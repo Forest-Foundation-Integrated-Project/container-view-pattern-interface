@@ -5,9 +5,9 @@ import { useState } from "react";
 import Button from './components/Button';
 import ImageViewer from './components/ImageViewer';
 import * as ImagePicker from 'expo-image-picker';
-import RegisterForm from "./Users/RegisterForm";
+import LoginForm from "./screens/Login/LoginContainer";
 
-const PlaceholderImage = require("./assets/images/background-image.png");
+const PlaceholderImage = require("./assets/images/images/background-image.png");
 
 export default function App() {
     const [selectedImage, setSelectedImage] = useState(null);
@@ -26,7 +26,7 @@ export default function App() {
 
     return (
         <View style={styles.container}>
-            <RegisterForm />
+            <LoginForm />
         </View>
     );
 }
