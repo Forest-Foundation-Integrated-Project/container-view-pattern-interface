@@ -7,7 +7,7 @@ import ImageViewer from './components/ImageViewer';
 import * as ImagePicker from 'expo-image-picker';
 import LoginForm from "./screens/Login/LoginContainer";
 
-const PlaceholderImage = require("./assets/images/images/background-image.png");
+const PlaceholderImage = require("./assets/images/background-image.png");
 
 export default function App() {
     const [selectedImage, setSelectedImage] = useState(null);
