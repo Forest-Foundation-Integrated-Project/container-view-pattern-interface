@@ -1,100 +1,58 @@
-import { StyleSheet, ViewStyle, Platform } from "react-native";
-import Constants from "expo-constants";
+import { StyleSheet } from 'react-native';
 
-const CIANO = "#00B0AE";
-const CONTENT_BACKGROUND = "#FFFFFF";
-
-export const styles = StyleSheet.create({   
-    topSafeArea: {
-        backgroundColor: CIANO,
-    },
+export default StyleSheet.create({
     container: {
         flex: 1,
-        paddingTop: Constants.statusBarHeight,
-        backgroundColor:
-            Platform.OS === "ios" ? CONTENT_BACKGROUND : CIANO,
+        alignItems: 'center'
     },
-    header: {
-        height: 50,
-        backgroundColor: CIANO,
-        paddingHorizontal: 20
-    },
-    nav:{
-        flex: 1,
-        flexDirection: "row",
-        justifyContent: "space-between",
+    title: {
+
     },
     logo: {
-        maxWidth: 100,
-        maxHeight: 30,
-    },
-    back: {
-        maxWidth: 40,
-        maxHeight: 30,
-    },
-    headerText: {
-        color: "#fff",
-        fontSize: 20
-    },
-    content: {
-        paddingTop: 110,
-        paddingHorizontal: 30,
-        backgroundColor: CONTENT_BACKGROUND
-    },
-    formGroup: {
-        marginBottom: 10,
-    },
-
-    input: {
-        height: 50,
-        paddingHorizontal: 20,
-        borderRadius: 20,
-        borderWidth: 2,
-        borderColor: "#e3e3e3",
-        backgroundColor: "#fff",
-    },
-    inputGender:{
-        height: 50,
-        width: 150,
-        paddingHorizontal: 20,
-        borderRadius: 20,
-        borderWidth: 2,
-        borderColor: "#e3e3e3",
-        backgroundColor: "#fff",
         flex: 1,
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "space-between"
+        height: 120,
+        width: 90,
+        alignSelf: "center",
+        margin: 30
     },
-
-    genderText:{
-        opacity: 0.39
-    },
-
-    genderArrow:{
-        maxHeight: 40,
-        maxWidth: 40,
-        opacity: 0.3
-    },
-
-    errorContainer: {
-        marginVertical: 5,
-    },
-    errorText: {
-        color: "#ff7675",
+    input: {
+        height: 48,
+        borderRadius: 5,
+        overflow: 'hidden',
+        backgroundColor: 'white',
+        marginTop: 10,
+        marginBottom: 10,
+        marginLeft: 30,
+        marginRight: 30,
+        paddingLeft: 16
     },
     button: {
-        marginTop: 40,
-        padding: 15,
-        height: 75,
-        backgroundColor: CIANO,
-        borderRadius: 20,
+        backgroundColor: '#788eec',
+        marginLeft: 30,
+        marginRight: 30,
+        marginTop: 20,
+        height: 48,
+        borderRadius: 5,
+        alignItems: "center",
+        justifyContent: 'center'
     },
-    buttonText: {
-        color: "#fff",
+    buttonTitle: {
+        color: 'white',
+        fontSize: 16,
+        fontWeight: "bold"
+    },
+    footerView: {
+        flex: 1,
+        alignItems: "center",
+        marginTop: 20
+    },
+    footerText: {
+        fontSize: 16,
+        color: '#2e2e2d'
+    },
+    footerLink: {
+        color: "#788eec",
         fontWeight: "bold",
-        fontSize: 18,
-        textAlign: "center",
-        paddingVertical: 10
+        fontSize: 16
     }
-});
+})
