@@ -6,6 +6,9 @@ import {
     TouchableOpacity,
     KeyboardAvoidingView,
     TextInput,
+    FormControl,
+    FormControlLabel,
+    RadioGroup,
     Image,
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
@@ -53,9 +56,9 @@ export default function RegisterForm() {
                 {/* https://formik.org/docs/overview */}
                 <Formik
                     initialValues={{
-                        firstName: "",
-                        lastName: "",
+                        completeName: "",
                         email: "",
+                        gender: "",
                         password: "",
                         confirmPassword: "",
                     }}
@@ -80,24 +83,14 @@ export default function RegisterForm() {
                             <View style={styles.formGroup}>
                                 <TextInput
                                     style={styles.input}
-                                    value={values.firstName}
-                                    onChangeText={handleChange("firstName")}
-                                    onBlur={handleBlur("firstName")}
-                                    placeholder="Nome"
+                                    value={values.completeName}
+                                    onChangeText={handleChange("completeName")}
+                                    onBlur={handleBlur("completeName")}
+                                    placeholder="Nome completo"
                                 />
 
                                 <ErrorMessage
-                                    errorValue={touched.firstName && errors.firstName}
-                                />
-                            </View>
-
-                            <View style={styles.formGroup}>
-                                <TextInput
-                                    style={styles.input}
-                                    value={values.lastName}
-                                    onChangeText={handleChange("lastName")}
-                                    onBlur={handleBlur("lastName")}
-                                    placeholder="Sobrenome"
+                                    errorValue={touched.completeName && errors.completeName}
                                 />
                             </View>
 
@@ -112,6 +105,16 @@ export default function RegisterForm() {
                                 />
 
                                 <ErrorMessage errorValue={touched.email && errors.email} />
+                            </View>
+
+                            <View style={styles.formGroup}>
+                                <TextInput
+                                    style={styles.inputGender}
+                                    value={values.gender}
+                                    onChangeText={handleChange("gender")}
+                                    onBlur={handleBlur("gender")}
+                                    placeholder="Gênero"
+                                />
                             </View>
 
                             <View style={styles.formGroup}>

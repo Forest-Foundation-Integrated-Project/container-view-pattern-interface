@@ -4,7 +4,7 @@ import { useState } from "react";
 import Button from './components/Button';
 import ImageViewer from './components/ImageViewer';
 import * as ImagePicker from 'expo-image-picker';
-import LoginForm from "./screens/Login/LoginContainer";
+import LoginForm from "./screens/Login/RegisterContainer";
 
 //const PlaceholderImage = require("./assets/images/background-image.png");
 

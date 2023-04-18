@@ -53,6 +53,30 @@ export const styles = StyleSheet.create({
         borderColor: "#e3e3e3",
         backgroundColor: "#fff",
     },
+    inputGender:{
+        height: 50,
+        width: 150,
+        paddingHorizontal: 20,
+        borderRadius: 20,
+        borderWidth: 2,
+        borderColor: "#e3e3e3",
+        backgroundColor: "#fff",
+        flex: 1,
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between"
+    },
+
+    genderText:{
+        opacity: 0.39
+    },
+
+    genderArrow:{
+        maxHeight: 40,
+        maxWidth: 40,
+        opacity: 0.3
+    },
+
     errorContainer: {
         marginVertical: 5,
     },
