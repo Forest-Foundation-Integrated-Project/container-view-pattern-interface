@@ -1,39 +1,33 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View } from "react-native";
-import { useState } from "react";
-import Button from './components/Button';
-import ImageViewer from './components/ImageViewer';
-import * as ImagePicker from 'expo-image-picker';
-import LoginForm from "./screens/Login/LoginContainer";
+import 'react-native-gesture-handler';
+import React, { useEffect, useState } from 'react'
+import { NavigationContainer } from '@react-navigation/native'
+import { createStackNavigator } from '@react-navigation/stack'
+import { LoginScreen, HomeScreen, RegistrationScreen } from './screens'
+import { decode, encode } from 'base-64'
+if (!global.btoa) { global.btoa = encode }
+if (!global.atob) { global.atob = decode }
 
-const PlaceholderImage = require("./assets/images/background-image.png");
+const Stack = createStackNavigator();
 
 export default function App() {
-    const [selectedImage, setSelectedImage] = useState(null);
-    const pickImageAsync = async () => {
-        let result = await ImagePicker.launchImageLibraryAsync({
-            allowsEditing: true,
-            quality: 1,
-        });
 
-        if (!result.canceled) {
-            setSelectedImage(result.assets[0].uri);
-        } else {
-            alert('You did not select any image.');
-        }
-    };
+    const [loading, setLoading] = useState(true)
+    const [user, setUser] = useState(null)
 
     return (
-        <View style={styles.container}>
-            <LoginForm />
-        </View>
+        <NavigationContainer>
+            <Stack.Navigator>
+                {user ? (
+                    <Stack.Screen name="Home">
+                        {props => <HomeScreen {...props} extraData={user} />}
+                    </Stack.Screen>
+                ) : (
+                    <>
+                        <Stack.Screen name="Login" component={LoginScreen} />
+                        <Stack.Screen name="Registration" component={RegistrationScreen} />
+                    </>
+                )}
+            </Stack.Navigator>
+        </NavigationContainer>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 16,
-        backgroundColor: '#fff',
-    }
-});

@@ -37,16 +37,16 @@ export default function RegisterForm() {
             <SafeAreaView style={styles.container}>
                 <View style={styles.header}>
                     <View style={styles.nav}>
-                    <Image
-                        style={styles.logo}
-                        source={require('../../assets/images/logo.png')}
-                    />
-                    <TouchableOpacity style={styles.back} onPress={console.log("a")}>
-                        <Image 
-                            style={styles.back}
-                            source={require('../../assets/images/voltar.png')}
+                        <Image
+                            style={styles.logo}
+                            source={require('../../assets/images/logo.png')}
                         />
-                    </TouchableOpacity>
+                        <TouchableOpacity style={styles.back} onPress={console.log("a")}>
+                            <Image
+                                style={styles.back}
+                                source={require('../../assets/images/voltar.png')}
+                            />
+                        </TouchableOpacity>
                     </View>
                 </View>
 
