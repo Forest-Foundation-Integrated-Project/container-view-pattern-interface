@@ -4,10 +4,10 @@ const CIANO = "#00B0AE";
 const CONTENT_BACKGROUND = "#FFFFFF";
 
 export default StyleSheet.create({
-    StackScreen:{
+    StackScreen: {
         display: 'hidden'
     },
-    
+
     container: {
         flex: 1,
         alignItems: 'center',
