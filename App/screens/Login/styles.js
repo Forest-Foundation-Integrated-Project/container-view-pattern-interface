@@ -1,38 +1,50 @@
 import { StyleSheet } from 'react-native';
 
+const CIANO = "#00B0AE";
+const CONTENT_BACKGROUND = "#FFFFFF";
+
 export default StyleSheet.create({
+    StackScreen:{
+        display: 'hidden'
+    },
+    
     container: {
         flex: 1,
-        alignItems: 'center'
+        alignItems: 'center',
+        backgroundColor: CIANO,
+        paddingHorizontal: 30
     },
     title: {
 
     },
     logo: {
         flex: 1,
-        height: 120,
-        width: 90,
+        height: 300,
+        maxWidth: 300,
         alignSelf: "center",
         margin: 30
     },
     input: {
-        height: 48,
-        borderRadius: 5,
         overflow: 'hidden',
+        marginTop: 15,
         backgroundColor: 'white',
-        marginTop: 10,
-        marginBottom: 10,
-        marginLeft: 30,
-        marginRight: 30,
-        paddingLeft: 16
+        height: 50,
+        paddingHorizontal: 20,
+        borderRadius: 20,
+        borderWidth: 2,
+        borderColor: "#e3e3e3",
+        backgroundColor: "#fff",
     },
     button: {
-        backgroundColor: '#788eec',
+        borderRadius: 20,
+        backgroundColor: CIANO,
         marginLeft: 30,
         marginRight: 30,
         marginTop: 20,
-        height: 48,
-        borderRadius: 5,
+        height: 75,
+        borderWidth: 5,
+        borderStyle: 'solid',
+        borderColor: CONTENT_BACKGROUND,
         alignItems: "center",
         justifyContent: 'center'
     },
@@ -48,10 +60,11 @@ export default StyleSheet.create({
     },
     footerText: {
         fontSize: 16,
-        color: '#2e2e2d'
+        color: 'white'
     },
     footerLink: {
-        color: "#788eec",
+        color: CONTENT_BACKGROUND,
+        textTransform: "uppercase",
         fontWeight: "bold",
         fontSize: 16
     }
