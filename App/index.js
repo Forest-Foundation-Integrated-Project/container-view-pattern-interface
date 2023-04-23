@@ -6,6 +6,7 @@ import Button from './components/Button';
 import ImageViewer from './components/ImageViewer';
 import * as ImagePicker from 'expo-image-picker';
 import RegisterForm from "./Users/RegisterForm";
+import Login from "./pages/login";
 
 const PlaceholderImage = require("./assets/images/background-image.png");
 
@@ -25,9 +26,10 @@ export default function App() {
     };
 
     return (
-        <View style={styles.container}>
-            <RegisterForm />
-        </View>
+        // <View style={styles.container}>
+        //     <RegisterForm />
+        // </View>
+        <Login />
     );
 }
 
