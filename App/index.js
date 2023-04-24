@@ -1,23 +1,17 @@
 import 'react-native-gesture-handler';
 import React, { useEffect, useState } from 'react'
 import { StyleSheet, Text, View } from 'react-native';
-
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { LoginScreen, HomeScreen, RegistrationScreen } from './screens'
 import { decode, encode } from 'base-64'
+import { styles } from './generalStyles'
 if (!global.btoa) { global.btoa = encode }
 if (!global.atob) { global.atob = decode }
 
-const Stack = createStackNavigator();
+const Stack = createStackNavigator()
 
-const styles = StyleSheet.create({
-    headerNavigation: {
-        headerStyle: {
-            backgroundColor: '#00B0AE'
-        }
-    },
-});
+
 
 export default function App() {
 
@@ -33,11 +27,14 @@ export default function App() {
                     </Stack.Screen>
                 ) : (
                     <>
-                        <Stack.Screen name="Login" component={LoginScreen} />
+                        <Stack.Screen name="Login" component={LoginScreen} 
+                        />
                         <Stack.Screen name="Registration" component={RegistrationScreen} />
                     </>
                 )}
             </Stack.Navigator>
+            
         </NavigationContainer>
     );
 }
+

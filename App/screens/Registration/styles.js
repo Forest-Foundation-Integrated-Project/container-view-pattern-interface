@@ -45,13 +45,23 @@ export const styles = StyleSheet.create({
         marginBottom: 10,
     },
 
+    dualFormGroup: {
+        flex: 1,
+        flexDirection: "row",
+    },
+
     input: {
         height: 50,
+        minWidth: 175,
         paddingHorizontal: 20,
         borderRadius: 20,
         borderWidth: 2,
         borderColor: "#e3e3e3",
         backgroundColor: "#fff",
+    },
+    inputText: {
+        color: "darkgrey",
+        paddingVertical: 12,
     },
     errorContainer: {
         marginVertical: 5,
