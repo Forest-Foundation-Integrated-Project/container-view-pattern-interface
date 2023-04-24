@@ -12,6 +12,8 @@ export const styles = StyleSheet.create({
         headerTintColor: '#fff',
         headerTitleStyle: {
             fontWeight: 'bold',
-          },
+        },
+        
     },
+
 });

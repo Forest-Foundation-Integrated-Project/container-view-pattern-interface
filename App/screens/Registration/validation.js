@@ -15,6 +15,6 @@ export const validationSchema = yup.object().shape({
     .minSymbols(1, "Sua senha deve conter, no mínimo, um caractere especial.")
     .minNumbers(1, "Sua senha deve conter, no mínimo, um número.")
     .required('Crie uma senha segura.'),
-    confirmPassword: yup.string().min(6).max(16).required('Senhas não conferem.'),
+    confirmPassword: yup.string().oneOf([yup.ref('password'), null], 'Senhas não conferem.')
 })
 

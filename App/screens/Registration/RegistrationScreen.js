@@ -15,6 +15,7 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import { validationSchema } from "./validation";
 import { styles } from "./styles";
+import { GenderPopUP } from "./GenderPopUp";
 import { touchProps } from "react-native-web/dist/cjs/modules/forwardedProps";
 
 const ErrorMessage = ({ errorValue }) => {
@@ -43,6 +44,13 @@ export default function RegisterForm() {
         return `${year}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day}`;
     }
 
+    function brFormatDate(date) {
+        const year = date.getFullYear();
+        const month = date.getMonth() + 1;
+        const day = date.getDate();
+        return `${day < 10 ? '0' + day : day}/${month < 10 ? '0' + month : month}/${year}`;
+    }
+
     return (
         
         <>
@@ -51,21 +59,6 @@ export default function RegisterForm() {
             <StatusBar style="light" />
 
             <SafeAreaView style={styles.container}>
-                <View style={styles.header}>
-                    <View style={styles.nav}>
-                        <Image
-                            style={styles.logo}
-                            source={require('../../assets/images/logo.png')}
-                        />
-                        <TouchableOpacity style={styles.back} onPress={console.log("a")}>
-                            <Image
-                                style={styles.back}
-                                source={require('../../assets/images/voltar.png')}
-                            />
-                        </TouchableOpacity>
-                    </View>
-                </View>
-
                 {/* https://formik.org/docs/overview */}
                 <Formik
                 
@@ -133,6 +126,8 @@ export default function RegisterForm() {
                                         autoCapitalize="none"
                                         placeholder="Gênero"
                                     />
+
+                                    {/*<GenderPopUP/>*/}
                                 <ErrorMessage errorValue={touched.gender && errors.gender} />
                                 </View>
 
@@ -142,7 +137,7 @@ export default function RegisterForm() {
                                             setShowDatePicker(true);
                                         }}
                                     >
-                                        <View style={styles.input}><Text style={styles.inputText}>{formatDate(birthDate)}</Text></View>
+                                        <View style={styles.input}><Text style={styles.inputText}>{brFormatDate(birthDate)}</Text></View>
                                     </TouchableOpacity>
                                     {showDatePicker && (
                                         <DatePicker
@@ -216,6 +211,7 @@ export default function RegisterForm() {
                         </KeyboardAwareScrollView>
                     )}
                 </Formik>
+                
             </SafeAreaView>
         </>
     );

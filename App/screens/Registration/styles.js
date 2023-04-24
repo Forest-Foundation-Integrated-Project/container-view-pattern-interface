@@ -6,38 +6,16 @@ const CONTENT_BACKGROUND = "#FFFFFF";
 
 export const styles = StyleSheet.create({
     topSafeArea: {
-        backgroundColor: CIANO,
     },
     container: {
         flex: 1,
         paddingTop: Constants.statusBarHeight,
         backgroundColor:
-            Platform.OS === "ios" ? CONTENT_BACKGROUND : CIANO,
+            Platform.OS === "ios" ? CONTENT_BACKGROUND : CONTENT_BACKGROUND,
     },
-    header: {
-        height: 50,
-        backgroundColor: CIANO,
-        paddingHorizontal: 20
-    },
-    nav: {
-        flex: 1,
-        flexDirection: "row",
-        justifyContent: "space-between",
-    },
-    logo: {
-        maxWidth: 100,
-        maxHeight: 30,
-    },
-    back: {
-        maxWidth: 40,
-        maxHeight: 30,
-    },
-    headerText: {
-        color: "#fff",
-        fontSize: 20
-    },
+
     content: {
-        paddingTop: 110,
+        paddingTop: 90,
         paddingHorizontal: 30,
         backgroundColor: CONTENT_BACKGROUND
     },
@@ -82,5 +60,16 @@ export const styles = StyleSheet.create({
         fontSize: 18,
         textAlign: "center",
         paddingVertical: 10
+    },
+
+    popUp:{
+        backgroundColor: "white",
+        borderRadius: 20,
+        height: 300,
+        width: 300,
+        position: "absolute",
+        top: 100,
+        left: 50,
+        right: 50,
     }
 });
