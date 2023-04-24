@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
     SafeAreaView,
     View,
@@ -13,7 +13,11 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import { Formik } from "formik";
 import * as yup from "yup";
 import { validationSchema } from "./validation";
+
+import DatePicker from '@react-native-community/datetimepicker'
+
 import { styles } from "./styles";
+import { saveUser } from "../../services/users/post";
 
 const ErrorMessage = ({ errorValue }) => {
     return errorValue ? (
@@ -23,9 +27,28 @@ const ErrorMessage = ({ errorValue }) => {
     ) : null;
 };
 
-export default function RegisterForm() {
-    function onSubmitHandler(values) {
-        console.log(values);
+export default function RegistrationScreen({ navigation }) {
+    const [birthDate, setBirthDate] = useState(new Date())
+    const [showDatePicker, setShowDatePicker] = useState(false);
+
+    function onSubmitHandler(userData) {
+        userData.birthDate = formatDate(birthDate)
+        userData.username = userData.email
+        delete userData.email
+        delete userData.confirmPassword
+
+        console.log(userData)
+        saveUser(userData)
+
+        console.log(navigation);
+        navigation.navigate("HomeScreen");
+    }
+
+    function formatDate(date) {
+        const year = date.getFullYear();
+        const month = date.getMonth() + 1;
+        const day = date.getDate();
+        return `${year}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day}`;
     }
 
     return (
@@ -53,14 +76,15 @@ export default function RegisterForm() {
                 {/* https://formik.org/docs/overview */}
                 <Formik
                     initialValues={{
-                        firstName: "",
-                        lastName: "",
+                        name: "",
                         email: "",
                         password: "",
                         confirmPassword: "",
+                        enroll: Math.random().toString(36).substring(2, 7),
+                        birthDate: birthDate
                     }}
-                    onSubmit={(values, actions) => {
-                        onSubmitHandler(values, actions);
+                    onSubmit={(values) => {
+                        onSubmitHandler(values);
                     }}
                     validationSchema={validationSchema}
                 >
@@ -80,27 +104,16 @@ export default function RegisterForm() {
                             <View style={styles.formGroup}>
                                 <TextInput
                                     style={styles.input}
-                                    value={values.firstName}
-                                    onChangeText={handleChange("firstName")}
-                                    onBlur={handleBlur("firstName")}
+                                    value={values.name}
+                                    onChangeText={handleChange("name")}
+                                    onBlur={handleBlur("name")}
                                     placeholder="Nome"
                                 />
 
                                 <ErrorMessage
-                                    errorValue={touched.firstName && errors.firstName}
+                                    errorValue={touched.name && errors.name}
                                 />
                             </View>
-
-                            <View style={styles.formGroup}>
-                                <TextInput
-                                    style={styles.input}
-                                    value={values.lastName}
-                                    onChangeText={handleChange("lastName")}
-                                    onBlur={handleBlur("lastName")}
-                                    placeholder="Sobrenome"
-                                />
-                            </View>
-
                             <View style={styles.formGroup}>
                                 <TextInput
                                     style={styles.input}
@@ -112,6 +125,32 @@ export default function RegisterForm() {
                                 />
 
                                 <ErrorMessage errorValue={touched.email && errors.email} />
+                            </View>
+                            <View style={styles.formGroup}>
+                                <TouchableOpacity
+                                    onPress={() => {
+                                        setShowDatePicker(true);
+                                    }}
+                                >
+                                    <Text style={styles.input}>Data de nascimento
+                                    </Text>
+                                </TouchableOpacity>
+                                {showDatePicker && (
+                                    <DatePicker
+                                        testID="datePicker"
+                                        value={birthDate}
+                                        mode="date"
+                                        display="default"
+                                        onChange={(event, selectedDate) => {
+                                            const currentDate = selectedDate || birthDate;
+                                            setShowDatePicker(false);
+                                            setBirthDate(currentDate);
+                                        }}
+                                    />
+                                )}
+                                <ErrorMessage
+                                    errorValue={touched.birthDate && errors.birthDate}
+                                />
                             </View>
 
                             <View style={styles.formGroup}>
@@ -152,7 +191,7 @@ export default function RegisterForm() {
                         </KeyboardAwareScrollView>
                     )}
                 </Formik>
-            </SafeAreaView>
+            </SafeAreaView >
         </>
     );
 }
