@@ -12,7 +12,8 @@ export default StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         backgroundColor: CIANO,
-        paddingHorizontal: 30
+        paddingHorizontal: 30,
+        paddingVertical: 50
     },
     title: {
 

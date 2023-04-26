@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import DatePicker from '@react-native-community/datetimepicker';
 import { Formik } from "formik";
 import * as yup from "yup";
 import { validationSchema } from "./validation";
@@ -18,6 +19,8 @@ import DatePicker from '@react-native-community/datetimepicker'
 
 import { styles } from "./styles";
 import { saveUser } from "../../services/users/post";
+import { GenderPopUP } from "./GenderPopUp";
+import { touchProps } from "react-native-web/dist/cjs/modules/forwardedProps";
 
 const ErrorMessage = ({ errorValue }) => {
     return errorValue ? (
@@ -51,33 +54,30 @@ export default function RegistrationScreen({ navigation }) {
         return `${year}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day}`;
     }
 
+    function brFormatDate(date) {
+        const year = date.getFullYear();
+        const month = date.getMonth() + 1;
+        const day = date.getDate();
+        return `${day < 10 ? '0' + day : day}/${month < 10 ? '0' + month : month}/${year}`;
+    }
+
     return (
+
         <>
             <SafeAreaView style={styles.topSafeArea} />
 
             <StatusBar style="light" />
 
             <SafeAreaView style={styles.container}>
-                <View style={styles.header}>
-                    <View style={styles.nav}>
-                        <Image
-                            style={styles.logo}
-                            source={require('../../assets/images/logo.png')}
-                        />
-                        <TouchableOpacity style={styles.back} onPress={console.log("a")}>
-                            <Image
-                                style={styles.back}
-                                source={require('../../assets/images/voltar.png')}
-                            />
-                        </TouchableOpacity>
-                    </View>
-                </View>
-
                 {/* https://formik.org/docs/overview */}
                 <Formik
+
                     initialValues={{
                         name: "",
                         email: "",
+                        gender: "",
+                        birthDate: "",
+                        university: "",
                         password: "",
                         confirmPassword: "",
                         enroll: Math.random().toString(36).substring(2, 7),
@@ -126,30 +126,60 @@ export default function RegistrationScreen({ navigation }) {
 
                                 <ErrorMessage errorValue={touched.email && errors.email} />
                             </View>
-                            <View style={styles.formGroup}>
-                                <TouchableOpacity
-                                    onPress={() => {
-                                        setShowDatePicker(true);
-                                    }}
-                                >
-                                    <Text style={styles.input}>Data de nascimento
-                                    </Text>
-                                </TouchableOpacity>
-                                {showDatePicker && (
-                                    <DatePicker
-                                        testID="datePicker"
-                                        value={birthDate}
-                                        mode="date"
-                                        display="default"
-                                        onChange={(event, selectedDate) => {
-                                            const currentDate = selectedDate || birthDate;
-                                            setShowDatePicker(false);
-                                            setBirthDate(currentDate);
-                                        }}
+                            <View style={styles.dualFormGroup}>
+
+                                <View style={styles.formGroup}>
+                                    <TextInput
+                                        style={styles.input}
+                                        value={values.gender}
+                                        onChangeText={handleChange("gender")}
+                                        onBlur={handleBlur("gender")}
+                                        autoCapitalize="none"
+                                        placeholder="Gênero"
                                     />
-                                )}
+
+                                    {/*<GenderPopUP/>*/}
+                                    <ErrorMessage errorValue={touched.gender && errors.gender} />
+                                </View>
+
+                                <View style={styles.formGroup}>
+                                    <TouchableOpacity
+                                        onPress={() => {
+                                            setShowDatePicker(true);
+                                        }}
+                                    >
+                                        <View style={styles.input}><Text style={styles.inputText}>{brFormatDate(birthDate)}</Text></View>
+                                    </TouchableOpacity>
+                                    {showDatePicker && (
+                                        <DatePicker
+                                            testID="datePicker"
+                                            value={birthDate}
+                                            mode="date"
+                                            display="default"
+                                            onChange={(event, selectedDate) => {
+                                                const currentDate = selectedDate || birthDate;
+                                                setShowDatePicker(false);
+                                                setBirthDate(currentDate);
+                                            }}
+                                        />
+                                    )}
+                                    <ErrorMessage
+                                        errorValue={touched.birthDate && errors.birthDate}
+                                    />
+                                </View>
+                            </View>
+
+                            <View style={styles.formGroup}>
+                                <TextInput
+                                    style={styles.input}
+                                    value={values.university}
+                                    onChangeText={handleChange("university")}
+                                    onBlur={handleBlur("university")}
+                                    placeholder="Universidade"
+                                />
+
                                 <ErrorMessage
-                                    errorValue={touched.birthDate && errors.birthDate}
+                                    errorValue={touched.university && errors.university}
                                 />
                             </View>
 
@@ -171,6 +201,7 @@ export default function RegistrationScreen({ navigation }) {
 
                             <View style={styles.formGroup}>
                                 <TextInput
+                                    class="confirmPassword"
                                     style={styles.input}
                                     value={values.confirmPassword}
                                     onChangeText={handleChange("confirmPassword")}
@@ -191,7 +222,8 @@ export default function RegistrationScreen({ navigation }) {
                         </KeyboardAwareScrollView>
                     )}
                 </Formik>
-            </SafeAreaView >
+
+            </SafeAreaView>
         </>
     );
 }
