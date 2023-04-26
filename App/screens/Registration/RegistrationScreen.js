@@ -14,9 +14,6 @@ import DatePicker from '@react-native-community/datetimepicker';
 import { Formik } from "formik";
 import * as yup from "yup";
 import { validationSchema } from "./validation";
-
-import DatePicker from '@react-native-community/datetimepicker'
-
 import { styles } from "./styles";
 import { saveUser } from "../../services/users/post";
 import { GenderPopUP } from "./GenderPopUp";
@@ -35,6 +32,7 @@ export default function RegistrationScreen({ navigation }) {
     const [showDatePicker, setShowDatePicker] = useState(false);
 
     function onSubmitHandler(userData) {
+        console.log("hi?")
         userData.birthDate = formatDate(birthDate)
         userData.username = userData.email
         delete userData.email
