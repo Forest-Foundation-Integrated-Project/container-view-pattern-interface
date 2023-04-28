@@ -7,6 +7,7 @@ import { LoginScreen, HomeScreen, RegistrationScreen } from './screens'
 import { decode, encode } from 'base-64'
 import { styles } from './generalStyles'
 import { ScreenStackHeaderBackButtonImage } from 'react-native-screens';
+
 if (!global.btoa) { global.btoa = encode }
 if (!global.atob) { global.atob = decode }
 
@@ -34,6 +35,7 @@ function BackButtom() {
 }
 
 export default function App() {
+    console.log(process.env.REACT_APP_BLA_BLA)
     const styles = StyleSheet.create({
         headerNavigation: {
             headerStyle: {
@@ -49,7 +51,7 @@ export default function App() {
         <NavigationContainer>
             <Stack.Navigator screenOptions={styles.headerNavigation}>
                 {user ? (
-                    <Stack.Screen name="Home">
+                    <Stack.Screen name="HomeScreen">
                         {props => <HomeScreen {...props} extraData={user} />}
                     </Stack.Screen>
                 ) : (
