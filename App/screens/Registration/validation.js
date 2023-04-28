@@ -3,9 +3,10 @@ import YupPassword from 'yup-password'
 YupPassword(yup)
 
 export const validationSchema = yup.object().shape({
-    firstName: yup.string().max(60).required('Informe seu nome'),
+    name: yup.string().max(60).required('Informe seu nome'),
     email: yup.string().email().required('Informe um email válido.'),
-    birthDate: yup.date().default(function () { return new Date()}),
+    gender: yup.string().required('Informe um gênero'),
+    birthDate: yup.date().default(function () { return new Date()}).required('Informe sua data de Nascimento'),
     university: yup.string().max(100).required('Informe sua universidade.'),
     password: yup.string()
     .min(6, "Sua senha deve conter, no mínimo, 6 caracteres.")

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import {
     SafeAreaView,
     View,
@@ -8,6 +8,7 @@ import {
     TextInput,
     Image,
 } from "react-native";
+import { Picker } from '@react-native-picker/picker';
 import { StatusBar } from "expo-status-bar";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import DatePicker from '@react-native-community/datetimepicker';
@@ -15,7 +16,6 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import { validationSchema } from "./validation";
 import { styles } from "./styles";
-import { GenderPopUP } from "./GenderPopUp";
 import { touchProps } from "react-native-web/dist/cjs/modules/forwardedProps";
 
 const ErrorMessage = ({ errorValue }) => {
@@ -31,9 +31,12 @@ export default function RegisterForm() {
     const [birthDate, setBirthDate] = useState(new Date())
     const [showDatePicker, setShowDatePicker] = useState(false);
 
+    let [gender, setGender] = useState('Gender')
+    
     function onSubmitHandler(userData) {
         userData.birthDate = formatDate(birthDate)
-        console.log(userData.birthDate)
+        userData.gender= gender
+        console.log(userData.gender)
         saveUser(userData)
     }
 
@@ -52,7 +55,7 @@ export default function RegisterForm() {
     }
 
     return (
-        
+
         <>
             <SafeAreaView style={styles.topSafeArea} />
 
@@ -61,9 +64,9 @@ export default function RegisterForm() {
             <SafeAreaView style={styles.container}>
                 {/* https://formik.org/docs/overview */}
                 <Formik
-                
+
                     initialValues={{
-                        firstName: "",
+                        name: "",
                         email: "",
                         gender: "",
                         birthDate: "",
@@ -92,15 +95,13 @@ export default function RegisterForm() {
                             <View style={styles.formGroup}>
                                 <TextInput
                                     style={styles.input}
-                                    value={values.firstName}
-                                    onChangeText={handleChange("firstName")}
-                                    onBlur={handleBlur("firstName")}
+                                    value={values.name}
+                                    onChangeText={handleChange("name")}
+                                    onBlur={handleBlur("name")}
                                     placeholder="Nome"
                                 />
 
-                                <ErrorMessage
-                                    errorValue={touched.firstName && errors.firstName}
-                                />
+                                <ErrorMessage errorValue={touched.name && errors.name}/>
                             </View>
 
                             <View style={styles.formGroup}>
@@ -117,18 +118,26 @@ export default function RegisterForm() {
                             </View>
                             <View style={styles.dualFormGroup}>
 
-                                <View style={styles.formGroup}>
-                                    <TextInput
-                                        style={styles.input}
-                                        value={values.gender}
-                                        onChangeText={handleChange("gender")}
-                                        onBlur={handleBlur("gender")}
-                                        autoCapitalize="none"
-                                        placeholder="Gênero"
-                                    />
-
-                                    {/*<GenderPopUP/>*/}
-                                <ErrorMessage errorValue={touched.gender && errors.gender} />
+                                <View>
+                                    <View style={styles.inputPicker}>
+                                        <Picker
+                                            style={styles.picker}
+                                            selectedValue={gender.toString()}
+                                            value= {gender.toString()}
+                                            onBlur={handleBlur("gender")}
+                                            onValueChange={(item, indexItem) => {
+                                            setGender(item)
+                                            handleChange("gender")
+                                            gender = item.value
+                                            }}>
+                                            <Picker.Item style={styles.pickerText} key={0} label="Gênero" value="" />
+                                            <Picker.Item style={styles.pickerSelect} key={1} label="Masculino" value="male" />
+                                            <Picker.Item style={styles.pickerSelect} key={2} label="Feminino" value="fem" />
+                                            <Picker.Item style={styles.pickerSelect} key={3} label="Outro" value="other" />
+                                        </Picker>
+                                        
+                                    </View>
+                                    <ErrorMessage errorValue={touched.gender && errors.gender} />
                                 </View>
 
                                 <View style={styles.formGroup}>
@@ -137,7 +146,7 @@ export default function RegisterForm() {
                                             setShowDatePicker(true);
                                         }}
                                     >
-                                        <View style={styles.input}><Text style={styles.inputText}>{brFormatDate(birthDate)}</Text></View>
+                                        <View style={styles.input}><Text id='a' style={styles.inputText}>data</Text></View>
                                     </TouchableOpacity>
                                     {showDatePicker && (
                                         <DatePicker
@@ -149,15 +158,17 @@ export default function RegisterForm() {
                                                 const currentDate = selectedDate || birthDate;
                                                 setShowDatePicker(false);
                                                 setBirthDate(currentDate);
+                                                const inp = document.getElementById('a')
+                                                inp.value = {currentDate}
                                             }}
                                         />
                                     )}
                                     <ErrorMessage
                                         errorValue={touched.birthDate && errors.birthDate}
                                     />
+                                </View>
                             </View>
-                            </View>
-                            
+
                             <View style={styles.formGroup}>
                                 <TextInput
                                     style={styles.input}
@@ -211,7 +222,7 @@ export default function RegisterForm() {
                         </KeyboardAwareScrollView>
                     )}
                 </Formik>
-                
+
             </SafeAreaView>
         </>
     );
