@@ -31,11 +31,11 @@ export default function RegisterForm() {
     const [birthDate, setBirthDate] = useState(new Date())
     const [showDatePicker, setShowDatePicker] = useState(false);
 
-    let [gender, setGender] = useState('Gender')
-    
+    const [gender, setGender] = useState('Gender')
+
     function onSubmitHandler(userData) {
         userData.birthDate = formatDate(birthDate)
-        userData.gender= gender
+        userData.gender = gender
         console.log(userData.gender)
         saveUser(userData)
     }
@@ -86,6 +86,7 @@ export default function RegisterForm() {
                         touched,
                         handleSubmit,
                         handleBlur,
+                        setFieldValue,
                     }) => (
                         // https://github.com/APSL/react-native-keyboard-aware-scroll-view
                         <KeyboardAwareScrollView
@@ -101,7 +102,7 @@ export default function RegisterForm() {
                                     placeholder="Nome"
                                 />
 
-                                <ErrorMessage errorValue={touched.name && errors.name}/>
+                                <ErrorMessage errorValue={touched.name && errors.name} />
                             </View>
 
                             <View style={styles.formGroup}>
@@ -111,7 +112,7 @@ export default function RegisterForm() {
                                     onChangeText={handleChange("email")}
                                     onBlur={handleBlur("email")}
                                     autoCapitalize="none"
-                                    placeholder="Email"
+                                    placeholder="E-mail"
                                 />
 
                                 <ErrorMessage errorValue={touched.email && errors.email} />
@@ -122,20 +123,19 @@ export default function RegisterForm() {
                                     <View style={styles.inputPicker}>
                                         <Picker
                                             style={styles.picker}
-                                            selectedValue={gender.toString()}
-                                            value= {gender.toString()}
+                                            selectedValue={gender}
+                                            value={gender}
                                             onBlur={handleBlur("gender")}
                                             onValueChange={(item, indexItem) => {
-                                            setGender(item)
-                                            handleChange("gender")
-                                            gender = item.value
+                                                setGender(item)
+                                                setFieldValue('gender', item)
+                                                
                                             }}>
                                             <Picker.Item style={styles.pickerText} key={0} label="Gênero" value="" />
                                             <Picker.Item style={styles.pickerSelect} key={1} label="Masculino" value="male" />
                                             <Picker.Item style={styles.pickerSelect} key={2} label="Feminino" value="fem" />
                                             <Picker.Item style={styles.pickerSelect} key={3} label="Outro" value="other" />
                                         </Picker>
-                                        
                                     </View>
                                     <ErrorMessage errorValue={touched.gender && errors.gender} />
                                 </View>
@@ -146,7 +146,7 @@ export default function RegisterForm() {
                                             setShowDatePicker(true);
                                         }}
                                     >
-                                        <View style={styles.input}><Text id='a' style={styles.inputText}>data</Text></View>
+                                        <View style={styles.input}><Text id='a' style={styles.inputText}>{brFormatDate(birthDate)}</Text></View>
                                     </TouchableOpacity>
                                     {showDatePicker && (
                                         <DatePicker
@@ -158,8 +158,6 @@ export default function RegisterForm() {
                                                 const currentDate = selectedDate || birthDate;
                                                 setShowDatePicker(false);
                                                 setBirthDate(currentDate);
-                                                const inp = document.getElementById('a')
-                                                inp.value = {currentDate}
                                             }}
                                         />
                                     )}

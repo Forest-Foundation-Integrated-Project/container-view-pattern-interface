@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-
+import Constants from "expo-constants";
 const CIANO = "#00B0AE";
 const CONTENT_BACKGROUND = "#FFFFFF";
 
@@ -8,18 +8,27 @@ export default StyleSheet.create({
         display: 'hidden'
     },
 
+    topSafeArea: {
+    },
+    container: {
+        backgroundColor:
+            Platform.OS === "ios" ? CONTENT_BACKGROUND : CONTENT_BACKGROUND,
+    },
+
     container: {
         flex: 1,
-        alignItems: 'center',
         backgroundColor: CIANO,
         paddingHorizontal: 30,
-        paddingVertical: 50
     },
-    title: {
 
-    },
-    logo: {
+    content:{
         flex: 1,
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+
+    logo: {
         height: 300,
         maxWidth: 300,
         alignSelf: "center",
@@ -49,10 +58,12 @@ export default StyleSheet.create({
         alignItems: "center",
         justifyContent: 'center'
     },
-    buttonTitle: {
-        color: 'white',
-        fontSize: 16,
-        fontWeight: "bold"
+    buttonText: {
+        color: "#fff",
+        fontWeight: "bold",
+        fontSize: 18,
+        textAlign: "center",
+        paddingVertical: 10
     },
     footerView: {
         flex: 1,
@@ -68,5 +79,14 @@ export default StyleSheet.create({
         textTransform: "uppercase",
         fontWeight: "bold",
         fontSize: 16
-    }
+    },
+
+    errorContainer: {
+        marginVertical: 5,
+    },
+
+    errorText: {
+        color: "#F73216",
+        fontWeight: 'bold'
+    },
 })

@@ -9,13 +9,12 @@ export const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-        paddingTop: Constants.statusBarHeight,
         backgroundColor:
             Platform.OS === "ios" ? CONTENT_BACKGROUND : CONTENT_BACKGROUND,
     },
 
     content: {
-        paddingTop: 90,
+        paddingVertical: 70,
         paddingHorizontal: 30,
         backgroundColor: CONTENT_BACKGROUND
     },
@@ -37,16 +36,20 @@ export const styles = StyleSheet.create({
         borderColor: "#e3e3e3",
         backgroundColor: "#fff",
     },
+
     inputText: {
         color: "darkgrey",
         paddingVertical: 12,
     },
+
     errorContainer: {
         marginVertical: 5,
     },
+
     errorText: {
         color: "#ff7675",
     },
+
     button: {
         marginTop: 40,
         padding: 15,
