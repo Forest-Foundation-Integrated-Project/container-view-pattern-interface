@@ -8,6 +8,7 @@ import {
     TextInput,
     Image,
 } from "react-native";
+import { Picker } from '@react-native-picker/picker';
 import { StatusBar } from "expo-status-bar";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import DatePicker from '@react-native-community/datetimepicker';
@@ -31,14 +32,13 @@ export default function RegistrationScreen({ navigation }) {
     const [birthDate, setBirthDate] = useState(new Date())
     const [showDatePicker, setShowDatePicker] = useState(false);
 
+    const [gender, setGender] = useState('Gender')
+
     function onSubmitHandler(userData) {
         console.log("hi?")
         userData.birthDate = formatDate(birthDate)
-        userData.username = userData.email
-        delete userData.email
-        delete userData.confirmPassword
-
-        console.log(userData)
+        userData.gender = gender
+        console.log(userData.gender)
         saveUser(userData)
 
         console.log(navigation);
@@ -93,6 +93,7 @@ export default function RegistrationScreen({ navigation }) {
                         touched,
                         handleSubmit,
                         handleBlur,
+                        setFieldValue,
                     }) => (
                         // https://github.com/APSL/react-native-keyboard-aware-scroll-view
                         <KeyboardAwareScrollView
@@ -108,9 +109,7 @@ export default function RegistrationScreen({ navigation }) {
                                     placeholder="Nome"
                                 />
 
-                                <ErrorMessage
-                                    errorValue={touched.name && errors.name}
-                                />
+                                <ErrorMessage errorValue={touched.name && errors.name} />
                             </View>
                             <View style={styles.formGroup}>
                                 <TextInput
@@ -119,24 +118,31 @@ export default function RegistrationScreen({ navigation }) {
                                     onChangeText={handleChange("email")}
                                     onBlur={handleBlur("email")}
                                     autoCapitalize="none"
-                                    placeholder="Email"
+                                    placeholder="E-mail"
                                 />
 
                                 <ErrorMessage errorValue={touched.email && errors.email} />
                             </View>
                             <View style={styles.dualFormGroup}>
 
-                                <View style={styles.formGroup}>
-                                    <TextInput
-                                        style={styles.input}
-                                        value={values.gender}
-                                        onChangeText={handleChange("gender")}
-                                        onBlur={handleBlur("gender")}
-                                        autoCapitalize="none"
-                                        placeholder="Gênero"
-                                    />
+                                <View>
+                                    <View style={styles.inputPicker}>
+                                        <Picker
+                                            style={styles.picker}
+                                            selectedValue={gender}
+                                            value={gender}
+                                            onBlur={handleBlur("gender")}
+                                            onValueChange={(item, indexItem) => {
+                                                setGender(item)
+                                                setFieldValue('gender', item)
 
-                                    {/*<GenderPopUP/>*/}
+                                            }}>
+                                            <Picker.Item style={styles.pickerText} key={0} label="Gênero" value="" />
+                                            <Picker.Item style={styles.pickerSelect} key={1} label="Masculino" value="male" />
+                                            <Picker.Item style={styles.pickerSelect} key={2} label="Feminino" value="fem" />
+                                            <Picker.Item style={styles.pickerSelect} key={3} label="Outro" value="other" />
+                                        </Picker>
+                                    </View>
                                     <ErrorMessage errorValue={touched.gender && errors.gender} />
                                 </View>
 
@@ -146,7 +152,7 @@ export default function RegistrationScreen({ navigation }) {
                                             setShowDatePicker(true);
                                         }}
                                     >
-                                        <View style={styles.input}><Text style={styles.inputText}>{brFormatDate(birthDate)}</Text></View>
+                                        <View style={styles.input}><Text id='a' style={styles.inputText}>{brFormatDate(birthDate)}</Text></View>
                                     </TouchableOpacity>
                                     {showDatePicker && (
                                         <DatePicker
