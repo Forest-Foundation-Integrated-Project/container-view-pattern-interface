@@ -16,8 +16,7 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import { validationSchema } from "./validation";
 import { styles } from "./styles";
-import { saveUser } from "../../services/users/post";
-import { GenderPopUP } from "./GenderPopUp";
+import { createUser } from "../../services/users/post";
 import { touchProps } from "react-native-web/dist/cjs/modules/forwardedProps";
 
 const ErrorMessage = ({ errorValue }) => {
@@ -39,10 +38,9 @@ export default function RegistrationScreen({ navigation }) {
         userData.birthDate = formatDate(birthDate)
         userData.gender = gender
         console.log(userData.gender)
-        saveUser(userData)
-
+        response = createUser(userData)
         console.log(navigation);
-        navigation.navigate("HomeScreen");
+        navigation.navigate("Home");
     }
 
     function formatDate(date) {

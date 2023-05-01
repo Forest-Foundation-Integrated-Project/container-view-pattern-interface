@@ -1,11 +1,14 @@
 import axios from 'axios';
 
-export function saveUser(userData) {
-    real_url = 'http://localhost:3000/dev/v1/users/user'
-    url = 'https://jsonplaceholder.typicode.com/users'
+import { REACT_APP_MS_USERS_BASE_URL } from '@env'
+
+
+export async function createUser(userData) {
+
+    console.log(REACT_APP_MS_USERS_BASE_URL)
     console.log('Making request with data:', userData);
 
-    axios.post(url, userData)
+    response = await axios.post(REACT_APP_MS_USERS_BASE_URL, userData)
         .then(response => {
             console.log('Request successful. Response:', response.data);
             // handle response
@@ -14,4 +17,6 @@ export function saveUser(userData) {
             console.log('Request failed with error:', error);
             // handle error
         });
+
+    return response
 }

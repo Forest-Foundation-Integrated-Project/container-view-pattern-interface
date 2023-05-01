@@ -51,7 +51,7 @@ export default function App() {
         <NavigationContainer>
             <Stack.Navigator screenOptions={styles.headerNavigation}>
                 {user ? (
-                    <Stack.Screen name="HomeScreen">
+                    <Stack.Screen name="Home" component={HomeScreen}>
                         {props => <HomeScreen {...props} extraData={user} />}
                     </Stack.Screen>
                 ) : (
