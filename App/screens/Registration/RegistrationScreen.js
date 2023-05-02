@@ -129,7 +129,7 @@ export default function RegisterForm() {
                                             onValueChange={(item, indexItem) => {
                                                 setGender(item)
                                                 setFieldValue('gender', item)
-                                                
+
                                             }}>
                                             <Picker.Item style={styles.pickerText} key={0} label="Gênero" value="" />
                                             <Picker.Item style={styles.pickerSelect} key={1} label="Masculino" value="male" />

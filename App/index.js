@@ -15,7 +15,7 @@ const Stack = createStackNavigator()
 function LogoTitle() {
     return (
       <Image
-        style={{ maxWidth: 100, maxHeight: 30 }}
+        style={{ maxWidth: 110, maxHeight: 30 }}
         source={require('./assets/images/logo.png')}
       />
     );
