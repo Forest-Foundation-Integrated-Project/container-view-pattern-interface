@@ -1,40 +1,72 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View } from "react-native";
-import { useState } from "react";
+import 'react-native-gesture-handler';
+import React, { useEffect, useState } from 'react'
+import { StyleSheet, Image, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native'
+import { createStackNavigator } from '@react-navigation/stack';
+import { LoginScreen, HomeScreen, RegistrationScreen } from './screens'
+import { decode, encode } from 'base-64'
+import { styles } from './generalStyles'
+import { ScreenStackHeaderBackButtonImage } from 'react-native-screens';
 
-import Button from './components/Button';
-import ImageViewer from './components/ImageViewer';
-import * as ImagePicker from 'expo-image-picker';
-import RegisterForm from "./Users/RegisterForm";
+if (!global.btoa) { global.btoa = encode }
+if (!global.atob) { global.atob = decode }
 
-const PlaceholderImage = require("./assets/images/background-image.png");
+const Stack = createStackNavigator()
 
-export default function App() {
-    const [selectedImage, setSelectedImage] = useState(null);
-    const pickImageAsync = async () => {
-        let result = await ImagePicker.launchImageLibraryAsync({
-            allowsEditing: true,
-            quality: 1,
-        });
-
-        if (!result.canceled) {
-            setSelectedImage(result.assets[0].uri);
-        } else {
-            alert('You did not select any image.');
-        }
-    };
-
+function LogoTitle() {
     return (
-        <View style={styles.container}>
-            <RegisterForm />
-        </View>
+      <Image
+        style={{ maxWidth: 110, maxHeight: 30 }}
+        source={require('./assets/images/logo.png')}
+      />
     );
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 16,
-        backgroundColor: '#fff',
-    }
-});
+function BackButtom() {
+    return (
+        <View>
+            <Image
+                style={{ maxWidth: 30, maxHeight: 30 }}
+                source={require('./assets/images/voltar.png')}
+            />
+        </View>
+
+    );
+}
+
+export default function App() {
+    console.log(process.env.REACT_APP_BLA_BLA)
+    const styles = StyleSheet.create({
+        headerNavigation: {
+            headerStyle: {
+                backgroundColor: '#00B0AE'
+            }
+        },
+    });
+
+    const [loading, setLoading] = useState(true)
+    const [user, setUser] = useState(null)
+
+    return (
+        <NavigationContainer>
+            <Stack.Navigator screenOptions={styles.headerNavigation}>
+                {user ? (
+                    <Stack.Screen name="Home" component={HomeScreen}>
+                        {props => <HomeScreen {...props} extraData={user} />}
+                    </Stack.Screen>
+                ) : (
+                    <>
+                        <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }}
+                        />
+                        <Stack.Screen name="Registration" component={RegistrationScreen} options={{
+                            headerTitle: (props) => <LogoTitle {...props} />,
+                            headerBackImage: (props) => <BackButtom {...props} />,
+                        }} />
+                    </>
+                )}
+            </Stack.Navigator>
+
+        </NavigationContainer>
+    );
+}
+
