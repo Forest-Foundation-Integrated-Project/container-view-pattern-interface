@@ -16,6 +16,7 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import { validationSchema } from "./validation";
 import { styles } from "./styles";
+import { createUser } from "../../services/users/post";
 import { touchProps } from "react-native-web/dist/cjs/modules/forwardedProps";
 
 const ErrorMessage = ({ errorValue }) => {
@@ -26,18 +27,20 @@ const ErrorMessage = ({ errorValue }) => {
     ) : null;
 };
 
-
-export default function RegisterForm() {
+export default function RegistrationScreen({ navigation }) {
     const [birthDate, setBirthDate] = useState(new Date())
     const [showDatePicker, setShowDatePicker] = useState(false);
 
     const [gender, setGender] = useState('Gender')
 
     function onSubmitHandler(userData) {
+        console.log("hi?")
         userData.birthDate = formatDate(birthDate)
         userData.gender = gender
         console.log(userData.gender)
-        saveUser(userData)
+        response = createUser(userData)
+        console.log(navigation);
+        navigation.navigate("Home");
     }
 
     function formatDate(date) {
@@ -73,9 +76,11 @@ export default function RegisterForm() {
                         university: "",
                         password: "",
                         confirmPassword: "",
+                        enroll: Math.random().toString(36).substring(2, 7),
+                        birthDate: birthDate
                     }}
-                    onSubmit={(values, actions) => {
-                        onSubmitHandler(values, actions);
+                    onSubmit={(values) => {
+                        onSubmitHandler(values);
                     }}
                     validationSchema={validationSchema}
                 >
@@ -104,7 +109,6 @@ export default function RegisterForm() {
 
                                 <ErrorMessage errorValue={touched.name && errors.name} />
                             </View>
-
                             <View style={styles.formGroup}>
                                 <TextInput
                                     style={styles.input}
