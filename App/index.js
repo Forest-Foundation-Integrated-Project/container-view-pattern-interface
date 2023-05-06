@@ -16,7 +16,6 @@ if (!global.atob) { global.atob = decode }
 const Stack = createStackNavigator()
 
 export default function App() {
-    console.log(process.env.REACT_APP_BLA_BLA)
     const styles = StyleSheet.create({
         headerNavigation: {
             headerStyle: {

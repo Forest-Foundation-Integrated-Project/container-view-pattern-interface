@@ -16,7 +16,7 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import { validationSchema } from "./validation";
 import { styles } from "./styles";
-import { createUser } from "../../services/users/post";
+import { createUser } from "../../services/users/createUser";
 import { touchProps } from "react-native-web/dist/cjs/modules/forwardedProps";
 
 const ErrorMessage = ({ errorValue }) => {

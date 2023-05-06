@@ -4,6 +4,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { Formik } from "formik";
 import { validationSchema } from "./validation";
 import styles from './styles';
+import { login } from '../../services/users/login'
 
 
 const ErrorMessage = ({ errorValue }) => {
@@ -21,7 +22,7 @@ export default function LoginScreen({ navigation }) {
 
     async function loginHandler({ email, password }) {
         setIsAuthenticating(true);
-        await createUser(email)
+        await login(email, password, navigation);
     }
 
     const onFooterLinkPress = () => {
@@ -38,8 +39,8 @@ export default function LoginScreen({ navigation }) {
                         email: "",
                         password: ""
                     }}
-                    onSubmit={(values, actions) => {
-                        onSubmitHandler(values, actions);
+                    onSubmit={(values) => {
+                        loginHandler(values);
                     }}
                     validationSchema={validationSchema}
                 >
