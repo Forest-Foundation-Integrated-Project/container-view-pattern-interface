@@ -31,15 +31,13 @@ export default function RegistrationScreen({ navigation }) {
     const [birthDate, setBirthDate] = useState(new Date())
     const [showDatePicker, setShowDatePicker] = useState(false);
 
-    const [gender, setGender] = useState('Gender')
+    const [gender, setGender] = useState("Gender")
 
-    function onSubmitHandler(userData) {
-        console.log("hi?")
+    const onSubmitHandler = (userData) => {
         userData.birthDate = formatDate(birthDate)
         userData.gender = gender
-        console.log(userData.gender)
         response = createUser(userData)
-        console.log(navigation);
+
         navigation.navigate("Home");
     }
 
@@ -76,7 +74,7 @@ export default function RegistrationScreen({ navigation }) {
                         university: "",
                         password: "",
                         confirmPassword: "",
-                        enroll: Math.random().toString(36).substring(2, 7),
+                        enroll: Math.floor(Math.random() * 90000) + 10000,
                         birthDate: birthDate
                     }}
                     onSubmit={(values) => {
@@ -137,7 +135,7 @@ export default function RegistrationScreen({ navigation }) {
                                             }}>
                                             <Picker.Item style={styles.pickerText} key={0} label="Gênero" value="" />
                                             <Picker.Item style={styles.pickerSelect} key={1} label="Masculino" value="male" />
-                                            <Picker.Item style={styles.pickerSelect} key={2} label="Feminino" value="fem" />
+                                            <Picker.Item style={styles.pickerSelect} key={2} label="Feminino" value="female" />
                                             <Picker.Item style={styles.pickerSelect} key={3} label="Outro" value="other" />
                                         </Picker>
                                     </View>

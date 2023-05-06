@@ -31,23 +31,22 @@ export default function App() {
     return (
         <NavigationContainer>
             <Stack.Navigator screenOptions={styles.headerNavigation}>
-                {user ? (
-                    <Stack.Screen name="Home" component={HomeScreen} option={{}} >
-                        {props => <HomeScreen {...props} extraData={user} navigator={props.navigation} />}
-                    </Stack.Screen>
-                ) : (
-                    <>
-                        <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }}
-                        />
-                        <Stack.Screen name="Registration" component={RegistrationScreen} options={{
-                            headerTitle: (props) => <LogoTitle {...props} />,
-                            headerBackImage: (props) => <BackButtom {...props} />,
-                        }} />
-                    </>
-                )}
+                <Stack.Screen name="Login" options={{ headerShown: false }}
+                >
+                    {props => <LoginScreen {...props} navigator={props.navigation} />}
+                </Stack.Screen>
+                <Stack.Screen name="Home" options={{}} >
+                    {props => <HomeScreen {...props} extraData={user} navigator={props.navigation} />}
+                </Stack.Screen>
+                <Stack.Screen name="Registration" options={{
+                    headerTitle: (props) => <LogoTitle {...props} />,
+                    headerBackImage: (props) => <BackButtom {...props} />,
+                }}>
+                    {props => <RegistrationScreen {...props} navigator={props.navigation} />}
+                </Stack.Screen>
             </Stack.Navigator>
 
-        </NavigationContainer>
+        </NavigationContainer >
     );
 }
 

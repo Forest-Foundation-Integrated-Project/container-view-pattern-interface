@@ -15,14 +15,17 @@ const ErrorMessage = ({ errorValue }) => {
 };
 
 export default function LoginScreen({ navigation }) {
+    const [isAuthenticating, setIsAuthenticating] = useState(false);
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    const onFooterLinkPress = () => {
-        navigation.navigate('Registration')
+    async function loginHandler({ email, password }) {
+        setIsAuthenticating(true);
+        await createUser(email)
     }
 
-    const onLoginPress = () => {
+    const onFooterLinkPress = () => {
+        navigation.navigate('Registration')
     }
 
     return (
@@ -51,7 +54,7 @@ export default function LoginScreen({ navigation }) {
                     }) =>
                     (
                         <KeyboardAwareScrollView
-                            style={{width: '100%' }}
+                            style={{ width: '100%' }}
                             keyboardShouldPersistTaps="always">
                             <Image
                                 style={styles.logo}
