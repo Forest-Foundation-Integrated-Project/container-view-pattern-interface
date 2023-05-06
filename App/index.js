@@ -7,32 +7,13 @@ import { LoginScreen, HomeScreen, RegistrationScreen } from './screens'
 import { decode, encode } from 'base-64'
 import { styles } from './generalStyles'
 import { ScreenStackHeaderBackButtonImage } from 'react-native-screens';
+import { BackButtom } from './components/BackButton';
+import { LogoTitle } from './components/LogoTitle';
 
 if (!global.btoa) { global.btoa = encode }
 if (!global.atob) { global.atob = decode }
 
 const Stack = createStackNavigator()
-
-function LogoTitle() {
-    return (
-      <Image
-        style={{ maxWidth: 110, maxHeight: 30 }}
-        source={require('./assets/images/logo.png')}
-      />
-    );
-}
-
-function BackButtom() {
-    return (
-        <View>
-            <Image
-                style={{ maxWidth: 30, maxHeight: 30 }}
-                source={require('./assets/images/voltar.png')}
-            />
-        </View>
-
-    );
-}
 
 export default function App() {
     console.log(process.env.REACT_APP_BLA_BLA)
@@ -51,8 +32,8 @@ export default function App() {
         <NavigationContainer>
             <Stack.Navigator screenOptions={styles.headerNavigation}>
                 {user ? (
-                    <Stack.Screen name="Home" component={HomeScreen}>
-                        {props => <HomeScreen {...props} extraData={user} />}
+                    <Stack.Screen name="Home" component={HomeScreen} option={{}} >
+                        {props => <HomeScreen {...props} extraData={user} navigator={props.navigation} />}
                     </Stack.Screen>
                 ) : (
                     <>
