@@ -4,7 +4,6 @@ import { REACT_APP_MS_USERS_BASE_URL } from '@env'
 
 
 export async function createUser(userData) {
-
     console.log(REACT_APP_MS_USERS_BASE_URL)
     console.log('Making request with data:', userData);
 
