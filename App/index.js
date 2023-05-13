@@ -38,7 +38,6 @@ function AuthenticatedStack() {
 
 function Navigation() {
     const authCtx = useContext(AuthContext);
-    console.log(authCtx.isAuthenticated)
     return (
 
         <NavigationContainer>

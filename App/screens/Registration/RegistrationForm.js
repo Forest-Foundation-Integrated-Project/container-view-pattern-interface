@@ -42,8 +42,6 @@ export default function RegistrationForm({ navigation }) {
         } catch (error) {
             Alert.alert(`erro: ${error}`);
         }
-
-        console.log(navigation)
     }
 
     return (
