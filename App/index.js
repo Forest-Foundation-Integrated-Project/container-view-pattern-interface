@@ -1,72 +1,92 @@
 import 'react-native-gesture-handler';
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { StyleSheet, Image, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack';
 import { LoginScreen, HomeScreen, RegistrationScreen } from './screens'
 import { decode, encode } from 'base-64'
 import { styles } from './generalStyles'
-import { ScreenStackHeaderBackButtonImage } from 'react-native-screens';
+import { BackButtom } from './components/BackButton';
+import { LogoTitle } from './components/LogoTitle';
+import AuthContextProvider, { AuthContext } from './store/auth-context'
+import { StatusBar } from 'expo-status-bar';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { AppLoading } from 'expo-app-loading'
 
 if (!global.btoa) { global.btoa = encode }
 if (!global.atob) { global.atob = decode }
 
 const Stack = createStackNavigator()
 
-function LogoTitle() {
+function AuthStack() {
     return (
-      <Image
-        style={{ maxWidth: 110, maxHeight: 30 }}
-        source={require('./assets/images/logo.png')}
-      />
+        <Stack.Navigator screenOptions={styles.headerNavigation}>
+            <Stack.Screen name="Login" options={{ headerShown: false }} component={LoginScreen}
+            />
+            <Stack.Screen name="Registration" options={{ headerShown: false }} component={RegistrationScreen} />
+        </Stack.Navigator >
     );
+};
+
+function AuthenticatedStack() {
+    return (
+        <Stack.Navigator screenOptions={styles.headerNavigation}>
+            <Stack.Screen name="Home" options={{}} component={HomeScreen} />
+        </Stack.Navigator>
+    );
+};
+
+function Navigation() {
+    const authCtx = useContext(AuthContext);
+    return (
+
+        <NavigationContainer>
+            {!authCtx.isAuthenticated && <AuthStack />}
+            {authCtx.isAuthenticated && <AuthenticatedStack />}
+        </NavigationContainer >
+
+    )
 }
 
-function BackButtom() {
-    return (
-        <View>
-            <Image
-                style={{ maxWidth: 30, maxHeight: 30 }}
-                source={require('./assets/images/voltar.png')}
-            />
-        </View>
+function Root() {
+    const [isTryingLogin, setIsTryingLogin] = useState(true);
 
-    );
+    const authCtx = useContext(AuthContext);
+
+    useEffect(() => {
+        async function fetchToken() {
+            const storedToken = await AsyncStorage.getItem('token');
+
+            if (storedToken) {
+                authCtx.authenticate(storedToken);
+            }
+
+            setIsTryingLogin(false);
+        }
+
+        fetchToken();
+    }, []);
+
+    if (isTryingLogin) {
+        // return <AppLoading />;
+    }
+
+    return <Navigation />;
 }
 
 export default function App() {
-    console.log(process.env.REACT_APP_BLA_BLA)
-    const styles = StyleSheet.create({
-        headerNavigation: {
-            headerStyle: {
-                backgroundColor: '#00B0AE'
-            }
-        },
-    });
+    // const [loading, setLoading] = useState(true)
+    // const [user, setUser] = useState(null)
 
-    const [loading, setLoading] = useState(true)
-    const [user, setUser] = useState(null)
 
     return (
-        <NavigationContainer>
-            <Stack.Navigator screenOptions={styles.headerNavigation}>
-                {user ? (
-                    <Stack.Screen name="Home" component={HomeScreen}>
-                        {props => <HomeScreen {...props} extraData={user} />}
-                    </Stack.Screen>
-                ) : (
-                    <>
-                        <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }}
-                        />
-                        <Stack.Screen name="Registration" component={RegistrationScreen} options={{
-                            headerTitle: (props) => <LogoTitle {...props} />,
-                            headerBackImage: (props) => <BackButtom {...props} />,
-                        }} />
-                    </>
-                )}
-            </Stack.Navigator>
-
-        </NavigationContainer>
+        <>
+            <StatusBar style="light" />
+            <AuthContextProvider>
+                <Root />
+            </AuthContextProvider >
+        </>
     );
 }
+
 
