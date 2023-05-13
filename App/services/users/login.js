@@ -1,11 +1,11 @@
-import axios from 'axios';
-
 import { MS_USERS_BASE_URL } from '@env'
 import { TEST_USERS_BASE_URL } from '@env'
 import { httpPost } from '../httpPost'
 
 export async function login(email, password, navigation) {
     let url = MS_USERS_BASE_URL;
+    let token;
+
     if (__DEV__) {
         url = TEST_USERS_BASE_URL;
     }
@@ -16,9 +16,12 @@ export async function login(email, password, navigation) {
     );
 
     if (response.status == 200) {
-        navigation.navigate('Home')
+        token = response.data.token;
     } else {
         alert("Erro: " + response.message);
+        token = null
     }
+
+    return token;
 }
 

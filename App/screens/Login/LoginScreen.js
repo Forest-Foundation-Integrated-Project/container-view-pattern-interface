@@ -1,11 +1,13 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Image, Text, TextInput, TouchableOpacity, View, SafeAreaView } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Formik } from "formik";
 import { validationSchema } from "./validation";
 import styles from './styles';
-import { login } from '../../services/users/login'
-
+import { login } from '../../services/users/login';
+import { AuthContext } from './../../store/auth-context';
+import { Loading } from './../../components/Loading';
+import { Alert } from 'react-native';
 
 const ErrorMessage = ({ errorValue }) => {
     return errorValue ? (
@@ -16,17 +18,33 @@ const ErrorMessage = ({ errorValue }) => {
 };
 
 export default function LoginScreen({ navigation }) {
+    const onFooterLinkPress = () => {
+        navigation.navigate('Registration')
+    }
     const [isAuthenticating, setIsAuthenticating] = useState(false);
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const authCtx = useContext(AuthContext);
 
     async function loginHandler({ email, password }) {
         setIsAuthenticating(true);
-        await login(email, password, navigation);
-    }
+        try {
+            token = await login(email, password, navigation);
+            authCtx.authenticate(token);
+            console.log(token)
+        } catch (error) {
+            console.log(error)
+            Alert.alert(
+                "Falha na autenticação",
+                "Não foi possível realizar o login, confira seu email e senha"
+            );
 
-    const onFooterLinkPress = () => {
-        navigation.navigate('Registration')
+            setIsAuthenticating(false);
+        }
+
+        if (isAuthenticating) {
+            return <Loading message="Logging you in..." />;
+        }
+
+        return <AuthContext />;
     }
 
     return (

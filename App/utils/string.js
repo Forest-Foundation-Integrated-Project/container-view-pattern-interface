@@ -1,4 +1,3 @@
-
 export function toSnakeCase(originalObj) {
     const transformedObj = {};
     for (let key in originalObj) {
