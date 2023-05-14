@@ -44,16 +44,8 @@ function AuthenticatedStack() {
         headerTitle: LogoTitle,
         headerRight: () => (
             <View style={styles.headerNavigation}>
-                <View style={styles.headerRightContainer}>
-                    <TouchableOpacity style={styles.searchIcon}>
-                        <SearchIcon />
-                    </TouchableOpacity>
-                </View>
-                <View style={styles.headerRightContainer}>
-                    <TouchableOpacity style={styles.menuIcon}>
-                        <MenuIcon />
-                    </TouchableOpacity>
-                </View>
+                <SearchIcon />
+                <MenuIcon />
             </View>
         )
     };

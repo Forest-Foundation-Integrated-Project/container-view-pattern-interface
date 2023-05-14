@@ -1,7 +1,13 @@
 import { Ionicons } from '@expo/vector-icons';
+import { View, TouchableOpacity } from 'react-native';
+import { styles } from './../generalStyles';
 
 export function SearchIcon() {
     return (
-        <Ionicons name="search" size={32} color="white" />
+        <View style={styles.headerRightContainer}>
+            <TouchableOpacity style={styles.searchIcon}>
+                <Ionicons name="search" size={32} color="white" />
+            </TouchableOpacity>
+        </View>
     );
 }
