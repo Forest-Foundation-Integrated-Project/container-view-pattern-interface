@@ -1,6 +1,6 @@
 import { Image, View } from 'react-native';
 
-export default function BackButtom() {
+export function BackButtom() {
     return (
         <View>
             <Image

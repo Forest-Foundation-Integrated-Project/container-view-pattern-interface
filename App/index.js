@@ -18,12 +18,18 @@ if (!global.atob) { global.atob = decode }
 
 const Stack = createStackNavigator()
 
+const options = {
+    headerShown: true,
+    headerTitle: LogoTitle,
+    headerBackImage: BackButtom
+}
+
 function AuthStack() {
     return (
         <Stack.Navigator screenOptions={styles.headerNavigation}>
             <Stack.Screen name="Login" options={{ headerShown: false }} component={LoginScreen}
             />
-            <Stack.Screen name="Registration" options={{ headerShown: false }} component={RegistrationScreen} />
+            <Stack.Screen name="Registration" options={options} component={RegistrationScreen} />
         </Stack.Navigator >
     );
 };
@@ -31,7 +37,7 @@ function AuthStack() {
 function AuthenticatedStack() {
     return (
         <Stack.Navigator screenOptions={styles.headerNavigation}>
-            <Stack.Screen name="Home" options={{}} component={HomeScreen} />
+            <Stack.Screen name="Home" options={options} component={HomeScreen} />
         </Stack.Navigator>
     );
 };

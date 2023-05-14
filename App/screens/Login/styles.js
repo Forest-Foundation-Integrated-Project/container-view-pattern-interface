@@ -21,7 +21,7 @@ export default StyleSheet.create({
         paddingHorizontal: 30,
     },
 
-    content:{
+    content: {
         flex: 1,
         flexDirection: 'column',
         alignItems: 'center',
@@ -32,7 +32,8 @@ export default StyleSheet.create({
         height: 300,
         maxWidth: 300,
         alignSelf: "center",
-        margin: 30
+        margin: 30,
+        padding: 10
     },
     input: {
         overflow: 'hidden',
@@ -79,14 +80,5 @@ export default StyleSheet.create({
         textTransform: "uppercase",
         fontWeight: "bold",
         fontSize: 16
-    },
-
-    errorContainer: {
-        marginVertical: 5,
-    },
-
-    errorText: {
-        color: "#F73216",
-        fontWeight: 'bold'
-    },
+    }
 })

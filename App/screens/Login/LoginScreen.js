@@ -11,6 +11,7 @@ import { Alert } from 'react-native';
 import ErrorMessage from './../../components/ErrorMessage'
 
 export default function LoginScreen({ navigation }) {
+    const authCtx = useContext(AuthContext)
     const onFooterLinkPress = () => {
         navigation.navigate('Registration')
     }
@@ -22,6 +23,7 @@ export default function LoginScreen({ navigation }) {
             token = await login(email, password, navigation);
             authCtx.authenticate(token);
         } catch (error) {
+            console.log(error)
             Alert.alert(
                 "Falha na autenticação",
                 "Não foi possível realizar o login, confira seu email e senha"

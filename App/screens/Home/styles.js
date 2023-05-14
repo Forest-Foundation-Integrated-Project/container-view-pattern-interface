@@ -1,7 +1,36 @@
 import { Dimensions, StyleSheet } from 'react-native';
+
+const CIANO = "#00B0AE";
+const CONTENT_BACKGROUND = "#FFFFFF";
+
 const screenWidth = Dimensions.get("window").width;
 
 export const styles = StyleSheet.create({
+    topSafeArea: {
+    },
+    container: {
+        backgroundColor:
+            Platform.OS === "ios" ? CONTENT_BACKGROUND : CONTENT_BACKGROUND,
+    },
+
+    container: {
+        flex: 1,
+        backgroundColor: CIANO,
+        paddingHorizontal: 30,
+    },
+
+    content: {
+        flex: 1,
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    logo: {
+        height: 300,
+        maxWidth: 300,
+        alignSelf: "center",
+        margin: 30
+    },
     container: {
         flex: 1,
         backgroundColor: '#fff',

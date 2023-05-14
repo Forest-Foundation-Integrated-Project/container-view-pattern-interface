@@ -1,6 +1,6 @@
 import { Image } from 'react-native';
 
-export default function LogoTitle() {
+export function LogoTitle() {
     return (
         <Image
             style={{ maxWidth: 110, maxHeight: 30 }}

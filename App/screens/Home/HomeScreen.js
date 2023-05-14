@@ -1,13 +1,14 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { View, Text, StyleSheet, FlatList } from 'react-native';
+import { SafeAreaView, FlatList } from 'react-native';
+import { StatusBar } from "expo-status-bar";
 import { styles } from "./styles"
-import { Product } from './../../components/Products/Product'
+import { Product } from './../../components/Product/Product'
 
 export default function HomeScreen({ navigation }) {
     const [products, setProducts] = useState([
         {
             "id": 1,
-            "title": "Product 1",
+            "title": "Cupcake",
             "description": "Description for Product 1",
             "seller_id": 1,
             "price_cents": 1999,
@@ -54,15 +55,22 @@ export default function HomeScreen({ navigation }) {
     };
 
     return (
-        <View style={styles.container}>
-            <FlatList
-                data={products}
-                renderItem={renderItem}
-                keyExtractor={item => item.id}
-                numColumns={2}
-                contentContainerStyle={styles.list}
-            />
-        </View>
+        <>
+            <SafeAreaView style={styles.topSafeArea} />
+
+            <StatusBar style="light" />
+
+            <SafeAreaView style={styles.container}>
+                <FlatList
+                    data={products}
+                    renderItem={renderItem}
+                    keyExtractor={item => item.id}
+                    numColumns={2}
+                    contentContainerStyle={styles.list}
+                />
+            </SafeAreaView>
+        </>
+
     );
 };
 
