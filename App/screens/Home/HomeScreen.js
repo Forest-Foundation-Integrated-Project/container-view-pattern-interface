@@ -1,12 +1,9 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { View, Text, StyleSheet, FlatList } from 'react-native';
-import { AuthContext } from '../../store/auth-context'
 import { styles } from "./styles"
+import { Product } from './../../components/Products/Product'
 
 export default function HomeScreen({ navigation }) {
-    // const authCtx = useContext(AuthContext)
-    // const token = authCtx.fetchToken();
-    // console.log(authCtx);
     const [products, setProducts] = useState([
         {
             "id": 1,
@@ -15,44 +12,44 @@ export default function HomeScreen({ navigation }) {
             "seller_id": 1,
             "price_cents": 1999,
             "tag_id": 1,
-            "subtitle": "subtitle here"
+            "subtitle": "subtitle here",
+            "image": "https://natashaskitchen.com/wp-content/uploads/2020/05/Vanilla-Cupcakes-3.jpg"
         },
         {
             "id": 2,
-            "title": "Product 2",
+            "title": "Aula de matemática",
             "description": "Description for Product 2",
             "seller_id": 2,
             "price_cents": 2999,
             "tag_id": 2,
-            "subtitle": "subtitle here"
+            "subtitle": "subtitle here",
+            "image": "https://api.time.com/wp-content/uploads/2017/10/how-to-improve-math-class.jpg?quality=85&w=1200&h=628&crop=1"
         },
         {
             "id": 3,
-            "title": "Product 3",
+            "title": "Te ensino python",
             "description": "Description for Product 3",
             "seller_id": 1,
             "price_cents": 3999,
             "tag_id": 3,
-            "subtitle": "subtitle here"
+            "subtitle": "subtitle here",
+            "image": "https://www.digicad.com.br/wp-content/uploads/2022/08/python.jpg"
         },
         {
             "id": 4,
-            "title": "Product 4",
+            "title": "Cookies",
             "description": "Description for Product 4",
             "seller_id": 3,
             "price_cents": 4999,
             "tag_id": 2,
-            "subtitle": "subtitle here"
+            "subtitle": "subtitle here",
+            "image": "https://static01.nyt.com/images/2022/02/12/dining/JT-Chocolate-Chip-Cookies/JT-Chocolate-Chip-Cookies-mediumThreeByTwo440.jpg"
         }
     ]);
 
     const renderItem = ({ item }) => {
         return (
-            <View style={styles.item}>
-                <Text style={styles.title}>{item.name}</Text>
-                <Text style={styles.subtitle}>{item.description}</Text>
-                <Text style={styles.price}>{item.price}</Text>
-            </View>
+            <Product image={item.image} title={item.title} subtitle={item.subtitle} />
         );
     };
 
@@ -62,6 +59,7 @@ export default function HomeScreen({ navigation }) {
                 data={products}
                 renderItem={renderItem}
                 keyExtractor={item => item.id}
+                numColumns={2}
                 contentContainerStyle={styles.list}
             />
         </View>

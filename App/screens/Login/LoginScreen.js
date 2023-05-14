@@ -15,7 +15,6 @@ export default function LoginScreen({ navigation }) {
         navigation.navigate('Registration')
     }
     const [isAuthenticating, setIsAuthenticating] = useState(false);
-    const authCtx = useContext(AuthContext);
 
     async function loginHandler({ email, password }) {
         setIsAuthenticating(true);

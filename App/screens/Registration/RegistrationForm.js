@@ -15,10 +15,8 @@ import { ErrorMessage } from "formik";
 import { Alert } from "react-native";
 import { brFormatDate, formatDate } from './../../utils/date'
 import createUser from "./../../services/users/createUser";
-import { AuthContext } from "../../store/auth-context";
 
 export default function RegistrationForm({ navigation }) {
-    const authCtx = useContext(AuthContext)
     const ErrorMessage = ({ errorValue }) => {
         return errorValue ? (
             <View style={styles.errorContainer}>

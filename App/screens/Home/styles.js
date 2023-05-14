@@ -1,22 +1,5 @@
-import { StyleSheet } from 'react-native';
-
-// export default StyleSheet.create({
-//     container: {
-//         flex: 1,
-//         alignItems: 'center'
-//     },
-//     input: {
-//         height: 48,
-//         borderRadius: 5,
-//         overflow: 'hidden',
-//         backgroundColor: 'white',
-//         marginTop: 10,
-//         marginBottom: 10,
-//         marginLeft: 30,
-//         marginRight: 30,
-//         paddingLeft: 16
-//     }
-// })
+import { Dimensions, StyleSheet } from 'react-native';
+const screenWidth = Dimensions.get("window").width;
 
 export const styles = StyleSheet.create({
     container: {
@@ -24,12 +7,14 @@ export const styles = StyleSheet.create({
         backgroundColor: '#fff',
     },
     list: {
-        padding: 16,
+        paddingHorizontal: 8
     },
     item: {
+        width: screenWidth * 0.5,
         paddingVertical: 8,
         borderBottomWidth: 1,
         borderBottomColor: '#ccc',
+        borderRadius: 20
     },
     title: {
         fontSize: 16,
