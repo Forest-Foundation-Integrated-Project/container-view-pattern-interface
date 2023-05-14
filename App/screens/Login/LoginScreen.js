@@ -8,14 +8,7 @@ import { login } from '../../services/users/login';
 import { AuthContext } from './../../store/auth-context';
 import { Loading } from './../../components/Loading';
 import { Alert } from 'react-native';
-
-const ErrorMessage = ({ errorValue }) => {
-    return errorValue ? (
-        <View style={styles.errorContainer}>
-            <Text style={styles.errorText}>{errorValue}</Text>
-        </View>
-    ) : null;
-};
+import ErrorMessage from './../../components/ErrorMessage'
 
 export default function LoginScreen({ navigation }) {
     const onFooterLinkPress = () => {

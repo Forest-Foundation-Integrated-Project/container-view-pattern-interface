@@ -67,9 +67,9 @@ function Root() {
         fetchToken();
     }, []);
 
-    if (isTryingLogin) {
-        // return <AppLoading />;
-    }
+    // if (isTryingLogin) {
+    //     // return <AppLoading />;
+    // }
 
     return <Navigation />;
 }
