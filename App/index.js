@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import React, { useContext, useEffect, useState } from 'react'
-import { StyleSheet, Image, Text, View } from 'react-native';
+import { View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack';
 import { LoginScreen, HomeScreen, RegistrationScreen } from './screens'
@@ -8,23 +8,26 @@ import { decode, encode } from 'base-64'
 import { styles } from './generalStyles'
 import { BackButtom } from './components/BackButton';
 import { LogoTitle } from './components/LogoTitle';
+import { SearchIcon } from './components/SearchIcon';
+import { MenuIcon } from './components/MenuIcon';
 import AuthContextProvider, { AuthContext } from './store/auth-context'
 import { StatusBar } from 'expo-status-bar';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AppLoading } from 'expo-app-loading'
+import { TouchableOpacity } from 'react-native';
 
 if (!global.btoa) { global.btoa = encode }
 if (!global.atob) { global.atob = decode }
 
 const Stack = createStackNavigator()
 
-const options = {
-    headerShown: true,
-    headerTitle: LogoTitle,
-    headerBackImage: BackButtom
-}
-
 function AuthStack() {
+    const options = {
+        headerShown: true,
+        headerTitle: LogoTitle,
+        headerBackImage: BackButtom
+    }
+
     return (
         <Stack.Navigator screenOptions={styles.headerNavigation}>
             <Stack.Screen name="Login" options={{ headerShown: false }} component={LoginScreen}
@@ -35,6 +38,26 @@ function AuthStack() {
 };
 
 function AuthenticatedStack() {
+
+    const options = {
+        headerShown: true,
+        headerTitle: LogoTitle,
+        headerRight: () => (
+            <View style={styles.headerNavigation}>
+                <View style={styles.headerRightContainer}>
+                    <TouchableOpacity style={styles.searchIcon}>
+                        <SearchIcon />
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.headerRightContainer}>
+                    <TouchableOpacity style={styles.menuIcon}>
+                        <MenuIcon />
+                    </TouchableOpacity>
+                </View>
+            </View>
+        )
+    };
+
     return (
         <Stack.Navigator screenOptions={styles.headerNavigation}>
             <Stack.Screen name="Home" options={options} component={HomeScreen} />

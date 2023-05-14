@@ -6,14 +6,30 @@ const CIANO = '#00B0AE'
 
 export const styles = StyleSheet.create({
     headerNavigation: {
+        flexDirection: "row",
         headerStyle: {
-            backgroundColor: CIANO,
+            backgroundColor: CIANO
         },
         headerTintColor: '#fff',
         headerTitleStyle: {
-            fontWeight: 'bold',
+            fontWeight: 'bold'
         },
-        
+        logoTitle: {
+            maxWidth: 110,
+            maxHeight: 30
+        },
+        headerRightContainer: {
+            alignItems: 'center',
+            paddingRight: 10,
+            width: "50%",
+            flex: 2
+        },
+        searchIcon: {
+            flexDirection: "row",
+            flex: 2
+        },
+        menuIcon: {
+            flex: 2
+        }
     },
-
 });
