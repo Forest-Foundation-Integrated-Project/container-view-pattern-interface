@@ -8,7 +8,7 @@ export default function HomeScreen({ navigation }) {
     console.log(token)
     return (
         <View>
-            <Text>Home Screen</Text>
+            <Text>Homee Screen</Text>
         </View>
     )
 }
