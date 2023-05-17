@@ -1,22 +1,19 @@
 import { Ionicons } from '@expo/vector-icons';
-import { View, TouchableOpacity, Modal, Text } from 'react-native';
-import { styles } from './../generalStyles';
-import { useContext } from 'react';
-import { ModalContext } from '../store/modal-context';
+import { View, TouchableOpacity, Text } from 'react-native';
+import { styles } from './../../generalStyles';
 
 export default function MenuScreen({ navigation }) {
-    const { openModal } = useContext(ModalContext);
-
-    const toggleModal = () => {
-        openModal();
-    };
-
-
+    console.log(navigation)
     return (
-        <View style={styles.headerRightContainer}>
-            <TouchableOpacity style={styles.menuIcon} onPress={navigation.goBack()}>
-                <Ionicons name="menu-outline" size={40} color="white" />
-            </TouchableOpacity>
-        </View>
+        <View style={styles.viewModal}>
+            <View style={styles.modalContainer}>
+                <View style={styles.modalContent}>
+                    <Text>This is a modal</Text>
+                    <TouchableOpacity onPress={navigation.goBack()}>
+                        <Text>Close Modal</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
+        </ View >
     );
-}
+};

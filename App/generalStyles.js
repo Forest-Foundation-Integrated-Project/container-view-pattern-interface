@@ -10,6 +10,7 @@ export const styles = StyleSheet.create({
         headerStyle: {
             backgroundColor: CIANO
         },
+        drawerPosition: "right",
         headerTintColor: '#fff',
         headerTitleStyle: {
             fontWeight: 'bold'
@@ -32,6 +33,7 @@ export const styles = StyleSheet.create({
         menuIcon: {
             flex: 2,
             padding: 10
-        }
+        },
+        drawerPosition: "left"
     },
 });
