@@ -26,10 +26,12 @@ export const styles = StyleSheet.create({
         },
         searchIcon: {
             flexDirection: "row",
-            flex: 2
+            flex: 2,
+            padding: 10
         },
         menuIcon: {
-            flex: 2
+            flex: 2,
+            padding: 10
         }
     },
 });

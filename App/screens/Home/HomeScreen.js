@@ -1,8 +1,10 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { SafeAreaView, FlatList } from 'react-native';
+import { SafeAreaView, FlatList, Modal, View, Text, TouchableOpacity } from 'react-native';
 import { StatusBar } from "expo-status-bar";
 import { styles } from "./styles"
 import { Product } from './../../components/Product/Product'
+import { ProductModal } from './../../components/Product/ProductModal'
+import { ModalContext } from '../../store/modal-context';
 
 export default function HomeScreen({ navigation }) {
     const [products, setProducts] = useState([

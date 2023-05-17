@@ -3,7 +3,8 @@ import React, { useContext, useEffect, useState } from 'react'
 import { View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack';
-import { LoginScreen, HomeScreen, RegistrationScreen } from './screens'
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { LoginScreen, HomeScreen, RegistrationScreen, MenuScreen } from './screens'
 import { decode, encode } from 'base-64'
 import { styles } from './generalStyles'
 import { BackButtom } from './components/BackButton';
@@ -11,10 +12,9 @@ import { LogoTitle } from './components/LogoTitle';
 import { SearchIcon } from './components/SearchIcon';
 import { MenuIcon } from './components/MenuIcon';
 import AuthContextProvider, { AuthContext } from './store/auth-context'
+import ModalContextProvider from './store/modal-context'
 import { StatusBar } from 'expo-status-bar';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { AppLoading } from 'expo-app-loading'
-import { TouchableOpacity } from 'react-native';
 
 if (!global.btoa) { global.btoa = encode }
 if (!global.atob) { global.atob = decode }
@@ -38,7 +38,7 @@ function AuthStack() {
 };
 
 function AuthenticatedStack() {
-
+    // const Drawer = createDrawerNavigator();
     const options = {
         headerShown: true,
         headerTitle: LogoTitle,
@@ -51,21 +51,22 @@ function AuthenticatedStack() {
     };
 
     return (
-        <Stack.Navigator screenOptions={styles.headerNavigation}>
-            <Stack.Screen name="Home" options={options} component={HomeScreen} />
-        </Stack.Navigator>
+        <ModalContextProvider>
+            {/* <Drawer.Navigator screenOptions={styles.headerNavigation}>
+                <Drawer.Screen name="Home" options={options} component={HomeScreen} />
+                <Drawer.Screen name="Menu" options={options} component={MenuScreen} />
+            </Drawer.Navigator> */}
+        </ModalContextProvider>
     );
 };
 
 function Navigation() {
     const authCtx = useContext(AuthContext);
     return (
-
         <NavigationContainer>
             {!authCtx.isAuthenticated && <AuthStack />}
             {authCtx.isAuthenticated && <AuthenticatedStack />}
         </NavigationContainer >
-
     )
 }
 
