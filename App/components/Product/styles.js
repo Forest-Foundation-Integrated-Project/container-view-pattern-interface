@@ -40,5 +40,9 @@ export const styles = StyleSheet.create({
         fontSize: 12,
         color: '#666',
         paddingBottom: 10
+    },
+
+    item: {
+        display: 'flex',
     }
 });

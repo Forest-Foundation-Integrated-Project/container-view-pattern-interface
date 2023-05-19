@@ -1,12 +1,13 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { SafeAreaView, FlatList, Modal, View, Text, TouchableOpacity } from 'react-native';
+import { SafeAreaView, FlatList, Modal, View, Text, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
 import { StatusBar } from "expo-status-bar";
 import { styles } from "./styles"
 import { Product } from './../../components/Product/Product'
 
 export default function HomeScreen({ navigation }) {
-    console.log(navigation)
+    console.log('oi')
     const [products, setProducts] = useState([
+
         {
             "id": 1,
             "title": "Cupcake",
@@ -49,12 +50,13 @@ export default function HomeScreen({ navigation }) {
         }
     ]);
 
-    const renderItem = ({ item }) => {
+
+    const renderItem = ({ item, navigation }) => {
         return (
-            <Product image={item.image} title={item.title} subtitle={item.subtitle} />
+            <Product image={item.image} title={item.title} subtitle={item.subtitle} navigation={navigation}/>
         );
     };
-
+    console.log(navigation)
     return (
         <>
             <SafeAreaView style={styles.topSafeArea} />

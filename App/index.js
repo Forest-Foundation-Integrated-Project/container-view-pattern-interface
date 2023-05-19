@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { LoginScreen, HomeScreen, RegistrationScreen, MenuScreen } from './screens';
+import { LoginScreen, HomeScreen, RegistrationScreen, MenuScreen, ProductScreen } from './screens';
 import { decode, encode } from 'base-64'
 import { styles } from './generalStyles';
 import { BackButtom } from './components/BackButton';
@@ -37,6 +37,7 @@ function AuthStack() {
     );
 };
 
+
 function AuthenticatedStack() {
     const Drawer = createDrawerNavigator();
     const options = {
@@ -49,6 +50,7 @@ function AuthenticatedStack() {
         <Drawer.Navigator screenOptions={styles.headerNavigation}>
             <Drawer.Screen name="Home" options={options} component={HomeScreen} />
             <Drawer.Screen name="Menu" options={options} component={MenuScreen} />
+            <Stack.Screen name="Product Screen" component={ProductScreen}/>
         </Drawer.Navigator >
     );
 };
@@ -62,7 +64,16 @@ function Navigation() {
         </NavigationContainer >
     )
 }
-
+/*
+function ProductScreen({ navigation }) {
+    const authCtx = useContext(AuthContext);
+    return (
+        <Stack.Navigator screenOptions={styles.headerNavigation}>
+            <Stack.Screen name="Product Screen" options={{ headerShown: false }} component={productScreen}/>
+        </Stack.Navigator >
+    );
+}
+*/
 function Root() {
     const [isTryingLogin, setIsTryingLogin] = useState(true);
 

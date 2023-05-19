@@ -4,10 +4,10 @@ import { StatusBar } from "expo-status-bar";
 import { styles } from "./styles"
 import { Product } from './../../components/Product/Product'
 
-export default function productScreen({navigation}){
+export default function ProductScreen({navigation}){
     return(
         <SafeAreaView>
-            
+            <Text>aaaaaaaaaaaa</Text>
             
         </SafeAreaView>
     )
