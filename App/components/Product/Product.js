@@ -1,18 +1,14 @@
 import React from 'react';
-import { View, Image, Text, StyleSheet, TouchableWithoutFeedback } from 'react-native';
+import { View, Image, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { styles } from "./styles"
 
-function bt(navigation){
-    //console.log(navigation)
-    //navigation.navigate('ProductScreen')
- //console.log('oi')
-}
-export function Product({ image, title, subtitle, navigation }) {
+
+export function Product({ image, title, subtitle, onPress }) {
     //console.log(navigation)
     return (
 
         <View style={styles.container}>
-            <TouchableWithoutFeedback style={{ backgroundColor: 'red' }} onPress={bt(navigation)}>
+            <TouchableOpacity onPress={onPress}>
                 <View>
                     <View style={styles.imageContainer}>
                         <Image source={{ uri: image }} style={styles.image} />
@@ -23,7 +19,7 @@ export function Product({ image, title, subtitle, navigation }) {
                     </View>
                 </View>
 
-            </TouchableWithoutFeedback>
+            </TouchableOpacity>
         </View>
 
     )
