@@ -12,13 +12,36 @@ export const styles = StyleSheet.create({
 
     container: {
        flex: 1,
-       //flexDirection: 'column',
        alignItems: 'center',
        //justifyContent: 'center',
     },
 
     userSession:{
+        maxWidth: 400,
         marginVertical: 10,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'flex-end',
+    },
+
+    userImage:{
+      height: 60,
+      width: 60,
+      borderRadius: 50,
+    },
+
+    userIfo:{
+      marginHorizontal: 10,
+    },
+
+    userName: {
+      fontSize: 16,
+      fontWeight: 'bold',
+    },
+
+    userLocation: {
+      fontSize: 14,
+      color: CINZA
     },
 
     productSession: {
@@ -65,7 +88,9 @@ export const styles = StyleSheet.create({
 
     prodDesc: {
       fontSize: 16,
-      color: CINZA
+      color: CINZA,
+      flexWrap: 'wrap',
+      maxWidth: 290,
     },
 
     buttoncontactUser: {

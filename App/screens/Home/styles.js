@@ -33,8 +33,53 @@ export const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#f5f5f5',
     },
+
+    bannerArea: {
+        alignItems: 'center',
+        marginVertical: 20,
+    },
+
+    banner: {
+        maxWidth: 355,
+        borderRadius: 15
+    },
+
+    bannerImage:{
+        height: 183,
+        width: 355,
+    },
+
+    orderOptions: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        marginHorizontal: 20,
+        marginBottom: 20,
+    },
+
+    toggleOption: {
+        backgroundColor: 'white',
+        borderRadius: 15,
+        justifyContent: 'center',
+        width: 100,
+        height: 30,
+    },
+
+    toggleOptionActive: {
+        backgroundColor: CIANO,
+    },
+
+    orderOption: {
+        fontSize: 14,
+        fontWeight: 'bold',
+        textAlign: 'center'
+    },
+
+    orderOptionActive: {
+        color: 'white'
+    },
+
     list: {
         paddingHorizontal: 8
     },
@@ -43,8 +88,9 @@ export const styles = StyleSheet.create({
         paddingVertical: 8,
         borderBottomWidth: 1,
         borderBottomColor: '#ccc',
-        borderRadius: 20
+        borderRadius: 15
     },
+
     title: {
         fontSize: 16,
         fontWeight: 'bold',
@@ -61,6 +107,21 @@ export const styles = StyleSheet.create({
     viewModal: {
         backgroundColor: 'rgba(0, 0, 0, 0.2)'
     },
+
+    shadow: {
+        ...Platform.select({
+          ios: {
+            shadowColor: 'black',
+            shadowOffset: { width: 0, height: 4 },
+            shadowOpacity: 0.1,
+            shadowRadius: 15,
+          },
+          android: {
+            elevation: 4,
+          },
+        }),
+      },
+
     modalContainer: {
         // flex: 0.5,
         // flexDirection: 'row',
