@@ -9,6 +9,7 @@ import {
   RegistrationScreen,
   MenuScreen,
   ProductScreen,
+  ForgotPasswordScreen,
 } from "./screens";
 import { decode, encode } from "base-64";
 import { styles } from "./generalStyles";
@@ -50,6 +51,12 @@ function AuthStack() {
         options={options}
         component={RegistrationScreen}
       />
+
+      <Stack.Screen 
+      name="ForgotPasswordScreen"
+      options={options}
+      component={ForgotPasswordScreen}
+      />
     </Stack.Navigator>
   );
 }
@@ -86,7 +93,7 @@ function Navigation() {
   return (
     <NavigationContainer>
       {!authCtx.isAuthenticated && <AuthStack />}
-      {authCtx.isAuthenticated && <AuthenticatedStack />}
+      {authCtx.isAuthenticated && <AuthStack />}
     </NavigationContainer>
   );
 }

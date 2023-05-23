@@ -10,23 +10,12 @@ import { Loading } from './../../components/Loading';
 import { Alert } from 'react-native';
 import ErrorMessage from './../../components/ErrorMessage'
 
-export default function LoginScreen({ navigation }) {
-    const authCtx = useContext(AuthContext)
-    const onFooterLinkPress = () => {
-        navigation.navigate('Registration')
-    }
+export default function ForgotPasswordScreen({ navigation }) {
 
-    const forgotPassPressed = () => {
-        navigation.navigate('ForgotPasswordScreen') 
-    }
-
-    const [isAuthenticating, setIsAuthenticating] = useState(false);
-
-    async function loginHandler({ email, password }) {
-        setIsAuthenticating(true);
+    async function emailHandler({ email }) {
+        //setIsAuthenticating(true);
         try {
-            token = await login(email, password, navigation);
-            authCtx.authenticate(token);
+            Alert.alert(`Sucesso .Por favor, cheque a caixa de entrada de ${email}.`);
         } catch (error) {
             console.log(error)
             Alert.alert(
@@ -34,14 +23,8 @@ export default function LoginScreen({ navigation }) {
                 "Não foi possível realizar o login, confira seu email e senha"
             );
 
-            setIsAuthenticating(false);
+            //setIsAuthenticating(false);
         }
-
-        if (isAuthenticating) {
-            return <Loading message="Logging you in..." />;
-        }
-
-        return <AuthContext />;
     }
 
     return (
@@ -51,11 +34,10 @@ export default function LoginScreen({ navigation }) {
                 <Formik style={styles.content}
 
                     initialValues={{
-                        email: "",
-                        password: ""
+                        email: ""
                     }}
                     onSubmit={(values) => {
-                        loginHandler(values);
+                        emailHandler(values);
                     }}
                     validationSchema={validationSchema}
                 >
@@ -72,10 +54,11 @@ export default function LoginScreen({ navigation }) {
                         <KeyboardAwareScrollView
                             style={{ width: '100%' }}
                             keyboardShouldPersistTaps="always">
-                            <Image
-                                style={styles.logo}
-                                source={require('../../assets/images/logotipo.png')}
-                            />
+                            <View style={styles.labelContainer}>
+                            <Text style={styles.labelText}>Não se preocupe, nós daremos um jeito!</Text>
+                            <Text style={styles.textInform}>Será enviado um e-mail de requisição para a alteração da sua senha.</Text>
+                            </View>
+                            
                             <View style={styles.formGroup}>
                                 <TextInput
                                     style={styles.input}
@@ -83,33 +66,15 @@ export default function LoginScreen({ navigation }) {
                                     onChangeText={handleChange("email")}
                                     onBlur={handleBlur("email")}
                                     autoCapitalize="none"
-                                    placeholder="E-mail"
+                                    placeholder="Insira seu e-mail de login"
                                 />
 
                                 <ErrorMessage errorValue={touched.email && errors.email} />
                             </View>
-                            <View style={styles.formGroup}>
-                                <TextInput
-                                    style={styles.input}
-                                    value={values.password}
-                                    onChangeText={handleChange("password")}
-                                    onBlur={handleBlur("password")}
-                                    autoCapitalize="none"
-                                    secureTextEntry={true}
-                                    placeholder="Senha"
-                                />
 
-                                <ErrorMessage
-                                    errorValue={touched.password && errors.password}
-                                />
-                            </View>
-                            <Text style={styles.forgotPass} onPress={forgotPassPressed}>Esqueceu sua senha?</Text>
                             <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-                                <Text style={styles.buttonText}>Login</Text>
+                                <Text style={styles.buttonText}>Requisitar nova senha</Text>
                             </TouchableOpacity>
-                            <View style={styles.footerView}>
-                                <Text style={styles.footerText}>Ainda não é registrado? <Text onPress={onFooterLinkPress} style={styles.footerLink}>REGISTRE-SE AQUI!</Text></Text>
-                            </View>
                         </KeyboardAwareScrollView>
                     )
                     }
@@ -117,4 +82,5 @@ export default function LoginScreen({ navigation }) {
             </View>
         </>
     )
+
 }

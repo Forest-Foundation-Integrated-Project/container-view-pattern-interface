@@ -7,3 +7,5 @@ export { default as RegistrationScreen } from './Registration/RegistrationScreen
 export { default as MenuScreen } from './Menu/MenuScreen'
 
 export { default as ProductScreen } from './Product/ProductScreen'
+
+export { default as ForgotPasswordScreen } from './ForgotPassword/ForgotPasswordScreen'
