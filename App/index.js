@@ -36,9 +36,9 @@ function AuthStack() {
         </Stack.Navigator >
     );
 };
+const LeftDrawer = createDrawerNavigator();
 
-function AuthenticatedStack() {
-    const Drawer = createDrawerNavigator();
+function LeftDrawerHomeScreen() {
     const options = {
         headerShown: true,
         headerTitle: LogoTitle,
@@ -46,12 +46,35 @@ function AuthenticatedStack() {
     };
 
     return (
-        <Drawer.Navigator screenOptions={styles.headerNavigation} drawerContent={MenuScreen}>
-            <Drawer.Screen name="Home" options={options} component={HomeScreen} />
-            <Drawer.Screen name="Profile" options={options} component={ProfileScreen} />
-            <Drawer.Screen name="Categories" options={options} component={CategoriesScreen} />
-            <Drawer.Screen name="Settings" options={options} component={SettingsScreen} />
-        </Drawer.Navigator >
+        <LeftDrawer.Navigator
+            useLegacyImplementation
+            id="LeftDrawer"
+            screenOptions={{ drawerPosition: 'left' }}>
+            <LeftDrawer.Screen name="Home" options={options} component={HomeScreen} />
+        </LeftDrawer.Navigator>
+    );
+}
+
+const RightDrawer = createDrawerNavigator();
+function RightDrawerMenuScreen() {
+    return (
+        <RightDrawer.Navigator
+            useLegacyImplementation
+            id="RightDrawer"
+            drawerContent={(props) => <MenuScreen {...props} />}
+            screenOptions={{
+                drawerPosition: 'right',
+                headerShown: false,
+            }}>
+            <RightDrawer.Screen name="HomeDrawer" component={LeftDrawerHomeScreen} />
+        </RightDrawer.Navigator>
+    )
+}
+
+function AuthenticatedStack() {
+
+    return (
+        <RightDrawerMenuScreen />
     );
 };
 

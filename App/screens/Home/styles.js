@@ -60,6 +60,5 @@ export const styles = StyleSheet.create({
     },
     viewModal: {
         backgroundColor: 'rgba(0, 0, 0, 0.2)'
-    },
-
+    }
 });
