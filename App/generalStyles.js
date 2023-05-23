@@ -7,10 +7,18 @@ const CIANO = '#00B0AE'
 export const styles = StyleSheet.create({
     headerNavigation: {
         flexDirection: "row",
+        drawerPosition: "right",
+        presentation: 'modal',
+        drawerPosition: 'right',
+        drawerType: 'slide',
+        drawerStyle: {
+            width: '50%',
+        },
+        overlayColor: 'rgba(0, 0, 0, 0)',
+        swipeEdgeWidth: 0,
         headerStyle: {
             backgroundColor: CIANO
         },
-        drawerPosition: "right",
         headerTintColor: '#fff',
         headerTitleStyle: {
             fontWeight: 'bold'
@@ -34,6 +42,5 @@ export const styles = StyleSheet.create({
             flex: 2,
             padding: 10
         },
-        drawerPosition: "left"
     },
 });

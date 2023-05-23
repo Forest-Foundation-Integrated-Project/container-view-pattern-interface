@@ -1,9 +1,10 @@
 import 'react-native-gesture-handler';
 import React, { useContext, useEffect, useState } from 'react'
-import { View } from 'react-native';
+import { View, Text, Dimensions } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { LoginScreen, HomeScreen, RegistrationScreen, MenuScreen } from './screens';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { LoginScreen, HomeScreen, RegistrationScreen, MenuScreen, SettingsScreen, CategoriesScreen, ProfileScreen } from './screens';
 import { decode, encode } from 'base-64'
 import { styles } from './generalStyles';
 import { BackButtom } from './components/BackButton';
@@ -13,7 +14,6 @@ import { MenuIcon } from './components/MenuIcon';
 import AuthContextProvider, { AuthContext } from './store/auth-context'
 import { StatusBar } from 'expo-status-bar';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { createDrawerNavigator } from '@react-navigation/drawer';
 import 'react-native-gesture-handler';
 
 if (!global.btoa) { global.btoa = encode }
@@ -42,13 +42,15 @@ function AuthenticatedStack() {
     const options = {
         headerShown: true,
         headerTitle: LogoTitle,
-        drawerPosition: "right"
+        headerBackImage: BackButtom
     };
 
     return (
-        <Drawer.Navigator screenOptions={styles.headerNavigation}>
+        <Drawer.Navigator screenOptions={styles.headerNavigation} drawerContent={MenuScreen}>
             <Drawer.Screen name="Home" options={options} component={HomeScreen} />
-            <Drawer.Screen name="Menu" options={options} component={MenuScreen} />
+            <Drawer.Screen name="Profile" options={options} component={ProfileScreen} />
+            <Drawer.Screen name="Categories" options={options} component={CategoriesScreen} />
+            <Drawer.Screen name="Settings" options={options} component={SettingsScreen} />
         </Drawer.Navigator >
     );
 };
@@ -103,5 +105,3 @@ export default function App() {
         </>
     );
 }
-
-
