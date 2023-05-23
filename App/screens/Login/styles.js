@@ -46,11 +46,19 @@ export default StyleSheet.create({
         borderColor: "#e3e3e3",
         backgroundColor: "#fff",
     },
+
+    forgotPass: {
+        marginTop: 10,
+        marginRight: 10,
+        alignSelf: 'flex-end',
+        fontSize: 16,
+        color: 'white'
+    },
+
     button: {
         borderRadius: 20,
         backgroundColor: CIANO,
-        marginLeft: 30,
-        marginRight: 30,
+        //marginHorizontal: 30,
         marginTop: 20,
         height: 75,
         borderWidth: 5,
@@ -75,6 +83,7 @@ export default StyleSheet.create({
         fontSize: 16,
         color: 'white'
     },
+
     footerLink: {
         color: CONTENT_BACKGROUND,
         textTransform: "uppercase",

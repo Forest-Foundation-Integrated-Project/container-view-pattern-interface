@@ -98,6 +98,7 @@ export default function LoginScreen({ navigation }) {
                                     errorValue={touched.password && errors.password}
                                 />
                             </View>
+                            <Text style={styles.forgotPass}>Esqueceu sua senha?</Text>
                             <TouchableOpacity style={styles.button} onPress={handleSubmit}>
                                 <Text style={styles.buttonText}>Login</Text>
                             </TouchableOpacity>
