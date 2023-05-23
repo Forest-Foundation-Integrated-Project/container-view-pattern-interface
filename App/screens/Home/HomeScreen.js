@@ -7,19 +7,6 @@ import { MenuIcon } from '../../components/MenuIcon';
 import { Ionicons } from '@expo/vector-icons';
 
 export default function HomeScreen({ navigation }) {
-
-    function handleToggleMenu() {
-        console.log("pressed")
-    }
-
-    // useLayoutEffect(() => {
-    //     navigation.setOptions({
-    //         headerRight: () => {
-    //             return <MenuIcon onPress={handleToggleMenu} />
-    //         }
-    //     })
-    // }, [navigation, handleToggleMenu]);
-
     console.log(navigation)
     const [products, setProducts] = useState([
         {

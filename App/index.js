@@ -36,38 +36,16 @@ function AuthStack() {
         </Stack.Navigator >
     );
 };
-const LeftDrawer = createDrawerNavigator();
 
-function LeftDrawerHomeScreen() {
-    const options = {
-        headerShown: true,
-        headerTitle: LogoTitle,
-        headerBackImage: BackButtom
-    };
-
-    return (
-        <LeftDrawer.Navigator
-            useLegacyImplementation
-            id="LeftDrawer"
-            screenOptions={{ drawerPosition: 'left' }}>
-            <LeftDrawer.Screen name="Home" options={options} component={HomeScreen} />
-        </LeftDrawer.Navigator>
-    );
-}
-
-const RightDrawer = createDrawerNavigator();
+const Drawer = createDrawerNavigator();
 function RightDrawerMenuScreen() {
     return (
-        <RightDrawer.Navigator
+        <Drawer.Navigator
             useLegacyImplementation
-            id="RightDrawer"
             drawerContent={(props) => <MenuScreen {...props} />}
-            screenOptions={{
-                drawerPosition: 'right',
-                headerShown: false,
-            }}>
-            <RightDrawer.Screen name="HomeDrawer" component={LeftDrawerHomeScreen} />
-        </RightDrawer.Navigator>
+            screenOptions={styles.headerNavigation}>
+            <Drawer.Screen name="HomeDrawer" component={HomeScreen} />
+        </Drawer.Navigator>
     )
 }
 
