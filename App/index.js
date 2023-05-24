@@ -9,6 +9,7 @@ import { LoginScreen, HomeScreen, RegistrationScreen, MenuScreen, SettingsScreen
 import { decode, encode } from 'base-64'
 import { styles } from './generalStyles';
 import { BackButtom } from './components/BackButton';
+import { EditButtom } from './components/EditButton';
 import { LogoTitle } from './components/LogoTitle';
 import AuthContextProvider, { AuthContext } from './store/auth-context'
 import { StatusBar } from 'expo-status-bar';
@@ -25,7 +26,7 @@ const Stack = createStackNavigator()
 const options = {
     headerShown: true,
     headerTitle: LogoTitle,
-    // headerBackImage: BackButtom
+    headerBackImage: BackButtom
 }
 
 function AuthStack() {
@@ -41,16 +42,22 @@ function AuthStack() {
 
 const Drawer = createDrawerNavigator();
 function AuthenticatedStack() {
-    const drawer_options = {
+    const home_options = {
         headerShown: true,
         headerTitle: LogoTitle,
         headerNavigationOptions
     }
+
+    // console.log(props)
+
     return (
         <Drawer.Navigator
-            drawerContent={(props) => <MenuScreen {...props} />}
+            drawerContent={({ navigation, props }) => (
+                <MenuScreen navigation={navigation} props={props} />
+            )}
             screenOptions={headerNavigationOptions}>
-            <Drawer.Screen name="Home" options={drawer_options} component={HomeScreen} />
+            <Drawer.Screen name="Home" options={home_options} component={HomeScreen} />
+            <Drawer.Screen name="Profile" options={home_options} component={ProfileScreen} />
         </Drawer.Navigator>
     );
 };

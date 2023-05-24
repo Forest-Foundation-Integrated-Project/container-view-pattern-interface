@@ -18,39 +18,37 @@ import { Ionicons } from '@expo/vector-icons';
 import { AuthContext } from './../../store/auth-context'
 import { useContext } from 'react';
 
-export default function MenuScreen(props) {
+export default function MenuScreen({ navigation, props }) {
+
 
     const user = {
         name: "Laís Gonçalves",
         role: "Vendedor"
     }
 
-    const { navigation, state } = props;
-    const { routes } = state;
-
     const BASE_PATH =
         'https://raw.githubusercontent.com/AboutReact/sampleresource/master/';
-    const proileImage = 'react_logo.png';
 
     const authCtx = useContext(AuthContext);
 
     function logout() {
         authCtx.logout()
     }
-
     return (
         <SafeAreaView style={styles.menuContainer}>
             <DrawerContentScrollView {...props}>
                 <View style={styles.body}>
                     <View style={styles.profileContainer}>
-                        <View style={styles.imageView}>
-                            <Image
-                                source={{ uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz8La2nwie8i1L3Asva1zyiKRaiWkVzujCP9ixCPH7OzYsLOPwBGfJ8VNzV67jehFLz2s&usqp=CAU" }}
-                                style={styles.sideMenuProfileIcon}
-                            />
-                        </View>
-                        <Text style={styles.userName}>{user.name}</Text>
-                        <Text style={styles.userRole}>{user.role}</Text>
+                        <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
+                            <View style={styles.imageView}>
+                                <Image
+                                    source={{ uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz8La2nwie8i1L3Asva1zyiKRaiWkVzujCP9ixCPH7OzYsLOPwBGfJ8VNzV67jehFLz2s&usqp=CAU" }}
+                                    style={styles.sideMenuProfileIcon}
+                                />
+                            </View>
+                            <Text style={styles.userName}>{user.name}</Text>
+                            <Text style={styles.userRole}>{user.role}</Text>
+                        </TouchableOpacity>
                     </View>
                     <View style={styles.menuItemsView}>
                         <DrawerItem style={styles.menuItem}
