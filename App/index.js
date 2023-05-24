@@ -4,32 +4,34 @@ import { View, Text, Dimensions } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import { headerNavigationOptions } from './headerNavigationOptions';
 import { LoginScreen, HomeScreen, RegistrationScreen, MenuScreen, SettingsScreen, CategoriesScreen, ProfileScreen } from './screens';
 import { decode, encode } from 'base-64'
 import { styles } from './generalStyles';
 import { BackButtom } from './components/BackButton';
 import { LogoTitle } from './components/LogoTitle';
-import { SearchIcon } from './components/SearchIcon';
-import { MenuIcon } from './components/MenuIcon';
 import AuthContextProvider, { AuthContext } from './store/auth-context'
 import { StatusBar } from 'expo-status-bar';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import 'react-native-gesture-handler';
+import { Ionicons } from '@expo/vector-icons';
+import { TouchableOpacity } from 'react-native';
 
 if (!global.btoa) { global.btoa = encode }
 if (!global.atob) { global.atob = decode }
 
 const Stack = createStackNavigator()
 
+const options = {
+    headerShown: true,
+    headerTitle: LogoTitle,
+    headerBackImage: BackButtom
+}
+
 function AuthStack() {
-    const options = {
-        headerShown: true,
-        headerTitle: LogoTitle,
-        headerBackImage: BackButtom
-    }
 
     return (
-        <Stack.Navigator screenOptions={styles.headerNavigation}>
+        <Stack.Navigator screenOptions={headerNavigationOptions}>
             <Stack.Screen name="Login" options={{ headerShown: false }} component={LoginScreen}
             />
             <Stack.Screen name="Registration" options={options} component={RegistrationScreen} />
@@ -38,21 +40,17 @@ function AuthStack() {
 };
 
 const Drawer = createDrawerNavigator();
-function RightDrawerMenuScreen() {
+function AuthenticatedStack() {
+    const drawer_options = {
+        ...options,
+        headerNavigationOptions
+    }
     return (
         <Drawer.Navigator
-            useLegacyImplementation
             drawerContent={(props) => <MenuScreen {...props} />}
-            screenOptions={styles.headerNavigation}>
-            <Drawer.Screen name="HomeDrawer" component={HomeScreen} />
+            screenOptions={headerNavigationOptions}>
+            <Drawer.Screen name="Home" options={drawer_options} component={HomeScreen} />
         </Drawer.Navigator>
-    )
-}
-
-function AuthenticatedStack() {
-
-    return (
-        <RightDrawerMenuScreen />
     );
 };
 

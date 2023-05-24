@@ -1,15 +1,16 @@
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { StyleSheet } from 'react-native';
-
-const CIANO = '#00B0AE'
+import { CIANO } from './constants/colors'
 
 export const styles = StyleSheet.create({
     headerNavigation: {
-        flexDirection: "row",
         drawerPosition: "right",
+        backgroundColor: CIANO,
+        flexDirection: "row",
         drawerStyle: {
-            width: '50%',
+            width: '75%',
+            marginTop: '20%'
         },
         overlayColor: 'rgba(0, 0, 0, 0)',
         swipeEdgeWidth: 0,
@@ -25,14 +26,11 @@ export const styles = StyleSheet.create({
             alignItems: 'center',
             paddingRight: 10,
             width: "50%",
-            flex: 2
+            flex: 2,
+            justifyContent: "flex-end"
         },
         searchIcon: {
             flexDirection: "row",
-            flex: 2,
-            padding: 10
-        },
-        menuIcon: {
             flex: 2,
             padding: 10
         },

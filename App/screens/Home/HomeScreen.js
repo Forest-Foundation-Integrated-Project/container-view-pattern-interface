@@ -3,11 +3,8 @@ import { SafeAreaView, FlatList, Modal, View, Text, TouchableOpacity } from 'rea
 import { StatusBar } from "expo-status-bar";
 import { styles } from "./styles"
 import { Product } from './../../components/Product/Product'
-import { MenuIcon } from '../../components/MenuIcon';
-import { Ionicons } from '@expo/vector-icons';
 
 export default function HomeScreen({ navigation }) {
-    console.log(navigation)
     const [products, setProducts] = useState([
         {
             "id": 1,
