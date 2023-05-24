@@ -19,6 +19,12 @@ import { AuthContext } from './../../store/auth-context'
 import { useContext } from 'react';
 
 export default function MenuScreen(props) {
+
+    const user = {
+        name: "Laís Gonçalves",
+        role: "Vendedor"
+    }
+
     const { navigation, state } = props;
     const { routes } = state;
 
@@ -37,10 +43,14 @@ export default function MenuScreen(props) {
             <DrawerContentScrollView {...props}>
                 <View style={styles.body}>
                     <View style={styles.profileContainer}>
-                        <Image
-                            source={{ uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz8La2nwie8i1L3Asva1zyiKRaiWkVzujCP9ixCPH7OzYsLOPwBGfJ8VNzV67jehFLz2s&usqp=CAU" }}
-                            style={styles.sideMenuProfileIcon}
-                        />
+                        <View style={styles.imageView}>
+                            <Image
+                                source={{ uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz8La2nwie8i1L3Asva1zyiKRaiWkVzujCP9ixCPH7OzYsLOPwBGfJ8VNzV67jehFLz2s&usqp=CAU" }}
+                                style={styles.sideMenuProfileIcon}
+                            />
+                        </View>
+                        <Text style={styles.userName}>{user.name}</Text>
+                        <Text style={styles.userRole}>{user.role}</Text>
                     </View>
                     <View style={styles.menuItemsView}>
                         <DrawerItem style={styles.menuItem}

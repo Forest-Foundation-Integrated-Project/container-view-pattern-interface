@@ -25,7 +25,7 @@ const Stack = createStackNavigator()
 const options = {
     headerShown: true,
     headerTitle: LogoTitle,
-    headerBackImage: BackButtom
+    // headerBackImage: BackButtom
 }
 
 function AuthStack() {
@@ -42,7 +42,8 @@ function AuthStack() {
 const Drawer = createDrawerNavigator();
 function AuthenticatedStack() {
     const drawer_options = {
-        ...options,
+        headerShown: true,
+        headerTitle: LogoTitle,
         headerNavigationOptions
     }
     return (

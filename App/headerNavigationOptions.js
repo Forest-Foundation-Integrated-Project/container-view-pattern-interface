@@ -7,16 +7,16 @@ import { CIANO } from './constants/colors'
 
 export const headerNavigationOptions = ({ navigation }) => ({
   backgroundColor: CIANO,
-  headerLeft: BackButtom,
+  headerLeft: () => (<TouchableOpacity></TouchableOpacity>),
   headerRight: () => (
-    <TouchableOpacity onPress={() => navigation.openDrawer()}>
+    <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
       <Ionicons name="menu-outline" size={40} color="white" />
     </TouchableOpacity>
   ),
   drawerPosition: "right",
   drawerStyle: {
-    width: '75%',
-    marginTop: '21%',
+    width: '70%',
+    marginTop: '20%',
   },
   overlayColor: 'rgba(0, 0, 0, 0)',
   headerStyle: {
