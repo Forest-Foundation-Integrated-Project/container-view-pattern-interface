@@ -51,7 +51,7 @@ export const styles = StyleSheet.create({
     borderBottomWidth: 2,
     borderBottomColor: "white",
     borderStyle: 'solid',
-    fontColor: 'white',
+    color: 'white',
     borderRadius: 0
   },
   menuItemText: {
@@ -71,7 +71,7 @@ export const styles = StyleSheet.create({
     borderStyle: 'solid',
     padding: 10,
     width: '70%',
-    fontColor: 'white',
+    color: 'white',
     alignSelf: 'center'
   },
   menuLogoutText: {

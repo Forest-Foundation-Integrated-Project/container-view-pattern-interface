@@ -2,7 +2,7 @@ import { Image, View } from 'react-native';
 
 export function BackButtom() {
     return (
-        <View style={{ paddingRight: 10 }}>
+        <View style={{ marginLeft: 10 }}>
             <Image
                 style={{ maxWidth: 30, maxHeight: 30 }}
                 source={require('../assets/images/voltar.png')}
