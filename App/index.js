@@ -10,13 +10,13 @@ import {
   ProductScreen,
   SettingsScreen,
   CategoriesScreen,
+  ProfileScreen,
 } from "./screens";
 import { decode, encode } from "base-64";
 import { styles } from "./generalStyles";
 import { BackButtom } from "./components/BackButton";
 import { EditButtom } from "./components/EditButton";
 import { LogoTitle } from "./components/LogoTitle";
-import { SearchIcon } from "./components/SearchIcon";
 import { MenuIcon } from "./components/MenuIcon";
 import AuthContextProvider, { AuthContext } from "./store/auth-context";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -58,7 +58,7 @@ function AuthStack() {
 
 function AuthenticatedStack() {
   const Drawer = createDrawerNavigator();
-  const home_options = {
+  const options = {
     headerShown: true,
     headerTitle: LogoTitle,
     headerNavigationOptions,
@@ -72,17 +72,13 @@ function AuthenticatedStack() {
         <MenuScreen navigation={navigation} props={props} />
       )}
     >
-      <Drawer.Screen
-        name="Home"
-        options={home_options}
-        component={HomeScreen}
-      />
+      <Drawer.Screen name="Home" options={options} component={HomeScreen} />
       <Drawer.Screen
         name="Profile"
-        options={home_options}
+        options={options}
         component={ProfileScreen}
       />
-      <Stack.Screen
+      <Drawer.Screen
         name="ProductScreen"
         options={options}
         component={ProductScreen}

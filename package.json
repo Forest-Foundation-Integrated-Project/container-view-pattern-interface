@@ -58,7 +58,8 @@
     "@commitlint/cli": "^17.6.3",
     "@commitlint/config-conventional": "^17.6.3",
     "git-commit-msg-linter": "^5.0.4",
-    "husky": "^8.0.3"
+    "husky": "^8.0.3",
+    "prettier-eslint": "^15.0.1"
   },
   "private": true
 }

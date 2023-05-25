@@ -1,4 +1,5 @@
 import { Dimensions, StyleSheet } from "react-native";
+import { CIANO } from "../../constants/colors";
 
 const CONTENT_BACKGROUND = "#FFFFFF";
 

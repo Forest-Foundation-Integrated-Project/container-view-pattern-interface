@@ -8,7 +8,11 @@ import { BackButtom } from "../../components/BackButton";
 export default function ProfileScreen({ navigation, route }) {
   useEffect(() => {
     navigation.setOptions({
-      headerLeft: BackButtom,
+      headerLeft: () => (
+        <TouchableOpacity onPress={goHome}>
+          <BackButtom />
+        </TouchableOpacity>
+      ),
       headerRight: EditButtom,
     });
   }, [navigation]);
@@ -20,6 +24,11 @@ export default function ProfileScreen({ navigation, route }) {
     description:
       "Lorem impsu fdsad lorem impsum core. Corem ipsum dsad lorem impsum core. Corem ipsum fdsad lorem impsum core. Corem ipsum ",
   };
+
+  function goHome() {
+    navigation.navigate("Home");
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.profileAvatar}>
