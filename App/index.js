@@ -1,114 +1,146 @@
-import 'react-native-gesture-handler';
-import React, { useContext, useEffect, useState } from 'react'
-import { View, Text, Dimensions } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { headerNavigationOptions } from './headerNavigationOptions';
-import { LoginScreen, HomeScreen, RegistrationScreen, MenuScreen, SettingsScreen, CategoriesScreen, ProfileScreen } from './screens';
-import { decode, encode } from 'base-64'
-import { styles } from './generalStyles';
-import { BackButtom } from './components/BackButton';
-import { EditButtom } from './components/EditButton';
-import { LogoTitle } from './components/LogoTitle';
-import AuthContextProvider, { AuthContext } from './store/auth-context'
-import { StatusBar } from 'expo-status-bar';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import 'react-native-gesture-handler';
-import { Ionicons } from '@expo/vector-icons';
-import { TouchableOpacity } from 'react-native';
+import React, { useContext, useEffect, useState } from "react";
+import { SafeAreaView, View, Text, Dimensions } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import {
+  LoginScreen,
+  HomeScreen,
+  RegistrationScreen,
+  MenuScreen,
+  ProductScreen,
+  SettingsScreen,
+  CategoriesScreen,
+} from "./screens";
+import { decode, encode } from "base-64";
+import { styles } from "./generalStyles";
+import { BackButtom } from "./components/BackButton";
+import { EditButtom } from "./components/EditButton";
+import { LogoTitle } from "./components/LogoTitle";
+import { SearchIcon } from "./components/SearchIcon";
+import { MenuIcon } from "./components/MenuIcon";
+import AuthContextProvider, { AuthContext } from "./store/auth-context";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { StatusBar } from "expo-status-bar";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import { headerNavigationOptions } from "./headerNavigationOptions";
+import "react-native-gesture-handler";
 
-if (!global.btoa) { global.btoa = encode }
-if (!global.atob) { global.atob = decode }
-
-const Stack = createStackNavigator()
-
-const options = {
-    headerShown: true,
-    headerTitle: LogoTitle,
-    headerBackImage: BackButtom
+if (!global.btoa) {
+  global.btoa = encode;
+}
+if (!global.atob) {
+  global.atob = decode;
 }
 
 function AuthStack() {
+  const Stack = createStackNavigator();
+  const options = {
+    headerShown: true,
+    headerTitle: LogoTitle,
+    headerBackImage: BackButtom,
+  };
 
-    return (
-        <Stack.Navigator screenOptions={headerNavigationOptions}>
-            <Stack.Screen name="Login" options={{ headerShown: false }} component={LoginScreen}
-            />
-            <Stack.Screen name="Registration" options={options} component={RegistrationScreen} />
-        </Stack.Navigator >
-    );
-};
-
-const Drawer = createDrawerNavigator();
-function AuthenticatedStack() {
-    const home_options = {
-        headerShown: true,
-        headerTitle: LogoTitle,
-        headerNavigationOptions
-    }
-
-    // console.log(props)
-
-    return (
-        <Drawer.Navigator
-            drawerContent={({ navigation, props }) => (
-                <MenuScreen navigation={navigation} props={props} />
-            )}
-            screenOptions={headerNavigationOptions}>
-            <Drawer.Screen name="Home" options={home_options} component={HomeScreen} />
-            <Drawer.Screen name="Profile" options={home_options} component={ProfileScreen} />
-        </Drawer.Navigator>
-    );
-};
-
-function Navigation() {
-    const authCtx = useContext(AuthContext);
-    return (
-        <NavigationContainer>
-            {!authCtx.isAuthenticated && <AuthStack />}
-            {authCtx.isAuthenticated && <AuthenticatedStack />}
-        </NavigationContainer >
-    )
+  return (
+    <Stack.Navigator screenOptions={headerNavigationOptions}>
+      <Stack.Screen
+        name="Login"
+        options={{ headerShown: false }}
+        component={LoginScreen}
+      />
+      <Stack.Screen
+        name="Registration"
+        options={options}
+        component={RegistrationScreen}
+      />
+    </Stack.Navigator>
+  );
 }
 
+function AuthenticatedStack() {
+  const Drawer = createDrawerNavigator();
+  const home_options = {
+    headerShown: true,
+    headerTitle: LogoTitle,
+    headerNavigationOptions,
+  };
+
+  return (
+    // <NavigationContainer independent={true}></NavigationContainer>
+    <Drawer.Navigator
+      screenOptions={headerNavigationOptions}
+      drawerContent={({ navigation, props }) => (
+        <MenuScreen navigation={navigation} props={props} />
+      )}
+    >
+      <Drawer.Screen
+        name="Home"
+        options={home_options}
+        component={HomeScreen}
+      />
+      <Drawer.Screen
+        name="Profile"
+        options={home_options}
+        component={ProfileScreen}
+      />
+      <Stack.Screen
+        name="ProductScreen"
+        options={options}
+        component={ProductScreen}
+      />
+    </Drawer.Navigator>
+    // </NavigationContainer>
+  );
+}
+
+function Navigation() {
+  const authCtx = useContext(AuthContext);
+  return (
+    <NavigationContainer>
+      {!authCtx.isAuthenticated && <AuthStack />}
+      {authCtx.isAuthenticated && <AuthenticatedStack />}
+    </NavigationContainer>
+  );
+}
+
+/*
+  function ProductScreen({ navigation }) {
+      const authCtx = useContext(AuthContext);
+      return (
+          <Stack.Navigator screenOptions={styles.headerNavigation}>
+              <Stack.Screen name="Product Screen" options={{ headerShown: false }} component={productScreen}/>
+          </Stack.Navigator >
+      );
+  }
+  */
 function Root() {
-    const [isTryingLogin, setIsTryingLogin] = useState(true);
+  const [isTryingLogin, setIsTryingLogin] = useState(true);
 
-    const authCtx = useContext(AuthContext);
+  const authCtx = useContext(AuthContext);
 
-    useEffect(() => {
-        async function fetchToken() {
-            const storedToken = await AsyncStorage.getItem('token');
+  useEffect(() => {
+    async function fetchToken() {
+      const storedToken = await AsyncStorage.getItem("token");
 
-            if (storedToken) {
-                authCtx.authenticate(storedToken);
-            }
+      if (storedToken) {
+        authCtx.authenticate(storedToken);
+      }
 
-            setIsTryingLogin(false);
-        }
+      setIsTryingLogin(false);
+    }
 
-        fetchToken();
-    }, []);
+    fetchToken();
+  }, []);
 
-    // if (isTryingLogin) {
-    //     // return <AppLoading />;
-    // }
-
-    return <Navigation />;
+  return <Navigation />;
 }
 
 export default function App() {
-    // const [loading, setLoading] = useState(true)
-    // const [user, setUser] = useState(null)
-
-
-    return (
-        <>
-            <StatusBar style="light" />
-            <AuthContextProvider>
-                <Root />
-            </AuthContextProvider >
-        </>
-    );
+  return (
+    <>
+      <StatusBar style="light" />
+      <AuthContextProvider>
+        <Root />
+      </AuthContextProvider>
+    </>
+  );
 }
