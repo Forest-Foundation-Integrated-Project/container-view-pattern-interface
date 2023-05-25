@@ -15,7 +15,6 @@ export default function RegistrationScreen({ navigation }) {
             <StatusBar style="light" />
 
             <SafeAreaView style={styles.container}>
-                {/* https://formik.org/docs/overview */}
                 <RegistrationForm navigation={navigation} />
             </SafeAreaView>
         </>

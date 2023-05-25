@@ -20,6 +20,7 @@ export async function login(email, password, navigation) {
     } else {
         alert("Erro: " + response.message);
         token = null
+        console.log(response.message)
     }
 
     return token;

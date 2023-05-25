@@ -8,8 +8,8 @@ export const AuthContext = createContext({
     logout: () => { },
 });
 
-function AuthContextProvider({ children }) {
-    const [authToken, setAuthToken] = useState();
+export default function AuthContextProvider({ children }) {
+    const [authToken, setAuthToken] = useState('');
 
     useEffect(() => {
         async function fetchToken() {
@@ -19,14 +19,16 @@ function AuthContextProvider({ children }) {
                 setAuthToken(storedToken)
             }
         }
+
+        fetchToken()
     }, []);
 
-    function authenticate(token) {
+    function handleAuthenticate(token) {
         setAuthToken(token);
         AsyncStorage.setItem("token", token);
     }
 
-    function logout() {
+    function handleLogout() {
         setAuthToken(null);
         AsyncStorage.removeItem("token");
     }
@@ -34,11 +36,9 @@ function AuthContextProvider({ children }) {
     const value = {
         token: authToken,
         isAuthenticated: !!authToken,
-        authenticate: authenticate,
-        logout: logout,
+        authenticate: handleAuthenticate,
+        logout: handleLogout,
     };
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
-
-export default AuthContextProvider;

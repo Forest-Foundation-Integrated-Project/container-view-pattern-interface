@@ -8,21 +8,14 @@ import { login } from '../../services/users/login';
 import { AuthContext } from './../../store/auth-context';
 import { Loading } from './../../components/Loading';
 import { Alert } from 'react-native';
-
-const ErrorMessage = ({ errorValue }) => {
-    return errorValue ? (
-        <View style={styles.errorContainer}>
-            <Text style={styles.errorText}>{errorValue}</Text>
-        </View>
-    ) : null;
-};
+import ErrorMessage from './../../components/ErrorMessage'
 
 export default function LoginScreen({ navigation }) {
+    const authCtx = useContext(AuthContext)
     const onFooterLinkPress = () => {
         navigation.navigate('Registration')
     }
     const [isAuthenticating, setIsAuthenticating] = useState(false);
-    const authCtx = useContext(AuthContext);
 
     async function loginHandler({ email, password }) {
         setIsAuthenticating(true);
@@ -30,6 +23,7 @@ export default function LoginScreen({ navigation }) {
             token = await login(email, password, navigation);
             authCtx.authenticate(token);
         } catch (error) {
+            console.log(error)
             Alert.alert(
                 "Falha na autenticação",
                 "Não foi possível realizar o login, confira seu email e senha"
@@ -104,6 +98,7 @@ export default function LoginScreen({ navigation }) {
                                     errorValue={touched.password && errors.password}
                                 />
                             </View>
+                            <Text style={styles.forgotPass}>Esqueceu sua senha?</Text>
                             <TouchableOpacity style={styles.button} onPress={handleSubmit}>
                                 <Text style={styles.buttonText}>Login</Text>
                             </TouchableOpacity>

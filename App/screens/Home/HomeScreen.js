@@ -1,14 +1,159 @@
-import React, { useContext } from 'react'
-import { Text, View } from 'react-native'
-import { AuthContext } from '../../store/auth-context'
+import React, { useState, useContext, useEffect, useLayoutEffect } from "react";
+import {
+  SafeAreaView,
+  FlatList,
+  Modal,
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  TouchableHighlight,
+} from "react-native";
+import { ProductScreen } from "../Product/ProductScreen";
+import { StatusBar } from "expo-status-bar";
+import { styles } from "./styles";
+import { Product } from "./../../components/Product/Product";
 
 export default function HomeScreen({ navigation }) {
-    const authCtx = useContext(AuthContext)
-    const token = authCtx.token;
-    console.log(token)
+  const [profiles, setProfiles] = useState([
+    {
+      id: 1,
+      name: "Beatrice Castro Goncalves",
+      university: "IFSP",
+      city: "Caraguatatuba",
+      image:
+        "https://natashaskitchen.com/wp-content/uploads/2020/05/Vanilla-Cupcakes-3.jpg",
+    },
+    {
+      id: 2,
+      name: "Danilo Almeida Cavalcanti",
+      university: "Módulo",
+      city: "Caraguatatuba",
+      image:
+        "https://api.time.com/wp-content/uploads/2017/10/how-to-improve-math-class.jpg?quality=85&w=1200&h=628&crop=1",
+    },
+    {
+      id: 3,
+      name: "Pedro Rodrigo",
+      university: "Anhanguera",
+      city: "Caraguatatuba",
+      image: "https://www.digicad.com.br/wp-content/uploads/2022/08/python.jpg",
+    },
+    {
+      id: 4,
+      name: "Julieta Melo Azevedo",
+      university: "IFSP",
+      city: "Caraguatatuba",
+      image:
+        "https://static01.nyt.com/images/2022/02/12/dining/JT-Chocolate-Chip-Cookies/JT-Chocolate-Chip-Cookies-mediumThreeByTwo440.jpg",
+    },
+  ]);
+
+  const [products, setProducts] = useState([
+    {
+      id: 1,
+      title: "Cupcake",
+      description:
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+      seller_id: 1,
+      price_cents: 1999,
+      tag_id: 1,
+      subtitle: `${profiles[0].name}`,
+      image:
+        "https://natashaskitchen.com/wp-content/uploads/2020/05/Vanilla-Cupcakes-3.jpg",
+    },
+    {
+      id: 2,
+      title: "Aula de matemática",
+      description: "Description for Product 2",
+      seller_id: 2,
+      price_cents: 2999,
+      tag_id: 2,
+      subtitle: `${profiles[1].name}`,
+      image:
+        "https://api.time.com/wp-content/uploads/2017/10/how-to-improve-math-class.jpg?quality=85&w=1200&h=628&crop=1",
+    },
+    {
+      id: 3,
+      title: "Te ensinarei python do zero",
+      description: "Description for Product 3",
+      seller_id: 1,
+      price_cents: 3999,
+      tag_id: 3,
+      subtitle: `${profiles[2].name}`,
+      image: "https://www.digicad.com.br/wp-content/uploads/2022/08/python.jpg",
+    },
+    {
+      id: 4,
+      title: "Cookies",
+      description: "Description for Product 4",
+      seller_id: 3,
+      price_cents: 4999,
+      tag_id: 2,
+      subtitle: `${profiles[3].name}`,
+      image:
+        "https://static01.nyt.com/images/2022/02/12/dining/JT-Chocolate-Chip-Cookies/JT-Chocolate-Chip-Cookies-mediumThreeByTwo440.jpg",
+    },
+  ]);
+
+  const productPressed = (navigation, item, profile) => {
+    navigation.navigate("ProductScreen", { item, profile });
+  };
+
+  const renderItem = ({ item }) => {
+    const profile = profiles[item.id - 1];
     return (
-        <View>
-            <Text>Home Screen</Text>
+      <Product
+        image={item.image}
+        title={item.title}
+        subtitle={item.subtitle}
+        onPress={() => productPressed(navigation, item, profile)}
+      />
+    );
+  };
+
+  return (
+    <>
+      <SafeAreaView style={styles.topSafeArea} />
+
+      <StatusBar style="light" />
+
+      <SafeAreaView style={styles.container}>
+        <View style={styles.bannerArea}>
+          <View style={[styles.banner, styles.shadow]}>
+            <Image
+              style={styles.bannerImage}
+              source={require("../../assets/images/banner.png")}
+            />
+          </View>
         </View>
-    )
+
+        <View style={styles.orderOptions}>
+          <TouchableOpacity
+            style={[
+              styles.toggleOption,
+              styles.toggleOptionActive,
+              styles.shadow,
+            ]}
+          >
+            <Text style={[styles.orderOption, styles.orderOptionActive]}>
+              Novidades
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.toggleOption, styles.shadow]}>
+            <Text style={styles.orderOption}>Ordenar por</Text>
+          </TouchableOpacity>
+        </View>
+
+        <FlatList
+          data={products}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.id}
+          numColumns={2}
+          contentContainerStyle={styles.list}
+        />
+      </SafeAreaView>
+    </>
+  );
 }
