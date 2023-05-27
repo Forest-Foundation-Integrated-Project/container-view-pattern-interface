@@ -72,9 +72,6 @@ export const styles = StyleSheet.create({
     color: "white",
   },
 
-  list: {
-    paddingHorizontal: 8,
-  },
   item: {
     width: screenWidth * 0.5,
     paddingVertical: 8,
@@ -112,18 +109,5 @@ export const styles = StyleSheet.create({
         elevation: 4,
       },
     }),
-  },
-
-  modalContainer: {
-    // flex: 0.5,
-    // flexDirection: 'row',
-    // justifyContent: 'flex-end',
-    // backgroundColor: 'rgba(255, 0, 255, 0.2)',
-    // paddingTop: 20,
-  },
-  modalContent: {
-    // backgroundColor: 'red',
-    // padding: 20,
-    // borderRadius: 10,
   },
 });
