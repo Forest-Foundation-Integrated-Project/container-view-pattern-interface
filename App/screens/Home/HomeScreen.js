@@ -14,6 +14,7 @@ import { ProductScreen } from "../Product/ProductScreen";
 import { StatusBar } from "expo-status-bar";
 import { styles } from "./styles";
 import { Product } from "./../../components/Product/Product";
+import { ProductList } from "../../components/Product/ProducList";
 
 export default function HomeScreen({ navigation }) {
   const [profiles, setProfiles] = useState([
@@ -97,22 +98,6 @@ export default function HomeScreen({ navigation }) {
     },
   ]);
 
-  const productPressed = (navigation, item, profile) => {
-    navigation.navigate("ProductScreen", { item, profile });
-  };
-
-  const renderItem = ({ item }) => {
-    const profile = profiles[item.id - 1];
-    return (
-      <Product
-        image={item.image}
-        title={item.title}
-        subtitle={item.subtitle}
-        onPress={() => productPressed(navigation, item, profile)}
-      />
-    );
-  };
-
   return (
     <>
       <SafeAreaView style={styles.topSafeArea} />
@@ -146,13 +131,7 @@ export default function HomeScreen({ navigation }) {
           </TouchableOpacity>
         </View>
 
-        <FlatList
-          data={products}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.id}
-          numColumns={2}
-          contentContainerStyle={styles.list}
-        />
+        <ProductList products={products} profiles={profiles}></ProductList>
       </SafeAreaView>
     </>
   );

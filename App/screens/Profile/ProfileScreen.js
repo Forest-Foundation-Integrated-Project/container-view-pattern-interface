@@ -1,9 +1,10 @@
 import { Ionicons } from "@expo/vector-icons";
 import { View, TouchableOpacity, Text, Button, Image } from "react-native";
 import { styles } from "./styles";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { EditButtom } from "../../components/EditButton";
 import { BackButtom } from "../../components/BackButton";
+import { ProductList } from "../../components/Product/ProducList";
 
 export default function ProfileScreen({ navigation, route }) {
   useEffect(() => {
@@ -24,6 +25,43 @@ export default function ProfileScreen({ navigation, route }) {
     description:
       "Lorem impsu fdsad lorem impsum core. Corem ipsum dsad lorem impsum core. Corem ipsum fdsad lorem impsum core. Corem ipsum ",
   };
+
+  const [profiles, setProfiles] = useState([
+    {
+      id: 1,
+      name: "Beatrice Castro Goncalves",
+      university: "IFSP",
+      city: "Caraguatatuba",
+      image:
+        "https://natashaskitchen.com/wp-content/uploads/2020/05/Vanilla-Cupcakes-3.jpg",
+    },
+  ]);
+
+  const [products, setProducts] = useState([
+    {
+      id: 1,
+      title: "Cupcake",
+      description:
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+      seller_id: 1,
+      price_cents: 1999,
+      tag_id: 1,
+      subtitle: `${profiles[0].name}`,
+      image:
+        "https://natashaskitchen.com/wp-content/uploads/2020/05/Vanilla-Cupcakes-3.jpg",
+    },
+    // {
+    //   id: 2,
+    //   title: "Aula de matemática",
+    //   description: "Description for Product 2",
+    //   seller_id: 2,
+    //   price_cents: 2999,
+    //   tag_id: 2,
+    //   subtitle: `${profiles[0].name}`,
+    //   image:
+    //     "https://api.time.com/wp-content/uploads/2017/10/how-to-improve-math-class.jpg?quality=85&w=1200&h=628&crop=1",
+    // },
+  ]);
 
   function goHome() {
     navigation.navigate("Home");
@@ -55,7 +93,11 @@ export default function ProfileScreen({ navigation, route }) {
           <Text style={styles.buttonText}>EditarProdutos</Text>
         </TouchableOpacity>
       </View>
-      <View style={styles.products}></View>
+      <ProductList
+        navigation={navigation}
+        products={products}
+        profiles={profiles}
+      />
     </View>
   );
 }
