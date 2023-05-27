@@ -131,7 +131,11 @@ export default function HomeScreen({ navigation }) {
           </TouchableOpacity>
         </View>
 
-        <ProductList products={products} profiles={profiles}></ProductList>
+        <ProductList
+          products={products}
+          profiles={profiles}
+          navigation={navigation}
+        ></ProductList>
       </SafeAreaView>
     </>
   );
