@@ -2,7 +2,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { View, TouchableOpacity, Text, Button, Image } from "react-native";
 import { styles } from "./styles";
 import { useEffect, useState } from "react";
-import { EditButtom } from "../../components/EditButton";
+import { EditButton } from "../../components/EditButton";
 import { BackButtom } from "../../components/BackButton";
 import { ProductList } from "../../components/Product/ProducList";
 
@@ -14,7 +14,11 @@ export default function ProfileScreen({ navigation, route }) {
           <BackButtom />
         </TouchableOpacity>
       ),
-      headerRight: EditButtom,
+      headerRight: () => (
+        <TouchableOpacity onPress={editProfile}>
+          <EditButton />
+        </TouchableOpacity>
+      ),
     });
   }, [navigation]);
 
@@ -66,6 +70,9 @@ export default function ProfileScreen({ navigation, route }) {
   function goHome() {
     navigation.navigate("Home");
   }
+  function editProfile() {
+    navigation.navigate("EditProfile");
+  }
 
   return (
     <View style={styles.container}>
@@ -87,10 +94,10 @@ export default function ProfileScreen({ navigation, route }) {
       </View>
       <View style={styles.buttons}>
         <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Adcionar Produto</Text>
+          <Text style={styles.buttonText}>Adcionar produto</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>EditarProdutos</Text>
+          <Text style={styles.buttonText}>Editar produtos</Text>
         </TouchableOpacity>
       </View>
       <ProductList
