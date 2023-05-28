@@ -15,8 +15,8 @@ import {
 } from "@react-navigation/drawer";
 import { styles } from "./styles";
 import { Ionicons } from "@expo/vector-icons";
-import { AuthContext } from "./../../store/auth-context";
-import { useContext } from "react";
+import { useDispatch } from "react-redux";
+import { handleLogout } from "../../store/redux/authentication";
 
 export default function MenuScreen({ navigation, props }) {
   const user = {
@@ -27,10 +27,9 @@ export default function MenuScreen({ navigation, props }) {
   const BASE_PATH =
     "https://raw.githubusercontent.com/AboutReact/sampleresource/master/";
 
-  const authCtx = useContext(AuthContext);
-
+  const dispatch = useDispatch();
   function logout() {
-    authCtx.logout();
+    dispatch(handleLogout());
   }
   return (
     <SafeAreaView style={styles.menuContainer}>

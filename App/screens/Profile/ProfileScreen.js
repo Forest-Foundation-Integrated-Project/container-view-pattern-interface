@@ -5,9 +5,22 @@ import { useEffect, useState } from "react";
 import { EditButton } from "../../components/EditButton";
 import { BackButtom } from "../../components/BackButton";
 import { ProductList } from "../../components/Product/ProductList";
+import getUser from "./../../services/users/getUser";
+import { Alert } from "react-native";
 
-export default function ProfileScreen({ navigation, route }) {
+export default function ProfileScreen({ navigation, route, userId }) {
+  async function fetchUser() {
+    try {
+      const res = await getUser(userId);
+      authCtx.authenticate("auisdhuiasdh");
+    } catch (error) {
+      Alert.alert(`erro: ${error}`);
+    }
+  }
+
   useEffect(() => {
+    fetchUser();
+
     navigation.setOptions({
       headerLeft: () => (
         <TouchableOpacity onPress={goHome}>
