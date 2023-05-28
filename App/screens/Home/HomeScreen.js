@@ -13,8 +13,7 @@ import {
 import { ProductScreen } from "../Product/ProductScreen";
 import { StatusBar } from "expo-status-bar";
 import { styles } from "./styles";
-import { Product } from "./../../components/Product/Product";
-import { ProductList } from "../../components/Product/ProducList";
+import { ProductList } from "./../../components/Product/ProductList";
 
 export default function HomeScreen({ navigation }) {
   const [profiles, setProfiles] = useState([

@@ -2,7 +2,12 @@ import React, { useState, useContext, useEffect, useLayoutEffect } from "react";
 import { View, FlatList, StyleSheet } from "react-native";
 import { Product } from "./Product";
 
-export function ProductList({ navigation, products, profiles }) {
+export function ProductList({
+  navigation,
+  products,
+  profiles,
+  listHeaderComponent,
+}) {
   console.log(profiles);
 
   const productPressed = (navigation, item, profile) => {
@@ -31,6 +36,8 @@ export function ProductList({ navigation, products, profiles }) {
 
   return (
     <FlatList
+      showsVerticalScrollIndicator={false}
+      ListHeaderComponent={listHeaderComponent}
       data={products}
       renderItem={renderItem}
       keyExtractor={(item) => item.id}

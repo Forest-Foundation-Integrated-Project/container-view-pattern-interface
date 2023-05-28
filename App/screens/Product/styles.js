@@ -4,17 +4,18 @@ import { CIANO, PRETO, CINZA, CNZACL, BRANCO } from "./../../constants/colors";
 const screenWidth = Dimensions.get("window").width;
 
 export const styles = StyleSheet.create({
+  topSafeArea: {},
   container: {
     flex: 1,
     alignItems: "center",
-    //justifyContent: 'center',
+    justifyContent: "center",
   },
   userSession: {
-    maxWidth: 400,
+    maxWidth: "100%",
     marginVertical: 10,
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "flex-end",
+    justifyContent: "flex-start",
   },
   userImage: {
     height: 60,
@@ -33,20 +34,23 @@ export const styles = StyleSheet.create({
     color: CINZA,
   },
   productSession: {
-    maxWidth: 300,
+    maxWidth: 350,
+    maxHeight: 500,
     backgroundColor: BRANCO,
     borderRadius: 15,
-    //alignItems: 'center',
+  },
+  contactUserSection: {
+    alignItems: "center",
+    justifyContent: "center",
   },
   productList: {
-    height: 500,
     width: "100%",
   },
   prodImage: {
-    //width: 300,
-    //height: 300,
-    height: 230,
-    width: 300,
+    width: 400,
+    height: 300,
+    // height: 250,
+    // width: 300,
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,
   },
@@ -64,7 +68,6 @@ export const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 20,
     maxWidth: 170,
-    flexWrap: "wrap",
   },
   prodPrice: {
     marginLeft: 10,
@@ -92,6 +95,7 @@ export const styles = StyleSheet.create({
   label: {
     fontSize: 20,
     fontWeight: "bold",
+    alignSelf: "center",
   },
   shadow: {
     ...Platform.select({
