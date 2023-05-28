@@ -14,45 +14,10 @@ import { ProductScreen } from "../Product/ProductScreen";
 import { StatusBar } from "expo-status-bar";
 import { styles } from "./styles";
 import { ProductList } from "./../../components/Product/ProductList";
+import { useSelector } from "react-redux";
 
 export default function HomeScreen({ navigation }) {
-  const [profiles, setProfiles] = useState([
-    {
-      id: 1,
-      name: "Beatrice Castro Goncalves",
-      university: "IFSP",
-      phone: "(12) 99999-9999",
-      city: "Caraguatatuba",
-      image:
-        "https://natashaskitchen.com/wp-content/uploads/2020/05/Vanilla-Cupcakes-3.jpg",
-    },
-    {
-      id: 2,
-      name: "Danilo Almeida Cavalcanti",
-      university: "Módulo",
-      phone: "(12) 99999-9999",
-      city: "Caraguatatuba",
-      image:
-        "https://api.time.com/wp-content/uploads/2017/10/how-to-improve-math-class.jpg?quality=85&w=1200&h=628&crop=1",
-    },
-    {
-      id: 3,
-      name: "Pedro Rodrigo",
-      university: "Anhanguera",
-      city: "Caraguatatuba",
-      phone: "(12) 99999-9999",
-      image: "https://www.digicad.com.br/wp-content/uploads/2022/08/python.jpg",
-    },
-    {
-      id: 4,
-      name: "Julieta Melo Azevedo",
-      university: "IFSP",
-      city: "Caraguatatuba",
-      phone: "(12) 99999-9999",
-      image:
-        "https://static01.nyt.com/images/2022/02/12/dining/JT-Chocolate-Chip-Cookies/JT-Chocolate-Chip-Cookies-mediumThreeByTwo440.jpg",
-    },
-  ]);
+  const profile = useSelector((state) => state.authentication.user);
 
   const [products, setProducts] = useState([
     {
@@ -63,7 +28,7 @@ export default function HomeScreen({ navigation }) {
       seller_id: 1,
       price_cents: 1999,
       tag_id: 1,
-      subtitle: `${profiles[0].name}`,
+      subtitle: `test`,
       image:
         "https://natashaskitchen.com/wp-content/uploads/2020/05/Vanilla-Cupcakes-3.jpg",
     },
@@ -74,7 +39,7 @@ export default function HomeScreen({ navigation }) {
       seller_id: 2,
       price_cents: 2999,
       tag_id: 2,
-      subtitle: `${profiles[1].name}`,
+      subtitle: `Test Name`,
       image:
         "https://api.time.com/wp-content/uploads/2017/10/how-to-improve-math-class.jpg?quality=85&w=1200&h=628&crop=1",
     },
@@ -85,7 +50,7 @@ export default function HomeScreen({ navigation }) {
       seller_id: 1,
       price_cents: 3999,
       tag_id: 3,
-      subtitle: `${profiles[2].name}`,
+      subtitle: `Test Name`,
       image: "https://www.digicad.com.br/wp-content/uploads/2022/08/python.jpg",
     },
     {
@@ -95,7 +60,7 @@ export default function HomeScreen({ navigation }) {
       seller_id: 3,
       price_cents: 4999,
       tag_id: 2,
-      subtitle: `${profiles[3].name}`,
+      subtitle: `Test Name`,
       image:
         "https://static01.nyt.com/images/2022/02/12/dining/JT-Chocolate-Chip-Cookies/JT-Chocolate-Chip-Cookies-mediumThreeByTwo440.jpg",
     },
@@ -136,7 +101,7 @@ export default function HomeScreen({ navigation }) {
 
         <ProductList
           products={products}
-          profiles={profiles}
+          profile={profile}
           navigation={navigation}
           ListHeaderComponent={<></>}
         ></ProductList>

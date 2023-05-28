@@ -33,16 +33,14 @@ export default function ProductScreen({ navigation, route }) {
       ),
     });
   }, [navigation]);
-  const [profiles, setProfiles] = useState([
-    {
-      id: 1,
-      name: "Beatrice Castro Goncalves",
-      university: "IFSP",
-      city: "Caraguatatuba",
-      image:
-        "https://natashaskitchen.com/wp-content/uploads/2020/05/Vanilla-Cupcakes-3.jpg",
-    },
-  ]);
+  const [profile, setProfiles] = useState({
+    id: 1,
+    name: "Beatrice Castro Goncalves",
+    university: "IFSP",
+    city: "Caraguatatuba",
+    image:
+      "https://natashaskitchen.com/wp-content/uploads/2020/05/Vanilla-Cupcakes-3.jpg",
+  });
   const [products, setProducts] = useState([
     {
       id: 1,
@@ -52,7 +50,7 @@ export default function ProductScreen({ navigation, route }) {
       seller_id: 1,
       price_cents: 1999,
       tag_id: 1,
-      subtitle: `${profiles[0].name}`,
+      subtitle: `${profile.name}`,
       image:
         "https://natashaskitchen.com/wp-content/uploads/2020/05/Vanilla-Cupcakes-3.jpg",
     },
@@ -64,7 +62,7 @@ export default function ProductScreen({ navigation, route }) {
       seller_id: 1,
       price_cents: 1999,
       tag_id: 1,
-      subtitle: `${profiles[0].name}`,
+      subtitle: `${profile.name}`,
       image:
         "https://natashaskitchen.com/wp-content/uploads/2020/05/Vanilla-Cupcakes-3.jpg",
     },
@@ -86,7 +84,7 @@ export default function ProductScreen({ navigation, route }) {
         <ProductList
           navigation={navigation}
           products={products}
-          profiles={profiles}
+          profile={profile}
           listHeaderComponent={() => (
             <HeaderProduct route={route} navigation={navigation} />
           )}

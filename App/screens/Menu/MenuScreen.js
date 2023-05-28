@@ -17,12 +17,10 @@ import { styles } from "./styles";
 import { Ionicons } from "@expo/vector-icons";
 import { useDispatch } from "react-redux";
 import { handleLogout } from "../../store/redux/authentication";
+import { useSelector } from "react-redux";
 
 export default function MenuScreen({ navigation, props }) {
-  const user = {
-    name: "Laís Gonçalves",
-    role: "Vendedor",
-  };
+  const user = useSelector((state) => state.authentication.user);
 
   const BASE_PATH =
     "https://raw.githubusercontent.com/AboutReact/sampleresource/master/";
@@ -36,7 +34,11 @@ export default function MenuScreen({ navigation, props }) {
       <DrawerContentScrollView {...props}>
         <View style={styles.body}>
           <View style={styles.profileContainer}>
-            <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate("Profile", { user: user, loadUser: false })
+              }
+            >
               <View style={styles.imageView}>
                 <Image
                   source={{

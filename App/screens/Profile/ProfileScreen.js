@@ -8,18 +8,23 @@ import { ProductList } from "../../components/Product/ProductList";
 import getUser from "./../../services/users/getUser";
 import { Alert } from "react-native";
 
-export default function ProfileScreen({ navigation, route, userId }) {
+export default function ProfileScreen({ navigation, route }) {
+  const { user, loadUser } = route.params;
+
+  console.log(user);
+
   async function fetchUser() {
     try {
-      const res = await getUser(userId);
-      authCtx.authenticate("auisdhuiasdh");
+      const res = await getUser(user.userId);
     } catch (error) {
       Alert.alert(`erro: ${error}`);
     }
   }
 
   useEffect(() => {
-    fetchUser();
+    if (loadUser == true) {
+      fetchUser();
+    }
 
     navigation.setOptions({
       headerLeft: () => (
@@ -45,27 +50,15 @@ export default function ProfileScreen({ navigation, route, userId }) {
     }
   }
 
-  const user = {
+  const [profile, setProfiles] = useState({
     id: 1,
-    name: "Lais Gonçalves",
-    university: "Anhanguera - Caraguatatuba",
+    name: "Beatrice Castro Goncalves",
+    university: "IFSP",
+    city: "Caraguatatuba",
     phone: "(12) 99999-9999",
-    role: "Vendedor",
-    description:
-      "Lorem impsu fdsad lorem impsum core. Corem ipsum dsad lorem impsum core. Corem ipsum fdsad lorem impsum core. Corem ipsum ",
-  };
-
-  const [profiles, setProfiles] = useState([
-    {
-      id: 1,
-      name: "Beatrice Castro Goncalves",
-      university: "IFSP",
-      city: "Caraguatatuba",
-      phone: "(12) 99999-9999",
-      image:
-        "https://natashaskitchen.com/wp-content/uploads/2020/05/Vanilla-Cupcakes-3.jpg",
-    },
-  ]);
+    image:
+      "https://natashaskitchen.com/wp-content/uploads/2020/05/Vanilla-Cupcakes-3.jpg",
+  });
 
   const [products, setProducts] = useState([
     {
@@ -76,7 +69,7 @@ export default function ProfileScreen({ navigation, route, userId }) {
       seller_id: 1,
       price_cents: 1999,
       tag_id: 1,
-      subtitle: `${profiles[0].name}`,
+      subtitle: `${user.name}`,
       image:
         "https://natashaskitchen.com/wp-content/uploads/2020/05/Vanilla-Cupcakes-3.jpg",
     },
@@ -129,7 +122,7 @@ export default function ProfileScreen({ navigation, route, userId }) {
       <ProductList
         navigation={navigation}
         products={products}
-        profiles={profiles}
+        profile={profile}
         ListHeaderComponent={<></>}
       />
     </View>

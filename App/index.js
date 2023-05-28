@@ -11,6 +11,7 @@ import {
   SettingsScreen,
   CategoriesScreen,
   ProfileScreen,
+  EditProfileScreen,
 } from "./screens";
 import { decode, encode } from "base-64";
 import { styles } from "./generalStyles";
@@ -78,6 +79,11 @@ function AuthenticatedStack() {
         name="Profile"
         options={options}
         component={ProfileScreen}
+      />
+      <Drawer.Screen
+        name="EditProfile"
+        options={options}
+        component={EditProfileScreen}
       />
       <Drawer.Screen
         name="ProductScreen"

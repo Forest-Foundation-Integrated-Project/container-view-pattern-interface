@@ -5,7 +5,7 @@ import { Product } from "./Product";
 export function ProductList({
   navigation,
   products,
-  profiles,
+  profile,
   listHeaderComponent,
 }) {
   const productPressed = (navigation, item, profile) => {
@@ -13,7 +13,7 @@ export function ProductList({
   };
 
   const renderItem = ({ item }) => {
-    const profile = profiles[item.id - 1];
+    const profile = profile;
     const isSingleItem = products.length === 1;
     const itemStyle = isSingleItem ? styles.singleItem : styles.item;
     const columnWrapperStyle = isSingleItem
