@@ -7,19 +7,11 @@ import { Formik } from "formik";
 import { validationSchema } from "./validation";
 import { styles } from "./styles";
 import { Alert } from "react-native";
-import { brFormatDate, formatDate } from "./../../utils/date";
-import createUser from "./../../services/users/createUser";
+import { brFormatDate, formatDate } from "../../../utils/date";
+import updateUser from "../../../services/users/updateUser";
+import ErrorMessage from "../../../components/ErrorMessage";
 
-export default function RegistrationForm({ navigation }) {
-  const ErrorMessage = ({ errorValue }) => {
-    return errorValue ? (
-      <View style={styles.errorContainer}>
-        <Text style={styles.errorText}>{errorValue}</Text>
-      </View>
-    ) : null;
-  };
-
-  // const [isAuthenticating, setIsAuthenticating] = useState(false);
+export default function EditProfileForm({ navigation }) {
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [birthDate, setBirthDate] = useState(new Date());
   const [gender, setGender] = useState("Gender");
@@ -29,21 +21,32 @@ export default function RegistrationForm({ navigation }) {
     userData.gender = gender;
 
     try {
-      const res = await createUser(userData);
-      authCtx.authenticate("auisdhuiasdh");
+      const res = await updateUser(userData);
     } catch (error) {
       Alert.alert(`erro: ${error}`);
     }
   };
 
+  const user = {
+    name: "Lais Gonçalves",
+    email: "lais@lais.com",
+    gender: "fem",
+    birthDate: "15-04-1994",
+    university: "Anhanguera - Caraguatatuba",
+    password: "123456",
+    confirmPassword: "123456",
+    description:
+      "Lorem impsu fdsad lorem impsum core. Corem ipsum dsad lorem impsum core. Corem ipsum fdsad lorem impsum core. Corem ipsum ",
+  };
+
   return (
     <Formik
       initialValues={{
-        name: "",
-        email: "",
-        gender: "",
-        birthDate: "",
-        university: "",
+        name: user.name,
+        email: user.email,
+        gender: user.gender,
+        birthDate: user.birthDate,
+        university: user.university,
         password: "",
         confirmPassword: "",
         enroll: Math.floor(Math.random() * 90000) + 10000,
@@ -68,6 +71,7 @@ export default function RegistrationForm({ navigation }) {
           showsVerticalScrollIndicator={false}
         >
           <View style={styles.formGroup}>
+            <Text style={styles.label}>Name</Text>
             <TextInput
               style={styles.input}
               value={values.name}
@@ -79,6 +83,7 @@ export default function RegistrationForm({ navigation }) {
             <ErrorMessage errorValue={touched.name && errors.name} />
           </View>
           <View style={styles.formGroup}>
+            <Text style={styles.label}>Email</Text>
             <TextInput
               style={styles.input}
               value={values.email}
@@ -92,6 +97,7 @@ export default function RegistrationForm({ navigation }) {
           </View>
           <View style={styles.dualFormGroup}>
             <View>
+              <Text style={styles.label}>Gênero</Text>
               <View style={styles.inputPicker}>
                 <Picker
                   style={styles.picker}
@@ -133,6 +139,7 @@ export default function RegistrationForm({ navigation }) {
             </View>
 
             <View style={styles.formGroup}>
+              <Text style={styles.label}>Data de Nascimento</Text>
               <TouchableOpacity
                 onPress={() => {
                   setShowDatePicker(true);
@@ -164,6 +171,7 @@ export default function RegistrationForm({ navigation }) {
           </View>
 
           <View style={styles.formGroup}>
+            <Text style={styles.label}>Universidade - Campus</Text>
             <TextInput
               style={styles.input}
               value={values.university}
@@ -178,6 +186,7 @@ export default function RegistrationForm({ navigation }) {
           </View>
 
           <View style={styles.formGroup}>
+            <Text style={styles.label}>Senha</Text>
             <TextInput
               style={styles.input}
               value={values.password}
@@ -192,6 +201,7 @@ export default function RegistrationForm({ navigation }) {
           </View>
 
           <View style={styles.formGroup}>
+            <Text style={styles.label}>Confirmar Senha</Text>
             <TextInput
               class="confirmPassword"
               style={styles.input}
@@ -209,7 +219,7 @@ export default function RegistrationForm({ navigation }) {
           </View>
 
           <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-            <Text style={styles.buttonText}>CRIAR CONTA</Text>
+            <Text style={styles.buttonText}>SALVAR ALTERAÇÕES</Text>
           </TouchableOpacity>
         </KeyboardAwareScrollView>
       )}

@@ -2,9 +2,9 @@ import { Ionicons } from "@expo/vector-icons";
 import { View, TouchableOpacity, Text, Button, Image } from "react-native";
 import { styles } from "./styles";
 import { useEffect, useState } from "react";
-import { EditButtom } from "../../components/EditButton";
+import { EditButton } from "../../components/EditButton";
 import { BackButtom } from "../../components/BackButton";
-import { ProductList } from "../../components/Product/ProducList";
+import { ProductList } from "../../components/Product/ProductList";
 
 export default function ProfileScreen({ navigation, route }) {
   useEffect(() => {
@@ -14,13 +14,29 @@ export default function ProfileScreen({ navigation, route }) {
           <BackButtom />
         </TouchableOpacity>
       ),
-      headerRight: EditButtom,
+      headerRight: headerRight,
     });
   }, [navigation]);
 
+  function headerRight() {
+    const object = (
+      <TouchableOpacity onPress={editProfile}>
+        <EditButton />
+      </TouchableOpacity>
+    );
+
+    if (user.id == products[0].seller_id) {
+      return object;
+    } else {
+      return <></>;
+    }
+  }
+
   const user = {
+    id: 1,
     name: "Lais Gonçalves",
     university: "Anhanguera - Caraguatatuba",
+    phone: "(12) 99999-9999",
     role: "Vendedor",
     description:
       "Lorem impsu fdsad lorem impsum core. Corem ipsum dsad lorem impsum core. Corem ipsum fdsad lorem impsum core. Corem ipsum ",
@@ -32,6 +48,7 @@ export default function ProfileScreen({ navigation, route }) {
       name: "Beatrice Castro Goncalves",
       university: "IFSP",
       city: "Caraguatatuba",
+      phone: "(12) 99999-9999",
       image:
         "https://natashaskitchen.com/wp-content/uploads/2020/05/Vanilla-Cupcakes-3.jpg",
     },
@@ -66,6 +83,9 @@ export default function ProfileScreen({ navigation, route }) {
   function goHome() {
     navigation.navigate("Home");
   }
+  function editProfile() {
+    navigation.navigate("EditProfile");
+  }
 
   return (
     <View style={styles.container}>
@@ -87,16 +107,17 @@ export default function ProfileScreen({ navigation, route }) {
       </View>
       <View style={styles.buttons}>
         <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Adcionar Produto</Text>
+          <Text style={styles.buttonText}>Adcionar produto</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>EditarProdutos</Text>
+          <Text style={styles.buttonText}>Editar produtos</Text>
         </TouchableOpacity>
       </View>
       <ProductList
         navigation={navigation}
         products={products}
         profiles={profiles}
+        ListHeaderComponent={<></>}
       />
     </View>
   );

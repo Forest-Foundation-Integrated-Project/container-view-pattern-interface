@@ -2,12 +2,12 @@ import { Ionicons } from "@expo/vector-icons";
 import { Image, View } from "react-native";
 import { StyleSheet } from "react-native";
 
-export function EditButton({ tintColor }) {
+export function EditButtonFilled({ tintColor }) {
   return (
     <View style={styles.view}>
       <Image
         style={(styles.image, { tintColor: tintColor })}
-        source={require("../assets/images/edit-icon.svg")}
+        source={require("../assets/images/edit-icon-filled.svg")}
       />
     </View>
   );
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   image: {
-    maxWidth: 30,
-    maxHeight: 30,
+    maxWidth: 50,
+    maxHeight: 50,
   },
 });
