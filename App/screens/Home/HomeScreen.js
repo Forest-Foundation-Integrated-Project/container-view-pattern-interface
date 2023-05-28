@@ -21,6 +21,7 @@ export default function HomeScreen({ navigation }) {
       id: 1,
       name: "Beatrice Castro Goncalves",
       university: "IFSP",
+      phone: "(12) 99999-9999",
       city: "Caraguatatuba",
       image:
         "https://natashaskitchen.com/wp-content/uploads/2020/05/Vanilla-Cupcakes-3.jpg",
@@ -29,6 +30,7 @@ export default function HomeScreen({ navigation }) {
       id: 2,
       name: "Danilo Almeida Cavalcanti",
       university: "Módulo",
+      phone: "(12) 99999-9999",
       city: "Caraguatatuba",
       image:
         "https://api.time.com/wp-content/uploads/2017/10/how-to-improve-math-class.jpg?quality=85&w=1200&h=628&crop=1",
@@ -38,6 +40,7 @@ export default function HomeScreen({ navigation }) {
       name: "Pedro Rodrigo",
       university: "Anhanguera",
       city: "Caraguatatuba",
+      phone: "(12) 99999-9999",
       image: "https://www.digicad.com.br/wp-content/uploads/2022/08/python.jpg",
     },
     {
@@ -45,6 +48,7 @@ export default function HomeScreen({ navigation }) {
       name: "Julieta Melo Azevedo",
       university: "IFSP",
       city: "Caraguatatuba",
+      phone: "(12) 99999-9999",
       image:
         "https://static01.nyt.com/images/2022/02/12/dining/JT-Chocolate-Chip-Cookies/JT-Chocolate-Chip-Cookies-mediumThreeByTwo440.jpg",
     },
@@ -134,6 +138,7 @@ export default function HomeScreen({ navigation }) {
           products={products}
           profiles={profiles}
           navigation={navigation}
+          ListHeaderComponent={<></>}
         ></ProductList>
       </SafeAreaView>
     </>

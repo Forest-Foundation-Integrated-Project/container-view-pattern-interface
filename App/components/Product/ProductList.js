@@ -8,8 +8,6 @@ export function ProductList({
   profiles,
   listHeaderComponent,
 }) {
-  console.log(profiles);
-
   const productPressed = (navigation, item, profile) => {
     navigation.navigate("ProductScreen", { item, profile });
   };

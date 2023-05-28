@@ -1,12 +1,12 @@
 import { Dimensions, StyleSheet } from "react-native";
 import { CIANO, PRETO, CINZA, CNZACL, BRANCO } from "./../../constants/colors";
 
-const screenWidth = Dimensions.get("window").width;
+export const headerProductStyles = StyleSheet.create({
+  topSafeArea: {},
 
-export const styles = StyleSheet.create({
   topSafeArea: {},
   container: {
-    flex: 1,
+    flex: 2,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -110,11 +110,10 @@ export const styles = StyleSheet.create({
       },
     }),
   },
-
   //prefix m is related to seller modal
   mcenteredView: {
     flex: 1,
-    alignItems: "center",
+    flexDirection: "column",
     justifyContent: "flex-end",
   },
   mmodalView: {
@@ -123,7 +122,6 @@ export const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 20,
     padding: 35,
-    alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -132,14 +130,24 @@ export const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
+    height: 400,
   },
   mbutton: {
     borderRadius: 20,
     padding: 10,
     elevation: 2,
+    height: 100,
     backgroundColor: CIANO,
+    justifyContent: "center",
+    alignItems: "center",
   },
-  mbuttonText: {},
+  mbuttonText: {
+    color: "white",
+    fontSize: 20,
+    paddingHorizontal: 20,
+    textAlign: "center",
+    fontWeight: 700,
+  },
   mbuttonOpen: {
     backgroundColor: "#F194FF",
   },

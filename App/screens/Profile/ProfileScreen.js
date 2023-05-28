@@ -25,7 +25,8 @@ export default function ProfileScreen({ navigation, route }) {
   const user = {
     name: "Lais Gonçalves",
     university: "Anhanguera - Caraguatatuba",
-    role: "Vendedor",
+    phone: "(12) 99999-9999",
+    role: "Ven) dedor",
     description:
       "Lorem impsu fdsad lorem impsum core. Corem ipsum dsad lorem impsum core. Corem ipsum fdsad lorem impsum core. Corem ipsum ",
   };
@@ -36,6 +37,7 @@ export default function ProfileScreen({ navigation, route }) {
       name: "Beatrice Castro Goncalves",
       university: "IFSP",
       city: "Caraguatatuba",
+      phone: "(12) 99999-9999",
       image:
         "https://natashaskitchen.com/wp-content/uploads/2020/05/Vanilla-Cupcakes-3.jpg",
     },
@@ -104,6 +106,7 @@ export default function ProfileScreen({ navigation, route }) {
         navigation={navigation}
         products={products}
         profiles={profiles}
+        ListHeaderComponent={<></>}
       />
     </View>
   );

@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   Image,
+  Pressable,
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { StatusBar } from "expo-status-bar";
@@ -18,6 +19,9 @@ import { ProdStyles } from "./../../components/Product/styles";
 import { Button } from "./../../components/Button";
 import { BackButtom } from "../../components/BackButton";
 import { ScrollView } from "react-native-gesture-handler";
+import { StyleSheet } from "react-native";
+import { CIANO } from "../../constants/colors";
+import { HeaderProduct } from "./../../components/Product/HeaderProduct";
 
 export default function ProductScreen({ navigation, route }) {
   useEffect(() => {
@@ -70,50 +74,7 @@ export default function ProductScreen({ navigation, route }) {
     navigation.goBack();
   }
 
-  function listHeaderComponent() {
-    return (
-      <>
-        <View style={styles.userSession}>
-          <Image
-            style={styles.userImage}
-            source={{ uri: route.params.profile.image }}
-          />
-          <View style={styles.userIfo}>
-            <Text style={styles.userName}>{route.params.profile.name}</Text>
-            <Text numberOfLines={1} style={styles.userLocation}>
-              {route.params.profile.university} - {route.params.profile.city}{" "}
-            </Text>
-          </View>
-        </View>
-
-        <View style={[styles.productSession, styles.shadow]}>
-          <Image
-            source={{ uri: route.params.item.image }}
-            style={styles.prodImage}
-          />
-          <View style={styles.prodInfo}>
-            <View style={styles.topDesc}>
-              <Text style={styles.prodTitle}>{route.params.item.title}</Text>
-              <Text style={styles.prodPrice}>
-                R${route.params.item.price_cents / 100}
-              </Text>
-            </View>
-            <Text style={styles.prodDesc}>{route.params.item.description}</Text>
-          </View>
-        </View>
-        <View style={styles.contactUserSection}>
-          <TouchableOpacity style={styles.buttoncontactUser}>
-            <Text style={[styles.buttonLabel, styles.shadow]}>
-              Contatar Vendedor
-            </Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.productList}>
-          <Text style={styles.label}>Outros produtos desse vendedor</Text>
-        </View>
-      </>
-    );
-  }
+  function openSellerProfile() {}
 
   return (
     <>
@@ -126,7 +87,7 @@ export default function ProductScreen({ navigation, route }) {
           navigation={navigation}
           products={products}
           profiles={profiles}
-          listHeaderComponent={listHeaderComponent}
+          listHeaderComponent={() => <HeaderProduct route={route} />}
         />
       </View>
     </>
