@@ -87,7 +87,9 @@ export default function ProductScreen({ navigation, route }) {
           navigation={navigation}
           products={products}
           profiles={profiles}
-          listHeaderComponent={() => <HeaderProduct route={route} />}
+          listHeaderComponent={() => (
+            <HeaderProduct route={route} navigation={navigation} />
+          )}
         />
       </View>
     </>

@@ -14,19 +14,30 @@ export default function ProfileScreen({ navigation, route }) {
           <BackButtom />
         </TouchableOpacity>
       ),
-      headerRight: () => (
-        <TouchableOpacity onPress={editProfile}>
-          <EditButton />
-        </TouchableOpacity>
-      ),
+      headerRight: headerRight,
     });
   }, [navigation]);
 
+  function headerRight() {
+    const object = (
+      <TouchableOpacity onPress={editProfile}>
+        <EditButton />
+      </TouchableOpacity>
+    );
+
+    if (user.id == products[0].seller_id) {
+      return object;
+    } else {
+      return <></>;
+    }
+  }
+
   const user = {
+    id: 1,
     name: "Lais Gonçalves",
     university: "Anhanguera - Caraguatatuba",
     phone: "(12) 99999-9999",
-    role: "Ven) dedor",
+    role: "Vendedor",
     description:
       "Lorem impsu fdsad lorem impsum core. Corem ipsum dsad lorem impsum core. Corem ipsum fdsad lorem impsum core. Corem ipsum ",
   };

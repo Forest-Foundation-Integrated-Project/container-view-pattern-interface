@@ -22,31 +22,40 @@ import { ScrollView } from "react-native-gesture-handler";
 import { StyleSheet } from "react-native";
 import { CIANO } from "../../constants/colors";
 
-export function HeaderProduct({ route }) {
+export function HeaderProduct({ route, navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
 
   const closeModal = () => {
     setModalVisible(false);
   };
 
+  function goToProfile() {
+    navigation.navigate("Profile");
+  }
   return (
     <>
       <View>
         <Pressable onPress={closeModal}>
-          <View style={headerProductStyles.userSession}>
-            <Image
-              style={headerProductStyles.userImage}
-              source={{ uri: route.params.profile.image }}
-            />
-            <View style={headerProductStyles.userIfo}>
-              <Text style={headerProductStyles.userName}>
-                {route.params.profile.name}
-              </Text>
-              <Text numberOfLines={1} style={headerProductStyles.userLocation}>
-                {route.params.profile.university} - {route.params.profile.city}{" "}
-              </Text>
+          <TouchableWithoutFeedback onPress={goToProfile}>
+            <View style={headerProductStyles.userSession}>
+              <Image
+                style={headerProductStyles.userImage}
+                source={{ uri: route.params.profile.image }}
+              />
+              <View style={headerProductStyles.userIfo}>
+                <Text style={headerProductStyles.userName}>
+                  {route.params.profile.name}
+                </Text>
+                <Text
+                  numberOfLines={1}
+                  style={headerProductStyles.userLocation}
+                >
+                  {route.params.profile.university} -{" "}
+                  {route.params.profile.city}{" "}
+                </Text>
+              </View>
             </View>
-          </View>
+          </TouchableWithoutFeedback>
           <View
             style={[
               headerProductStyles.productSession,
