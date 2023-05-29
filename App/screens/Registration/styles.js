@@ -1,7 +1,7 @@
 import { StyleSheet, ViewStyle, Platform } from "react-native";
 import Constants from "expo-constants";
+import { CIANO } from "./../../constants/colors"
 
-const CIANO = "#00B0AE";
 const CONTENT_BACKGROUND = "#FFFFFF";
 
 export const styles = StyleSheet.create({
@@ -12,7 +12,6 @@ export const styles = StyleSheet.create({
         backgroundColor:
             Platform.OS === "ios" ? CONTENT_BACKGROUND : CONTENT_BACKGROUND,
     },
-
     content: {
         paddingVertical: 70,
         paddingHorizontal: 30,
@@ -75,12 +74,12 @@ export const styles = StyleSheet.create({
         backgroundColor: "#fff",
     },
 
-    pickerText:{
+    pickerText: {
         color: "darkgrey",
         fontSize: 14,
     },
 
-    pickerSelect:{
+    pickerSelect: {
         color: "black",
         fontSize: 14,
     }

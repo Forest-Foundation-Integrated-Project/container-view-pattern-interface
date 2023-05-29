@@ -9,7 +9,7 @@ export const AuthContext = createContext({
 });
 
 export default function AuthContextProvider({ children }) {
-    const [authToken, setAuthToken] = useState();
+    const [authToken, setAuthToken] = useState('');
 
     useEffect(() => {
         async function fetchToken() {

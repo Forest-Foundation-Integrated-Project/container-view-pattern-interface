@@ -1,6 +1,5 @@
-import "react-native-gesture-handler";
 import React, { useContext, useEffect, useState } from "react";
-import { SafeAreaView } from "react-native";
+import { SafeAreaView, View, Text, Dimensions } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import {
@@ -9,18 +8,22 @@ import {
   RegistrationScreen,
   MenuScreen,
   ProductScreen,
+  SettingsScreen,
+  CategoriesScreen,
+  ProfileScreen,
   ForgotPasswordScreen,
 } from "./screens";
 import { decode, encode } from "base-64";
 import { styles } from "./generalStyles";
 import { BackButtom } from "./components/BackButton";
+import { EditButtom } from "./components/EditButton";
 import { LogoTitle } from "./components/LogoTitle";
-import { SearchIcon } from "./components/SearchIcon";
 import { MenuIcon } from "./components/MenuIcon";
 import AuthContextProvider, { AuthContext } from "./store/auth-context";
-import { StatusBar } from "expo-status-bar";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { StatusBar } from "expo-status-bar";
 import { createDrawerNavigator } from "@react-navigation/drawer";
+import { headerNavigationOptions } from "./headerNavigationOptions";
 import "react-native-gesture-handler";
 
 if (!global.btoa) {
@@ -30,9 +33,8 @@ if (!global.atob) {
   global.atob = decode;
 }
 
-const Stack = createStackNavigator();
-
 function AuthStack() {
+  const Stack = createStackNavigator();
   const options = {
     headerShown: true,
     headerTitle: LogoTitle,
@@ -40,7 +42,7 @@ function AuthStack() {
   };
 
   return (
-    <Stack.Navigator screenOptions={styles.headerNavigation}>
+    <Stack.Navigator screenOptions={headerNavigationOptions}>
       <Stack.Screen
         name="Login"
         options={{ headerShown: false }}
@@ -61,35 +63,40 @@ function AuthStack() {
   );
 }
 
-
 function AuthenticatedStack() {
   const Drawer = createDrawerNavigator();
   const options = {
     headerShown: true,
     headerTitle: LogoTitle,
-    drawerPosition: "right",
+    headerNavigationOptions,
   };
-  console.log(Drawer);
 
   return (
-    <NavigationContainer independent={true}>
-        <Drawer.Navigator screenOptions={styles.headerNavigation}>
-        <Drawer.Screen name="Home" options={options} component={HomeScreen} />
-        <Drawer.Screen name="Menu" options={options} component={MenuScreen} />
-        <Stack.Screen name="ProductScreen" options={options} component={ProductScreen}/>
-        </Drawer.Navigator>
-    </NavigationContainer>
-
+    // <NavigationContainer independent={true}></NavigationContainer>
+    <Drawer.Navigator
+      screenOptions={headerNavigationOptions}
+      drawerContent={({ navigation, props }) => (
+        <MenuScreen navigation={navigation} props={props} />
+      )}
+    >
+      <Drawer.Screen name="Home" options={options} component={HomeScreen} />
+      <Drawer.Screen
+        name="Profile"
+        options={options}
+        component={ProfileScreen}
+      />
+      <Drawer.Screen
+        name="ProductScreen"
+        options={options}
+        component={ProductScreen}
+      />
+    </Drawer.Navigator>
+    // </NavigationContainer>
   );
 }
 
 function Navigation() {
   const authCtx = useContext(AuthContext);
-  const options = {
-    headerShown: true,
-    headerTitle: LogoTitle,
-    headerBackImage: BackButtom,
-  };
   return (
     <NavigationContainer>
       {!authCtx.isAuthenticated && <AuthStack />}
@@ -97,16 +104,17 @@ function Navigation() {
     </NavigationContainer>
   );
 }
+
 /*
-function ProductScreen({ navigation }) {
-    const authCtx = useContext(AuthContext);
-    return (
-        <Stack.Navigator screenOptions={styles.headerNavigation}>
-            <Stack.Screen name="Product Screen" options={{ headerShown: false }} component={productScreen}/>
-        </Stack.Navigator >
-    );
-}
-*/
+  function ProductScreen({ navigation }) {
+      const authCtx = useContext(AuthContext);
+      return (
+          <Stack.Navigator screenOptions={styles.headerNavigation}>
+              <Stack.Screen name="Product Screen" options={{ headerShown: false }} component={productScreen}/>
+          </Stack.Navigator >
+      );
+  }
+  */
 function Root() {
   const [isTryingLogin, setIsTryingLogin] = useState(true);
 
@@ -126,17 +134,10 @@ function Root() {
     fetchToken();
   }, []);
 
-  // if (isTryingLogin) {
-  //     // return <AppLoading />;
-  // }
-
   return <Navigation />;
 }
 
 export default function App() {
-  // const [loading, setLoading] = useState(true)
-  // const [user, setUser] = useState(null)
-
   return (
     <>
       <StatusBar style="light" />
