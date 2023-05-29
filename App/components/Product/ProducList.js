@@ -3,7 +3,7 @@ import { View, FlatList, StyleSheet } from "react-native";
 import { Product } from "./Product";
 
 export function ProductList({ navigation, products, profiles }) {
-  console.log(profiles);
+  //console.log(navigation);
 
   const productPressed = (navigation, item, profile) => {
     navigation.navigate("ProductScreen", { item, profile });

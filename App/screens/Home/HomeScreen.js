@@ -23,31 +23,36 @@ export default function HomeScreen({ navigation }) {
       name: "Beatrice Castro Goncalves",
       university: "IFSP",
       city: "Caraguatatuba",
+      contactInformation: "beatrice@gmail.com",
       image:
-        "https://natashaskitchen.com/wp-content/uploads/2020/05/Vanilla-Cupcakes-3.jpg",
+        "https://images.pexels.com/photos/2709388/pexels-photo-2709388.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     },
+    
     {
       id: 2,
       name: "Danilo Almeida Cavalcanti",
       university: "Módulo",
       city: "Caraguatatuba",
+      contactInformation: "(12) 12312-3123",
       image:
-        "https://api.time.com/wp-content/uploads/2017/10/how-to-improve-math-class.jpg?quality=85&w=1200&h=628&crop=1",
+        "https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     },
     {
       id: 3,
       name: "Pedro Rodrigo",
       university: "Anhanguera",
       city: "Caraguatatuba",
-      image: "https://www.digicad.com.br/wp-content/uploads/2022/08/python.jpg",
+      contactInformation: "pedro.rod@hotmail.com",
+      image: "https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     },
     {
       id: 4,
       name: "Julieta Melo Azevedo",
       university: "IFSP",
       city: "Caraguatatuba",
+      contactInformation: "(12) 32132-1321",
       image:
-        "https://static01.nyt.com/images/2022/02/12/dining/JT-Chocolate-Chip-Cookies/JT-Chocolate-Chip-Cookies-mediumThreeByTwo440.jpg",
+        "https://images.pexels.com/photos/773371/pexels-photo-773371.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     },
   ]);
 
@@ -63,6 +68,18 @@ export default function HomeScreen({ navigation }) {
       subtitle: `${profiles[0].name}`,
       image:
         "https://natashaskitchen.com/wp-content/uploads/2020/05/Vanilla-Cupcakes-3.jpg",
+    },
+    {
+      id: 1,
+      title: "Bolinho",
+      description:
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+      seller_id: 1,
+      price_cents: 599,
+      tag_id: 1,
+      subtitle: `${profiles[0].name}`,
+      image:
+        "https://i0.wp.com/cooknenjoy.com/wp-content/uploads/2019/05/P1180804.jpg?w=1200&ssl=1",
     },
     {
       id: 2,
@@ -131,7 +148,7 @@ export default function HomeScreen({ navigation }) {
           </TouchableOpacity>
         </View>
 
-        <ProductList products={products} profiles={profiles}></ProductList>
+        <ProductList navigation={navigation} products={products} profiles={profiles}></ProductList>
       </SafeAreaView>
     </>
   );
