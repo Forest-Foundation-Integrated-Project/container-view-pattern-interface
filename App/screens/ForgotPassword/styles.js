@@ -80,6 +80,49 @@ export default StyleSheet.create({
         paddingVertical: 10
     },
 
+    modalBackground: {
+        flex: 1,
+        alignItems: "center",
+        justifyContent: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.3)',
+    },
+
+    modal: {
+        backgroundColor: CIANO,
+        minHeight: 450,
+        width: 350,
+        borderRadius: 15,
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingHorizontal: 10,
+    },
+
+    modalText: {
+        fontSize: 25,
+        fontWeight: 'bold',
+        textAlign: 'justify',
+        flexWrap: 'wrap', 
+        color: BRANCO
+    },
+
+    modalInput: {
+        marginVertical: 20,
+        flexDirection: 'row',
+        justifyContent: 'center',
+    },
+
+    modalNumberInput: {
+        borderWidth: 5,
+        borderColor: BRANCO,
+        borderRadius: 15,
+        height: 60,
+        width: 40,
+        marginHorizontal: 10,
+        textAlign: 'center',
+        fontSize: 30,
+        color: BRANCO
+    },
+
     shadow: {
         ...Platform.select({
           ios: {

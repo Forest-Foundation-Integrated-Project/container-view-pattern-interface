@@ -15,3 +15,5 @@ export { default as CategoriesScreen } from "./Categories/CategoriesScreen";
 export { default as ProductScreen } from "./Product/ProductScreen";
 
 export { default as ForgotPasswordScreen } from './ForgotPassword/ForgotPasswordScreen'
+
+export { default as ResetPasswordScreen } from './ResetPassword/ResetPasswordScreen';
