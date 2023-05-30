@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import {
   Image,
   Text,
@@ -16,20 +16,30 @@ import { AuthContext } from "./../../store/auth-context";
 import { Loading } from "./../../components/Loading";
 import { Alert } from "react-native";
 import ErrorMessage from "./../../components/ErrorMessage";
+import { BackButtom } from "../../components/BackButton";
 
 export default function ResetPasswordScreen({ navigation }) {
-  const authCtx = useContext(AuthContext);
-  const onFooterLinkPress = () => {
-    navigation.navigate("Registration");
-  };
 
-  const forgotPassPressed = () => {
-    navigation.navigate("ForgotPasswordScreen");
-  };
+  useEffect(() => {
+    navigation.setOptions({
+      headerLeft: () => (
+        <TouchableOpacity onPress={goBack}>
+          <BackButtom />
+        </TouchableOpacity>
+      ),
+      headerRight: null,
+    });
+
+    function goBack() {
+      navigation.navigate("Login");
+    }
+  }, [navigation]);
+
+  const authCtx = useContext(AuthContext);
 
   const [isAuthenticating, setIsAuthenticating] = useState(false);
 
-  async function loginHandler({ email, password }) {
+  async function loginHandler({ password, confirmPassword }) {
     setIsAuthenticating(true);
     try {
       token = await login(email, password, navigation);
@@ -58,8 +68,8 @@ export default function ResetPasswordScreen({ navigation }) {
         <Formik
           style={styles.content}
           initialValues={{
-            email: "",
-            password: "",
+            newPassword: "",
+            confirmPassword: "",
           }}
           onSubmit={(values) => {
             loginHandler(values);
@@ -76,21 +86,19 @@ export default function ResetPasswordScreen({ navigation }) {
             setFieldValue,
           }) => (
             <KeyboardAwareScrollView
-              style={{ width: "100%" }}
+              style={{ width: "100%"}}
               keyboardShouldPersistTaps="always"
             >
-              <Image
-                style={styles.logo}
-                source={require("../../assets/images/logotipo.png")}
-              />
+              
               <View style={styles.formGroup}>
-                <TextInput
+              <TextInput
                   style={styles.input}
-                  value={values.email}
-                  onChangeText={handleChange("email")}
-                  onBlur={handleBlur("email")}
+                  value={values.password}
+                  onChangeText={handleChange("newPassword")}
+                  onBlur={handleBlur("newPassword")}
                   autoCapitalize="none"
-                  placeholder="E-mail"
+                  secureTextEntry={true}
+                  placeholder="Nova senha"
                 />
 
                 <ErrorMessage errorValue={touched.email && errors.email} />
@@ -99,31 +107,21 @@ export default function ResetPasswordScreen({ navigation }) {
                 <TextInput
                   style={styles.input}
                   value={values.password}
-                  onChangeText={handleChange("password")}
-                  onBlur={handleBlur("password")}
+                  onChangeText={handleChange("confirmPassword")}
+                  onBlur={handleBlur("confirmPassword")}
                   autoCapitalize="none"
                   secureTextEntry={true}
-                  placeholder="Senha"
+                  placeholder="Confirmar nova senha"
                 />
 
                 <ErrorMessage
                   errorValue={touched.password && errors.password}
                 />
               </View>
-              <Text style={styles.forgotPass} onPress={forgotPassPressed}>
-                Esqueceu sua senha?
-              </Text>
+              
               <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-                <Text style={styles.buttonText}>Login</Text>
+                <Text style={styles.buttonText}>Alterar senha e fazer login</Text>
               </TouchableOpacity>
-              <View style={styles.footerView}>
-                <Text style={styles.footerText}>
-                  Ainda não é registrado?{" "}
-                  <Text onPress={onFooterLinkPress} style={styles.footerLink}>
-                    REGISTRE-SE AQUI!
-                  </Text>
-                </Text>
-              </View>
             </KeyboardAwareScrollView>
           )}
         </Formik>

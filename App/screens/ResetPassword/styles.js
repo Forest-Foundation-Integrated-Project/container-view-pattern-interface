@@ -20,27 +20,25 @@ export default StyleSheet.create({
     flex: 1,
     backgroundColor: CIANO,
     paddingHorizontal: 30,
+    paddingTop: 150,
   },
 
   content: {
-    flex: 1,
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
+
   },
 
-  logo: {
-    height: 300,
-    maxWidth: 300,
-    alignSelf: "center",
-    margin: 30,
-    padding: 10,
+  formGroup: {
   },
+
   input: {
     overflow: "hidden",
     marginTop: 15,
     backgroundColor: "white",
     height: 50,
+
     paddingHorizontal: 20,
     borderRadius: 20,
     borderWidth: 2,
@@ -48,18 +46,9 @@ export default StyleSheet.create({
     backgroundColor: "#fff",
   },
 
-  forgotPass: {
-    marginTop: 10,
-    marginRight: 10,
-    alignSelf: "flex-end",
-    fontSize: 16,
-    color: "white",
-  },
-
   button: {
     borderRadius: 20,
     backgroundColor: CIANO,
-    //marginHorizontal: 30,
     marginTop: 20,
     height: 75,
     borderWidth: 5,
@@ -75,20 +64,5 @@ export default StyleSheet.create({
     textAlign: "center",
     paddingVertical: 10,
   },
-  footerView: {
-    flex: 1,
-    alignItems: "center",
-    marginTop: 20,
-  },
-  footerText: {
-    fontSize: 16,
-    color: "white",
-  },
 
-  footerLink: {
-    color: CONTENT_BACKGROUND,
-    textTransform: "uppercase",
-    fontWeight: "bold",
-    fontSize: 16,
-  },
 });

@@ -50,12 +50,13 @@ export default function ForgotPasswordScreen({ navigation }) {
     const code = value1 + value2 + value3 + value4
     if(code != null) {
       setModalVisible(false);
-      goToResetPasswordPage}
+      goToResetPasswordPage()
+    }
   }
 
   const [modalVisible, setModalVisible] = useState(false);
 
-  const goToResetPasswordPage = () => {navigation.navigate('ResetpasswordScreen')}
+  const goToResetPasswordPage = () => {navigation.navigate('ResetPasswordScreen')}
 
   return (
     <>
