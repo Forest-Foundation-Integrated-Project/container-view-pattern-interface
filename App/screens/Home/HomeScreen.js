@@ -10,7 +10,7 @@ import {
   TouchableWithoutFeedback,
   TouchableHighlight,
 } from "react-native";
-import { ProductScreen } from "../Product/ProductScreen";
+import { ProductScreen } from "../Product/ProductListScreen";
 import { StatusBar } from "expo-status-bar";
 import { styles } from "./styles";
 import { ProductList } from "./../../components/Product/ProductList";
@@ -18,6 +18,7 @@ import { useSelector } from "react-redux";
 
 export default function HomeScreen({ navigation }) {
   const profile = useSelector((state) => state.authentication.user);
+  // const products = useSelector((state) => state.product.products);
 
   const [products, setProducts] = useState([
     {

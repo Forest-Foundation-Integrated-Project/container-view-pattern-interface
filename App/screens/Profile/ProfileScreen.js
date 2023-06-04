@@ -11,11 +11,15 @@ import { Alert } from "react-native";
 export default function ProfileScreen({ navigation, route }) {
   const { user, loadUser } = route.params;
 
-  console.log(user);
+  if (loadUser == true) {
+    fetchUser();
+  }
 
   async function fetchUser() {
     try {
       const res = await getUser(user.userId);
+      console.log(res);
+      user = res.user;
     } catch (error) {
       Alert.alert(`erro: ${error}`);
     }

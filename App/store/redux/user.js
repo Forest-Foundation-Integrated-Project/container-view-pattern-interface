@@ -4,11 +4,11 @@ import { StatusBar } from "expo-status-bar";
 const user = createSlice({
   name: "user",
   initialState: {
-    data: "",
+    userData: "",
   },
   reducers: {
     fetchUser: (state, action) => {
-      state.data = action.payload.data;
+      state.userData = action.payload.data;
     },
   },
 });

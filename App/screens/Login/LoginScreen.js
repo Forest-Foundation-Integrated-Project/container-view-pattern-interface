@@ -31,7 +31,7 @@ export default function LoginScreen({ navigation }) {
       const token = await login(email, password, navigation);
       dispatch(handleAuthenticate(token));
     } catch (error) {
-      console.log(error);
+      console.log("Error: " + error);
       Alert.alert(
         "Falha na autenticação",
         "Não foi possível realizar o login, confira seu email e senha"
