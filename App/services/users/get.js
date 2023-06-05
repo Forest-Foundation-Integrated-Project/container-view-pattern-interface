@@ -8,7 +8,7 @@ export async function fetchUser(navigation) {
 
   const response = await httpGet(`${url}/${userId}`);
 
-  console.log(response);
+  // console.log(response);
 
   if (response.status == 200) {
     userData = response.data;

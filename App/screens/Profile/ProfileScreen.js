@@ -18,7 +18,6 @@ export default function ProfileScreen({ navigation, route }) {
   async function fetchUser() {
     try {
       const res = await getUser(user.userId);
-      console.log(res);
       user = res.user;
     } catch (error) {
       Alert.alert(`erro: ${error}`);
@@ -76,6 +75,16 @@ export default function ProfileScreen({ navigation, route }) {
       subtitle: `${user.name}`,
       image:
         "https://natashaskitchen.com/wp-content/uploads/2020/05/Vanilla-Cupcakes-3.jpg",
+      seller: {
+        id: 1,
+        userId: "d32b8356-f81f-4823-bf77-9a967bbb630a",
+        name: "Outra Pessoaaa",
+        university: "IFSP",
+        phone: "(12) 99999-9999",
+        city: "Caraguatatuba",
+        image:
+          "https://natashaskitchen.com/wp-content/uploads/2020/05/Vanilla-Cupcakes-3.jpg",
+      },
     },
     // {
     //   id: 2,

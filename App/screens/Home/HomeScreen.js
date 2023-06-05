@@ -32,6 +32,16 @@ export default function HomeScreen({ navigation }) {
       subtitle: `test`,
       image:
         "https://natashaskitchen.com/wp-content/uploads/2020/05/Vanilla-Cupcakes-3.jpg",
+      seller: {
+        id: 1,
+        userId: "d32b8356-f81f-4823-bf77-9a967bbb630a",
+        name: "Outra Pessoaaa",
+        university: "IFSP",
+        phone: "(12) 99999-9999",
+        city: "Caraguatatuba",
+        image:
+          "https://natashaskitchen.com/wp-content/uploads/2020/05/Vanilla-Cupcakes-3.jpg",
+      },
     },
     {
       id: 2,
@@ -43,6 +53,16 @@ export default function HomeScreen({ navigation }) {
       subtitle: `Test Name`,
       image:
         "https://api.time.com/wp-content/uploads/2017/10/how-to-improve-math-class.jpg?quality=85&w=1200&h=628&crop=1",
+      seller: {
+        id: 1,
+        userId: "d32b8356-f81f-4823-bf77-9a967bbb630a",
+        name: "Outra Pessoaaa",
+        university: "IFSP",
+        phone: "(12) 99999-9999",
+        city: "Caraguatatuba",
+        image:
+          "https://natashaskitchen.com/wp-content/uploads/2020/05/Vanilla-Cupcakes-3.jpg",
+      },
     },
     {
       id: 3,
@@ -53,6 +73,16 @@ export default function HomeScreen({ navigation }) {
       tag_id: 3,
       subtitle: `Test Name`,
       image: "https://www.digicad.com.br/wp-content/uploads/2022/08/python.jpg",
+      seller: {
+        id: 1,
+        userId: "d32b8356-f81f-4823-bf77-9a967bbb630a",
+        name: "Outra Pessoaaa",
+        university: "IFSP",
+        phone: "(12) 99999-9999",
+        city: "Caraguatatuba",
+        image:
+          "https://natashaskitchen.com/wp-content/uploads/2020/05/Vanilla-Cupcakes-3.jpg",
+      },
     },
     {
       id: 4,
@@ -64,6 +94,16 @@ export default function HomeScreen({ navigation }) {
       subtitle: `Test Name`,
       image:
         "https://static01.nyt.com/images/2022/02/12/dining/JT-Chocolate-Chip-Cookies/JT-Chocolate-Chip-Cookies-mediumThreeByTwo440.jpg",
+      seller: {
+        id: 1,
+        userId: "d32b8356-f81f-4823-bf77-9a967bbb630a",
+        name: "Outra Pessoaaa",
+        university: "IFSP",
+        phone: "(12) 99999-9999",
+        city: "Caraguatatuba",
+        image:
+          "https://natashaskitchen.com/wp-content/uploads/2020/05/Vanilla-Cupcakes-3.jpg",
+      },
     },
   ]);
 

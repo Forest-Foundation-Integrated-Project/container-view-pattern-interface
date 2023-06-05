@@ -1,7 +1,7 @@
 import { Dimensions, StyleSheet } from "react-native";
-import { CIANO, PRETO, CINZA, CNZACL, BRANCO } from "./../../constants/colors";
+import { CIANO, PRETO, CINZA, CNZACL, BRANCO } from "../../constants/colors";
 
-export const headerProductStyles = StyleSheet.create({
+export const UserProductStyles = StyleSheet.create({
   topSafeArea: {},
 
   topSafeArea: {},
