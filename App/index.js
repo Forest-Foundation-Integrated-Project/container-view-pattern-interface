@@ -109,10 +109,12 @@ function Root() {
 
   useEffect(() => {
     async function fetchToken() {
-      const storedToken = await AsyncStorage.getItem("token");
+      const token = await AsyncStorage.getItem("token");
+      var user = await AsyncStorage.getItem("user");
 
-      if (storedToken) {
-        store.dispatch(handleAuthenticate({ token: storedToken }));
+      user = JSON.parse(user);
+      if (token && user) {
+        store.dispatch(handleAuthenticate({ token, user }));
       }
 
       setIsTryingLogin(false);

@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { StatusBar } from "expo-status-bar";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const authentication = createSlice({
   name: "authentication",
@@ -11,21 +12,22 @@ const authentication = createSlice({
   reducers: {
     handleAuthenticate: (state, action) => {
       state.token = action.payload.token;
+      state.user = action.payload.user;
       state.isAuthenticated = true;
-      state.user = {
-        id: 1,
-        userId: "d32b8356-f81f-4823-bf77-9a967bbb630a",
-        name: "Outra Pessoaaa",
-        university: "IFSP",
-        phone: "(12) 99999-9999",
-        city: "Caraguatatuba",
-        image:
-          "https://natashaskitchen.com/wp-content/uploads/2020/05/Vanilla-Cupcakes-3.jpg",
-      };
+
+      typeof state.token !== "undefined"
+        ? AsyncStorage.setItem("token", action.payload.token)
+        : null;
+      typeof state.user !== "undefined"
+        ? AsyncStorage.setItem("user", JSON.stringify(action.payload.user))
+        : null;
     },
     handleLogout: (state) => {
       state.token = "";
       state.isAuthenticated = false;
+      state.user = {};
+      AsyncStorage.removeItem("token");
+      AsyncStorage.removeItem("user");
     },
   },
 });

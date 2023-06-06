@@ -30,7 +30,10 @@ export function UserProduct({ route, navigation }) {
   };
 
   function goToProfile() {
-    navigation.navigate("Profile", { loadUser: true });
+    navigation.navigate("Profile", {
+      loadUser: true,
+      key: route.params.profile.user_id,
+    });
   }
   return (
     <>

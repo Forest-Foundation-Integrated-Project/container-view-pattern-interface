@@ -17,6 +17,9 @@ import { Alert } from "react-native";
 import ErrorMessage from "./../../components/ErrorMessage";
 import { useDispatch } from "react-redux";
 import { handleAuthenticate } from "../../store/redux/authentication";
+import getUser from "../../services/users/getUser";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import axios from "axios";
 
 export default function LoginScreen({ navigation }) {
   const dispatch = useDispatch();
@@ -29,7 +32,9 @@ export default function LoginScreen({ navigation }) {
     setIsAuthenticating(true);
     try {
       const token = await login(email, password, navigation);
-      dispatch(handleAuthenticate(token));
+      const res = await getUser("ded6f05a-ec8d-4ebb-ba6c-eb10fe8a2b0c", token);
+      const user = res.data;
+      dispatch(handleAuthenticate({ token, user }));
     } catch (error) {
       console.log("Error: " + error);
       Alert.alert(

@@ -19,17 +19,17 @@ import getUser from "../../services/users/getUser";
 import { CIANO, PRETO, CINZA, CNZACL, BRANCO } from "../../constants/colors";
 
 export default function ProductListScreen({ navigation, route }) {
+  const [profile, setProfile, key] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
-  const [profile, setProfile] = useState(false);
   const closeModal = () => {
     setModalVisible(false);
   };
 
   async function fetchUser() {
     try {
-      const res = await getUser(user.userId);
-      console.log(res);
-      setProfile(res.user);
+      console.log("user_id: " + route.params.item.seller_id);
+      const res = await getUser(route.params.item.seller_id);
+      setProfile(res.data);
     } catch (error) {
       console.log(`erro: ${error}`);
     }
@@ -39,19 +39,12 @@ export default function ProductListScreen({ navigation, route }) {
     fetchUser();
   });
 
-  // profile = {
-  //   id: 1,
-  //   userId: "d32b8356-f81f-4823-bf77-9a967bbb630a",
-  //   name: "Outra Pessoaaa",
-  //   university: "IFSP",
-  //   phone: "(12) 99999-9999",
-  //   city: "Caraguatatuba",
-  //   image:
-  //     "https://natashaskitchen.com/wp-content/uploads/2020/05/Vanilla-Cupcakes-3.jpg",
-  // };
-
   function goToProfile() {
-    navigation.navigate("Profile", { loadUser: true, user: { id: seller_id } });
+    navigation.navigate("Profile", {
+      loadUser: true,
+      user: { id: route.params.item.seller_id },
+      key: route.params.item.seller_id,
+    });
   }
 
   useEffect(() => {
@@ -72,14 +65,14 @@ export default function ProductListScreen({ navigation, route }) {
       title: "Cupcake",
       description:
         "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-      seller_id: 1,
+      seller_id: "4b2ccf36-3742-45c3-80b6-2036a92d940f",
       price_cents: 1999,
       tag_id: 1,
       subtitle: `${seller_name}`,
       image:
         "https://natashaskitchen.com/wp-content/uploads/2020/05/Vanilla-Cupcakes-3.jpg",
       seller: {
-        id: 1,
+        id: "4b2ccf36-3742-45c3-80b6-2036a92d940f",
         userId: "d32b8356-f81f-4823-bf77-9a967bbb630a",
         name: "Outra Pessoaaa",
         university: "IFSP",
@@ -94,14 +87,14 @@ export default function ProductListScreen({ navigation, route }) {
       title: "Cupcake",
       description:
         "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-      seller_id: 1,
+      seller_id: "4b2ccf36-3742-45c3-80b6-2036a92d940f",
       price_cents: 1999,
       tag_id: 1,
       subtitle: `${seller_name}`,
       image:
         "https://natashaskitchen.com/wp-content/uploads/2020/05/Vanilla-Cupcakes-3.jpg",
       seller: {
-        id: 1,
+        id: "4b2ccf36-3742-45c3-80b6-2036a92d940f",
         userId: "d32b8356-f81f-4823-bf77-9a967bbb630a",
         name: "Outra Pessoaaa",
         university: "IFSP",
@@ -211,11 +204,11 @@ export default function ProductListScreen({ navigation, route }) {
                         <View style={UserProductStyles.muserSession}>
                           <Image
                             style={UserProductStyles.muserImage}
-                            source={{ uri: route.params.item.seller.image }}
+                            source={{ uri: profile.image }}
                           />
                           <View style={UserProductStyles.muserIfo}>
                             <Text style={UserProductStyles.muserName}>
-                              {route.params.item.seller.name}
+                              {profile.name}
                             </Text>
                             <Text
                               numberOfLines={1}

@@ -10,7 +10,6 @@ import {
   TouchableWithoutFeedback,
   TouchableHighlight,
 } from "react-native";
-import { ProductScreen } from "../Product/ProductListScreen";
 import { StatusBar } from "expo-status-bar";
 import { styles } from "./styles";
 import { ProductList } from "./../../components/Product/ProductList";
@@ -26,14 +25,14 @@ export default function HomeScreen({ navigation }) {
       title: "Cupcake",
       description:
         "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-      seller_id: 1,
+      seller_id: "4b2ccf36-3742-45c3-80b6-2036a92d940f",
       price_cents: 1999,
       tag_id: 1,
       subtitle: `test`,
       image:
         "https://natashaskitchen.com/wp-content/uploads/2020/05/Vanilla-Cupcakes-3.jpg",
       seller: {
-        id: 1,
+        id: "4b2ccf36-3742-45c3-80b6-2036a92d940f",
         userId: "d32b8356-f81f-4823-bf77-9a967bbb630a",
         name: "Outra Pessoaaa",
         university: "IFSP",
@@ -54,7 +53,7 @@ export default function HomeScreen({ navigation }) {
       image:
         "https://api.time.com/wp-content/uploads/2017/10/how-to-improve-math-class.jpg?quality=85&w=1200&h=628&crop=1",
       seller: {
-        id: 1,
+        id: "4b2ccf36-3742-45c3-80b6-2036a92d940f",
         userId: "d32b8356-f81f-4823-bf77-9a967bbb630a",
         name: "Outra Pessoaaa",
         university: "IFSP",
@@ -68,13 +67,13 @@ export default function HomeScreen({ navigation }) {
       id: 3,
       title: "Te ensinarei python do zero",
       description: "Description for Product 3",
-      seller_id: 1,
+      seller_id: "4b2ccf36-3742-45c3-80b6-2036a92d940f",
       price_cents: 3999,
       tag_id: 3,
       subtitle: `Test Name`,
       image: "https://www.digicad.com.br/wp-content/uploads/2022/08/python.jpg",
       seller: {
-        id: 1,
+        id: "4b2ccf36-3742-45c3-80b6-2036a92d940f",
         userId: "d32b8356-f81f-4823-bf77-9a967bbb630a",
         name: "Outra Pessoaaa",
         university: "IFSP",
@@ -95,7 +94,7 @@ export default function HomeScreen({ navigation }) {
       image:
         "https://static01.nyt.com/images/2022/02/12/dining/JT-Chocolate-Chip-Cookies/JT-Chocolate-Chip-Cookies-mediumThreeByTwo440.jpg",
       seller: {
-        id: 1,
+        id: "4b2ccf36-3742-45c3-80b6-2036a92d940f",
         userId: "d32b8356-f81f-4823-bf77-9a967bbb630a",
         name: "Outra Pessoaaa",
         university: "IFSP",

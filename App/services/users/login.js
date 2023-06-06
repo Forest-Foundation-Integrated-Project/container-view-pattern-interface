@@ -1,16 +1,12 @@
-import { MS_USERS_BASE_URL } from "@env";
+import { BASE_URL } from "@env";
 import { TEST_USERS_BASE_URL } from "@env";
 import { httpPost } from "../httpPost";
 
 export async function login(email, password, navigation) {
-  let url = MS_USERS_BASE_URL;
+  let url = `${BASE_URL}/auth/sign-in`;
   let token;
 
-  if (__DEV__) {
-    url = TEST_USERS_BASE_URL;
-  }
-
-  const response = await httpPost(`${url}login`, {
+  const response = await httpPost(url, {
     email: email,
     password: password,
   });
