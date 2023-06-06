@@ -35,7 +35,7 @@ export default function EditProfileScreen({ navigation, route }) {
   };
 
   function goToProfileScreen() {
-    navigation.navigate("Profile");
+    navigation.goBack();
   }
 
   function uploadPicker() {

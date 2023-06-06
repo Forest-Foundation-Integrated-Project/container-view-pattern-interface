@@ -2,18 +2,12 @@ import React, { useState, useContext, useEffect, useLayoutEffect } from "react";
 import { View, FlatList, StyleSheet } from "react-native";
 import { Product } from "./Product";
 
-export function ProductList({
-  navigation,
-  products,
-  profiles,
-  listHeaderComponent,
-}) {
-  const productPressed = (navigation, item, profile) => {
-    navigation.navigate("ProductScreen", { item, profile });
+export function ProductList({ navigation, products, listHeaderComponent }) {
+  const productPressed = (navigation, item) => {
+    navigation.navigate("ProductScreen", { item });
   };
 
   const renderItem = ({ item }) => {
-    const profile = profiles[item.id - 1];
     const isSingleItem = products.length === 1;
     const itemStyle = isSingleItem ? styles.singleItem : styles.item;
     const columnWrapperStyle = isSingleItem
@@ -26,7 +20,7 @@ export function ProductList({
           image={item.image}
           title={item.title}
           subtitle={item.subtitle}
-          onPress={() => productPressed(navigation, item, profile)}
+          onPress={() => productPressed(navigation, item)}
         />
       </View>
     );

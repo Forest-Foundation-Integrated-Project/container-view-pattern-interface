@@ -12,17 +12,17 @@ import {
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { StatusBar } from "expo-status-bar";
-import { headerProductStyles } from "./headerProductStyles";
-import { ProductList } from "../../components/Product/ProductList";
-import { Product } from "./../../components/Product/Product";
-import { ProdStyles } from "./../../components/Product/styles";
-import { Button } from "./../../components/Button";
-import { BackButtom } from "../../components/BackButton";
+import { UserProductStyles } from "./UserProductStyles";
+import { ProductList } from "./ProductList";
+import { Product } from "./Product";
+import { ProdStyles } from "./styles";
+import { Button } from "../Button";
+import { BackButtom } from "../BackButton";
 import { ScrollView } from "react-native-gesture-handler";
 import { StyleSheet } from "react-native";
 import { CIANO } from "../../constants/colors";
 
-export function HeaderProduct({ route, navigation }) {
+export function UserProduct({ route, navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
 
   const closeModal = () => {
@@ -30,26 +30,26 @@ export function HeaderProduct({ route, navigation }) {
   };
 
   function goToProfile() {
-    navigation.navigate("Profile");
+    navigation.navigate("Profile", {
+      loadUser: true,
+      key: route.params.profile.user_id,
+    });
   }
   return (
     <>
       <View>
         <Pressable onPress={closeModal}>
           <TouchableWithoutFeedback onPress={goToProfile}>
-            <View style={headerProductStyles.userSession}>
+            <View style={UserProductStyles.userSession}>
               <Image
-                style={headerProductStyles.userImage}
+                style={UserProductStyles.userImage}
                 source={{ uri: route.params.profile.image }}
               />
-              <View style={headerProductStyles.userIfo}>
-                <Text style={headerProductStyles.userName}>
+              <View style={UserProductStyles.userIfo}>
+                <Text style={UserProductStyles.userName}>
                   {route.params.profile.name}
                 </Text>
-                <Text
-                  numberOfLines={1}
-                  style={headerProductStyles.userLocation}
-                >
+                <Text numberOfLines={1} style={UserProductStyles.userLocation}>
                   {route.params.profile.university} -{" "}
                   {route.params.profile.city}{" "}
                 </Text>
@@ -57,46 +57,43 @@ export function HeaderProduct({ route, navigation }) {
             </View>
           </TouchableWithoutFeedback>
           <View
-            style={[
-              headerProductStyles.productSession,
-              headerProductStyles.shadow,
-            ]}
+            style={[UserProductStyles.productSession, UserProductStyles.shadow]}
           >
             <Image
               source={{ uri: route.params.item.image }}
-              style={headerProductStyles.prodImage}
+              style={UserProductStyles.prodImage}
             />
-            <View style={headerProductStyles.prodInfo}>
-              <View style={headerProductStyles.topDesc}>
-                <Text style={headerProductStyles.prodTitle}>
+            <View style={UserProductStyles.prodInfo}>
+              <View style={UserProductStyles.topDesc}>
+                <Text style={UserProductStyles.prodTitle}>
                   {route.params.item.title}
                 </Text>
-                <Text style={headerProductStyles.prodPrice}>
+                <Text style={UserProductStyles.prodPrice}>
                   R${route.params.item.price_cents / 100}
                 </Text>
               </View>
-              <Text style={headerProductStyles.prodDesc}>
+              <Text style={UserProductStyles.prodDesc}>
                 {route.params.item.description}
               </Text>
             </View>
           </View>
-          <View style={headerProductStyles.contactUserSection}>
+          <View style={UserProductStyles.contactUserSection}>
             <TouchableOpacity
-              style={headerProductStyles.buttoncontactUser}
+              style={UserProductStyles.buttoncontactUser}
               onPress={() => setModalVisible(true)}
             >
               <Text
                 style={[
-                  headerProductStyles.buttonLabel,
-                  headerProductStyles.shadow,
+                  UserProductStyles.buttonLabel,
+                  UserProductStyles.shadow,
                 ]}
               >
                 Contatar Vendedor
               </Text>
             </TouchableOpacity>
           </View>
-          <View style={headerProductStyles.productList}>
-            <Text style={headerProductStyles.label}>
+          <View style={UserProductStyles.productList}>
+            <Text style={UserProductStyles.label}>
               Outros produtos desse vendedor
             </Text>
           </View>
@@ -105,28 +102,28 @@ export function HeaderProduct({ route, navigation }) {
       <View>
         <Modal animationType="slide" transparent={true} visible={modalVisible}>
           <TouchableWithoutFeedback onPress={closeModal}>
-            <View style={headerProductStyles.mcenteredView}>
-              <View style={headerProductStyles.mmodalView}>
-                <View style={headerProductStyles.muserSession}>
+            <View style={UserProductStyles.mcenteredView}>
+              <View style={UserProductStyles.mmodalView}>
+                <View style={UserProductStyles.muserSession}>
                   <Image
-                    style={headerProductStyles.muserImage}
+                    style={UserProductStyles.muserImage}
                     source={{ uri: route.params.profile.image }}
                   />
-                  <View style={headerProductStyles.muserIfo}>
-                    <Text style={headerProductStyles.muserName}>
+                  <View style={UserProductStyles.muserIfo}>
+                    <Text style={UserProductStyles.muserName}>
                       {route.params.profile.name}
                     </Text>
                     <Text
                       numberOfLines={1}
-                      style={headerProductStyles.muserLocation}
+                      style={UserProductStyles.muserLocation}
                     >
                       {route.params.profile.university} -{" "}
                       {route.params.profile.city}{" "}
                     </Text>
                   </View>
                 </View>
-                <TouchableOpacity style={headerProductStyles.mbutton}>
-                  <Text style={headerProductStyles.mbuttonText}>
+                <TouchableOpacity style={UserProductStyles.mbutton}>
+                  <Text style={UserProductStyles.mbuttonText}>
                     Meu Whatsapp: 12 99999-9999
                   </Text>
                 </TouchableOpacity>

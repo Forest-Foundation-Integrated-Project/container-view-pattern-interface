@@ -5,9 +5,29 @@ import { useEffect, useState } from "react";
 import { EditButton } from "../../components/EditButton";
 import { BackButtom } from "../../components/BackButton";
 import { ProductList } from "../../components/Product/ProductList";
+import getUser from "./../../services/users/getUser";
+import { Alert } from "react-native";
 
 export default function ProfileScreen({ navigation, route }) {
+  const [profile, setProfile, key] = useState(null);
+  const { user, loadUser } = route.params;
+
+  async function fetchUser() {
+    try {
+      const res = await getUser(user.id);
+      setProfile(res.data);
+    } catch (error) {
+      Alert.alert(`erro: ${error}`);
+    }
+  }
+
   useEffect(() => {
+    if (loadUser == true) {
+      fetchUser();
+    } else {
+      setProfile(user);
+    }
+
     navigation.setOptions({
       headerLeft: () => (
         <TouchableOpacity onPress={goHome}>
@@ -19,53 +39,37 @@ export default function ProfileScreen({ navigation, route }) {
   }, [navigation]);
 
   function headerRight() {
-    const object = (
-      <TouchableOpacity onPress={editProfile}>
-        <EditButton />
-      </TouchableOpacity>
-    );
-
-    if (user.id == products[0].seller_id) {
-      return object;
-    } else {
-      return <></>;
+    if (!loadUser) {
+      return (
+        <TouchableOpacity onPress={editProfile}>
+          <EditButton />
+        </TouchableOpacity>
+      );
     }
   }
 
-  const user = {
-    id: 1,
-    name: "Lais Gonçalves",
-    university: "Anhanguera - Caraguatatuba",
-    phone: "(12) 99999-9999",
-    role: "Vendedor",
-    description:
-      "Lorem impsu fdsad lorem impsum core. Corem ipsum dsad lorem impsum core. Corem ipsum fdsad lorem impsum core. Corem ipsum ",
-  };
-
-  const [profiles, setProfiles] = useState([
-    {
-      id: 1,
-      name: "Beatrice Castro Goncalves",
-      university: "IFSP",
-      city: "Caraguatatuba",
-      phone: "(12) 99999-9999",
-      image:
-        "https://natashaskitchen.com/wp-content/uploads/2020/05/Vanilla-Cupcakes-3.jpg",
-    },
-  ]);
-
-  const [products, setProducts] = useState([
+  const [userProducts, setProducts] = useState([
     {
       id: 1,
       title: "Cupcake",
       description:
         "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-      seller_id: 1,
+      seller_id: "4b2ccf36-3742-45c3-80b6-2036a92d940f",
       price_cents: 1999,
       tag_id: 1,
-      subtitle: `${profiles[0].name}`,
+      subtitle: `mocked profile name`,
       image:
         "https://natashaskitchen.com/wp-content/uploads/2020/05/Vanilla-Cupcakes-3.jpg",
+      seller: {
+        id: "4b2ccf36-3742-45c3-80b6-2036a92d940f",
+        userId: "d32b8356-f81f-4823-bf77-9a967bbb630a",
+        name: "Outra Pessoaaa",
+        university: "IFSP",
+        phone: "(12) 99999-9999",
+        city: "Caraguatatuba",
+        image:
+          "https://natashaskitchen.com/wp-content/uploads/2020/05/Vanilla-Cupcakes-3.jpg",
+      },
     },
     // {
     //   id: 2,
@@ -88,37 +92,41 @@ export default function ProfileScreen({ navigation, route }) {
   }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.profileAvatar}>
-        <View style={styles.imageContainer}>
-          <Image
-            source={{
-              uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz8La2nwie8i1L3Asva1zyiKRaiWkVzujCP9ixCPH7OzYsLOPwBGfJ8VNzV67jehFLz2s&usqp=CAU",
-            }}
-            style={styles.image}
+    <View key={key} style={styles.container}>
+      {profile && (
+        <>
+          <View style={styles.profileAvatar}>
+            <View style={styles.imageContainer}>
+              <Image
+                source={{
+                  uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz8La2nwie8i1L3Asva1zyiKRaiWkVzujCP9ixCPH7OzYsLOPwBGfJ8VNzV67jehFLz2s&usqp=CAU",
+                }}
+                style={styles.image}
+              />
+            </View>
+            <Text style={styles.userName}>{profile.name}</Text>
+            <Text style={styles.userUniversity}>{profile.university}</Text>
+            <Text style={styles.userRole}>{profile.role}</Text>
+          </View>
+          <View style={styles.bio}>
+            <Text style={styles.bioDescription}>{profile.description}</Text>
+          </View>
+          <View style={styles.buttons}>
+            <TouchableOpacity style={styles.button}>
+              <Text style={styles.buttonText}>Adcionar produto</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button}>
+              <Text style={styles.buttonText}>Editar produtos</Text>
+            </TouchableOpacity>
+          </View>
+          <ProductList
+            navigation={navigation}
+            products={userProducts}
+            profile={profile}
+            ListHeaderComponent={<></>}
           />
-        </View>
-        <Text style={styles.userName}>{user.name}</Text>
-        <Text style={styles.userUniversity}>{user.university}</Text>
-        <Text style={styles.userRole}>{user.role}</Text>
-      </View>
-      <View style={styles.bio}>
-        <Text style={styles.bioDescription}>{user.description}</Text>
-      </View>
-      <View style={styles.buttons}>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Adcionar produto</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Editar produtos</Text>
-        </TouchableOpacity>
-      </View>
-      <ProductList
-        navigation={navigation}
-        products={products}
-        profiles={profiles}
-        ListHeaderComponent={<></>}
-      />
+        </>
+      )}
     </View>
   );
 }

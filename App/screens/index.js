@@ -12,6 +12,6 @@ export { default as ProfileScreen } from "./Profile/ProfileScreen";
 
 export { default as CategoriesScreen } from "./Categories/CategoriesScreen";
 
-export { default as ProductScreen } from "./Product/ProductScreen";
+export { default as ProductScreen } from "./Product/ProductListScreen";
 
 export { default as EditProfileScreen } from "./Profile/EditProfile/EditProfileScreen";

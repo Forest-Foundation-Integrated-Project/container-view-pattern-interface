@@ -19,7 +19,6 @@ export default function RegistrationForm({ navigation }) {
     ) : null;
   };
 
-  // const [isAuthenticating, setIsAuthenticating] = useState(false);
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [birthDate, setBirthDate] = useState(new Date());
   const [gender, setGender] = useState("Gender");

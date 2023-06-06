@@ -15,88 +15,102 @@ import {
 } from "@react-navigation/drawer";
 import { styles } from "./styles";
 import { Ionicons } from "@expo/vector-icons";
-import { AuthContext } from "./../../store/auth-context";
-import { useContext } from "react";
+import { useDispatch } from "react-redux";
+import { handleLogout } from "../../store/redux/authentication";
+import { useSelector } from "react-redux";
 
 export default function MenuScreen({ navigation, props }) {
-  const user = {
-    name: "Laís Gonçalves",
-    role: "Vendedor",
-  };
+  const user = useSelector((state) => state.authentication.user);
 
   const BASE_PATH =
     "https://raw.githubusercontent.com/AboutReact/sampleresource/master/";
 
-  const authCtx = useContext(AuthContext);
-
+  const dispatch = useDispatch();
   function logout() {
-    authCtx.logout();
+    dispatch(handleLogout());
   }
   return (
     <SafeAreaView style={styles.menuContainer}>
-      <DrawerContentScrollView {...props}>
-        <View style={styles.body}>
-          <View style={styles.profileContainer}>
-            <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
-              <View style={styles.imageView}>
-                <Image
-                  source={{
-                    uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz8La2nwie8i1L3Asva1zyiKRaiWkVzujCP9ixCPH7OzYsLOPwBGfJ8VNzV67jehFLz2s&usqp=CAU",
-                  }}
-                  style={styles.sideMenuProfileIcon}
+      {user && (
+        <>
+          <DrawerContentScrollView {...props}>
+            <View style={styles.body}>
+              <View style={styles.profileContainer}>
+                <TouchableOpacity
+                  onPress={() =>
+                    navigation.navigate("Profile", {
+                      user: user,
+                      loadUser: false,
+                      key: user.user_id,
+                    })
+                  }
+                >
+                  <View style={styles.imageView}>
+                    <Image
+                      source={{
+                        uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz8La2nwie8i1L3Asva1zyiKRaiWkVzujCP9ixCPH7OzYsLOPwBGfJ8VNzV67jehFLz2s&usqp=CAU",
+                      }}
+                      style={styles.sideMenuProfileIcon}
+                    />
+                  </View>
+                  <Text style={styles.userName}>{user.name}</Text>
+                  <Text style={styles.userRole}>{user.role}</Text>
+                </TouchableOpacity>
+              </View>
+              <View style={styles.menuItemsView}>
+                <DrawerItem
+                  style={styles.menuItem}
+                  label={() => (
+                    <Text style={styles.menuItemText}>Categorias</Text>
+                  )}
+                  icon={() => (
+                    <Ionicons
+                      color="white"
+                      size={28}
+                      name="list-outline"
+                    ></Ionicons>
+                  )}
+                  onPress={() => navigation.navigate("CategoriesScreen")}
+                />
+                <DrawerItem
+                  style={styles.menuItem}
+                  label={() => (
+                    <Text style={styles.menuItemText}>Configurações</Text>
+                  )}
+                  icon={() => (
+                    <Ionicons
+                      color="white"
+                      size={28}
+                      name="settings-outline"
+                    ></Ionicons>
+                  )}
+                  onPress={() => navigation.navigate("SettingsScreen")}
+                />
+                <DrawerItem
+                  style={styles.menuItem}
+                  label={() => <Text style={styles.menuItemText}>Ajuda</Text>}
+                  icon={() => (
+                    <Ionicons
+                      color="white"
+                      size={28}
+                      name="help-circle-outline"
+                    ></Ionicons>
+                  )}
+                  onPress={() => navigation.navigate("HelpScreen")}
                 />
               </View>
-              <Text style={styles.userName}>{user.name}</Text>
-              <Text style={styles.userRole}>{user.role}</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.menuItemsView}>
-            <DrawerItem
-              style={styles.menuItem}
-              label={() => <Text style={styles.menuItemText}>Categorias</Text>}
-              icon={() => (
-                <Ionicons
-                  color="white"
-                  size={28}
-                  name="list-outline"
-                ></Ionicons>
-              )}
-              onPress={() => navigation.navigate("CategoriesScreen")}
-            />
-            <DrawerItem
-              style={styles.menuItem}
-              label={() => (
-                <Text style={styles.menuItemText}>Configurações</Text>
-              )}
-              icon={() => (
-                <Ionicons
-                  color="white"
-                  size={28}
-                  name="settings-outline"
-                ></Ionicons>
-              )}
-              onPress={() => navigation.navigate("SettingsScreen")}
-            />
-            <DrawerItem
-              style={styles.menuItem}
-              label={() => <Text style={styles.menuItemText}>Ajuda</Text>}
-              icon={() => (
-                <Ionicons
-                  color="white"
-                  size={28}
-                  name="help-circle-outline"
-                ></Ionicons>
-              )}
-              onPress={() => navigation.navigate("HelpScreen")}
-            />
-          </View>
-        </View>
-        <View styles={styles.footer}>
-          <TouchableOpacity style={styles.menuLogoutButton} onPress={logout}>
-            <Text style={styles.menuLogoutText}>Desconectar</Text>
-          </TouchableOpacity>
-        </View>
-      </DrawerContentScrollView>
+            </View>
+            <View styles={styles.footer}>
+              <TouchableOpacity
+                style={styles.menuLogoutButton}
+                onPress={logout}
+              >
+                <Text style={styles.menuLogoutText}>Desconectar</Text>
+              </TouchableOpacity>
+            </View>
+          </DrawerContentScrollView>
+        </>
+      )}
     </SafeAreaView>
   );
 }

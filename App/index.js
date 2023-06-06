@@ -11,6 +11,7 @@ import {
   SettingsScreen,
   CategoriesScreen,
   ProfileScreen,
+  EditProfileScreen,
 } from "./screens";
 import { decode, encode } from "base-64";
 import { styles } from "./generalStyles";
@@ -18,12 +19,14 @@ import { BackButtom } from "./components/BackButton";
 import { EditButtom } from "./components/EditButton";
 import { LogoTitle } from "./components/LogoTitle";
 import { MenuIcon } from "./components/MenuIcon";
-import AuthContextProvider, { AuthContext } from "./store/auth-context";
+import { store } from "./store/redux/store";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { StatusBar } from "expo-status-bar";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { headerNavigationOptions } from "./headerNavigationOptions";
 import "react-native-gesture-handler";
+import { Provider, useSelector } from "react-redux";
+import { handleAuthenticate, handleLogout } from "./store/redux/authentication";
 
 if (!global.btoa) {
   global.btoa = encode;
@@ -65,7 +68,6 @@ function AuthenticatedStack() {
   };
 
   return (
-    // <NavigationContainer independent={true}></NavigationContainer>
     <Drawer.Navigator
       screenOptions={headerNavigationOptions}
       drawerContent={({ navigation, props }) => (
@@ -79,46 +81,40 @@ function AuthenticatedStack() {
         component={ProfileScreen}
       />
       <Drawer.Screen
+        name="EditProfile"
+        options={options}
+        component={EditProfileScreen}
+      />
+      <Drawer.Screen
         name="ProductScreen"
         options={options}
         component={ProductScreen}
       />
     </Drawer.Navigator>
-    // </NavigationContainer>
   );
 }
 
-function Navigation() {
-  const authCtx = useContext(AuthContext);
+function Navigation({ authentication }) {
   return (
     <NavigationContainer>
-      {!authCtx.isAuthenticated && <AuthStack />}
-      {authCtx.isAuthenticated && <AuthenticatedStack />}
+      {!authentication.isAuthenticated && <AuthStack />}
+      {authentication.isAuthenticated && <AuthenticatedStack />}
     </NavigationContainer>
   );
 }
 
-/*
-  function ProductScreen({ navigation }) {
-      const authCtx = useContext(AuthContext);
-      return (
-          <Stack.Navigator screenOptions={styles.headerNavigation}>
-              <Stack.Screen name="Product Screen" options={{ headerShown: false }} component={productScreen}/>
-          </Stack.Navigator >
-      );
-  }
-  */
 function Root() {
   const [isTryingLogin, setIsTryingLogin] = useState(true);
-
-  const authCtx = useContext(AuthContext);
+  const authentication = useSelector((state) => state.authentication);
 
   useEffect(() => {
     async function fetchToken() {
-      const storedToken = await AsyncStorage.getItem("token");
+      const token = await AsyncStorage.getItem("token");
+      var user = await AsyncStorage.getItem("user");
 
-      if (storedToken) {
-        authCtx.authenticate(storedToken);
+      user = JSON.parse(user);
+      if (token && user) {
+        store.dispatch(handleAuthenticate({ token, user }));
       }
 
       setIsTryingLogin(false);
@@ -127,16 +123,16 @@ function Root() {
     fetchToken();
   }, []);
 
-  return <Navigation />;
+  return <Navigation authentication={authentication} />;
 }
 
 export default function App() {
   return (
     <>
       <StatusBar style="light" />
-      <AuthContextProvider>
+      <Provider store={store}>
         <Root />
-      </AuthContextProvider>
+      </Provider>
     </>
   );
 }
