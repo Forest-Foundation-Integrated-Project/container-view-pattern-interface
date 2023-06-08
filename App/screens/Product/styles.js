@@ -7,12 +7,13 @@ export const styles = StyleSheet.create({
   topSafeArea: {},
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    //alignItems: "center",
+    //justifyContent: 'center',
   },
   userSession: {
     maxWidth: "100%",
     marginVertical: 10,
+    marginHorizontal: 20,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "flex-start",
@@ -34,8 +35,8 @@ export const styles = StyleSheet.create({
     color: CINZA,
   },
   productSession: {
-    maxWidth: 350,
-    maxHeight: 500,
+    alignSelf: "center",
+    maxWidth: 300,
     backgroundColor: BRANCO,
     borderRadius: 15,
   },
@@ -58,6 +59,7 @@ export const styles = StyleSheet.create({
     marginHorizontal: 10,
     //alignItems: 'flex-start',
     flexWrap: "wrap",
+    paddingBottom: 10,
   },
   topDesc: {
     flexDirection: "row",
@@ -78,9 +80,11 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     color: CINZA,
     flexWrap: "wrap",
-    maxWidth: 290,
+    maxWidth: 280,
+    textAlign: "justify",
   },
   buttoncontactUser: {
+    alignSelf: "center",
     margin: 20,
     backgroundColor: CIANO,
     borderRadius: 15,
@@ -93,10 +97,77 @@ export const styles = StyleSheet.create({
     marginVertical: 15,
   },
   label: {
+    marginHorizontal: 20,
     fontSize: 20,
     fontWeight: "bold",
     alignSelf: "center",
   },
+  modalBackground: {
+    flex: 1,
+    backgroundColor: "rgba(0, 0, 0, 0.2)",
+  },
+
+  modal: {
+    position: "absolute",
+    flex: 1,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    minHeight: 490,
+    alignSelf: "center",
+    backgroundColor: BRANCO,
+    borderRadius: 20,
+    alignItems: "center",
+  },
+
+  modalUserInfo: {
+    marginVertical: 40,
+    alignItems: "center",
+  },
+
+  modalUserImage: {
+    height: 152,
+    width: 152,
+    borderRadius: 500,
+  },
+
+  modalUserDesc: {
+    justifyContent: "space-around",
+    alignItems: "center",
+    marginVertical: 10,
+  },
+
+  modalUserName: {
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+
+  modalUserSchool: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: CINZA,
+  },
+
+  modalUserStatus: {
+    fontSize: 16,
+    color: CINZA,
+  },
+
+  modalContactView: {
+    marginVertical: 20,
+    backgroundColor: CIANO,
+    paddingVertical: 20,
+    width: 250,
+    borderRadius: 15,
+    alignItems: "center",
+  },
+
+  contactInfo: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: BRANCO,
+  },
+
   shadow: {
     ...Platform.select({
       ios: {

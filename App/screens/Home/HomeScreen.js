@@ -43,6 +43,18 @@ export default function HomeScreen({ navigation }) {
       },
     },
     {
+      id: 1,
+      title: "Bolinho",
+      description:
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+      seller_id: 1,
+      price_cents: 599,
+      tag_id: 1,
+      subtitle: `${profiles[0].name}`,
+      image:
+        "https://i0.wp.com/cooknenjoy.com/wp-content/uploads/2019/05/P1180804.jpg?w=1200&ssl=1",
+    },
+    {
       id: 2,
       title: "Aula de matemática",
       description: "Description for Product 2",

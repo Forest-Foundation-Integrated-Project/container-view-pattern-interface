@@ -12,6 +12,8 @@ import {
   CategoriesScreen,
   ProfileScreen,
   EditProfileScreen,
+  ForgotPasswordScreen,
+  ResetPasswordScreen,
 } from "./screens";
 import { decode, encode } from "base-64";
 import { styles } from "./generalStyles";
@@ -54,6 +56,18 @@ function AuthStack() {
         name="Registration"
         options={options}
         component={RegistrationScreen}
+      />
+
+      <Stack.Screen
+        name="ForgotPasswordScreen"
+        options={options}
+        component={ForgotPasswordScreen}
+      />
+
+      <Stack.Screen
+        name="ResetPasswordScreen"
+        options={options}
+        component={ResetPasswordScreen}
       />
     </Stack.Navigator>
   );

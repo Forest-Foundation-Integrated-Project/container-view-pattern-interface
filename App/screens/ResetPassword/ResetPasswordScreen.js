@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import {
   Image,
   Text,
@@ -12,31 +12,40 @@ import { Formik } from "formik";
 import { validationSchema } from "./validation";
 import styles from "./styles";
 import { login } from "../../services/users/login";
+import { AuthContext } from "./../../store/auth-context";
 import { Loading } from "./../../components/Loading";
 import { Alert } from "react-native";
 import ErrorMessage from "./../../components/ErrorMessage";
-import { useDispatch } from "react-redux";
-import { handleAuthenticate } from "../../store/redux/authentication";
-import getUser from "../../services/users/getUser";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import axios from "axios";
+import { BackButtom } from "../../components/BackButton";
 
-export default function LoginScreen({ navigation }) {
-  const dispatch = useDispatch();
-  const onFooterLinkPress = () => {
-    navigation.navigate("Registration");
-  };
+export default function ResetPasswordScreen({ navigation }) {
+
+  useEffect(() => {
+    navigation.setOptions({
+      headerLeft: () => (
+        <TouchableOpacity onPress={goBack}>
+          <BackButtom />
+        </TouchableOpacity>
+      ),
+      headerRight: null,
+    });
+
+    function goBack() {
+      navigation.navigate("Login");
+    }
+  }, [navigation]);
+
+  const authCtx = useContext(AuthContext);
+
   const [isAuthenticating, setIsAuthenticating] = useState(false);
 
-  async function loginHandler({ email, password }) {
+  async function loginHandler({ password, confirmPassword }) {
     setIsAuthenticating(true);
     try {
-      const token = await login(email, password, navigation);
-      const res = await getUser("ded6f05a-ec8d-4ebb-ba6c-eb10fe8a2b0c", token);
-      const user = res.data;
-      dispatch(handleAuthenticate({ token, user }));
+      token = await login(email, password, navigation);
+      authCtx.authenticate(token);
     } catch (error) {
-      console.log("Error: " + error);
+      console.log(error);
       Alert.alert(
         "Falha na autenticação",
         "Não foi possível realizar o login, confira seu email e senha"
@@ -49,7 +58,7 @@ export default function LoginScreen({ navigation }) {
       return <Loading message="Logging you in..." />;
     }
 
-    return <></>;
+    return <AuthContext />;
   }
 
   return (
@@ -59,8 +68,8 @@ export default function LoginScreen({ navigation }) {
         <Formik
           style={styles.content}
           initialValues={{
-            email: "",
-            password: "",
+            newPassword: "",
+            confirmPassword: "",
           }}
           onSubmit={(values) => {
             loginHandler(values);
@@ -77,21 +86,19 @@ export default function LoginScreen({ navigation }) {
             setFieldValue,
           }) => (
             <KeyboardAwareScrollView
-              style={{ width: "100%" }}
+              style={{ width: "100%"}}
               keyboardShouldPersistTaps="always"
             >
-              <Image
-                style={styles.logo}
-                source={require("../../assets/images/logotipo.png")}
-              />
+              
               <View style={styles.formGroup}>
-                <TextInput
+              <TextInput
                   style={styles.input}
-                  value={values.email}
-                  onChangeText={handleChange("email")}
-                  onBlur={handleBlur("email")}
+                  value={values.password}
+                  onChangeText={handleChange("newPassword")}
+                  onBlur={handleBlur("newPassword")}
                   autoCapitalize="none"
-                  placeholder="E-mail"
+                  secureTextEntry={true}
+                  placeholder="Nova senha"
                 />
 
                 <ErrorMessage errorValue={touched.email && errors.email} />
@@ -100,31 +107,21 @@ export default function LoginScreen({ navigation }) {
                 <TextInput
                   style={styles.input}
                   value={values.password}
-                  onChangeText={handleChange("password")}
-                  onBlur={handleBlur("password")}
+                  onChangeText={handleChange("confirmPassword")}
+                  onBlur={handleBlur("confirmPassword")}
                   autoCapitalize="none"
                   secureTextEntry={true}
-                  placeholder="Senha"
+                  placeholder="Confirmar nova senha"
                 />
 
                 <ErrorMessage
                   errorValue={touched.password && errors.password}
                 />
               </View>
-              <Text style={styles.forgotPass} onPress={forgotPassPressed}>
-                Esqueceu sua senha?
-              </Text>
+              
               <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-                <Text style={styles.buttonText}>Login</Text>
+                <Text style={styles.buttonText}>Alterar senha e fazer login</Text>
               </TouchableOpacity>
-              <View style={styles.footerView}>
-                <Text style={styles.footerText}>
-                  Ainda não é registrado?{" "}
-                  <Text onPress={onFooterLinkPress} style={styles.footerLink}>
-                    REGISTRE-SE AQUI!
-                  </Text>
-                </Text>
-              </View>
             </KeyboardAwareScrollView>
           )}
         </Formik>
