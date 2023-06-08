@@ -23,12 +23,6 @@ import { StyleSheet } from "react-native";
 import { CIANO } from "../../constants/colors";
 
 export function UserProduct({ route, navigation }) {
-  React.useEffect(() => {
-    const focusHandler = navigation.addListener("focus", () => {
-      Alert.alert("Refreshed");
-    });
-    return focusHandler;
-  }, [navigation]);
   const [modalVisible, setModalVisible] = useState(false);
 
   const closeModal = () => {
