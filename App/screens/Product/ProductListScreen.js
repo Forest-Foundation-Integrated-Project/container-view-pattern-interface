@@ -19,7 +19,7 @@ import getUser from "../../services/users/getUser";
 import { CIANO, PRETO, CINZA, CNZACL, BRANCO } from "../../constants/colors";
 
 export default function ProductListScreen({ navigation, route }) {
-  const [profile, setProfile, key] = useState(null);
+  const [profile, setProfile] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
   const closeModal = () => {
     setModalVisible(false);
@@ -36,7 +36,9 @@ export default function ProductListScreen({ navigation, route }) {
   }
 
   useEffect(() => {
-    fetchUser();
+    if (typeof profile == "undefined") {
+      fetchUser();
+    }
   });
 
   function goToProfile() {
@@ -204,11 +206,11 @@ export default function ProductListScreen({ navigation, route }) {
                         <View style={UserProductStyles.muserSession}>
                           <Image
                             style={UserProductStyles.muserImage}
-                            source={{ uri: profile.image }}
+                            source={{ uri: route.params.item.seller.image }}
                           />
                           <View style={UserProductStyles.muserIfo}>
                             <Text style={UserProductStyles.muserName}>
-                              {profile.name}
+                              {route.params.item.seller.name}
                             </Text>
                             <Text
                               numberOfLines={1}

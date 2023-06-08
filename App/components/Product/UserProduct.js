@@ -33,6 +33,7 @@ export function UserProduct({ route, navigation }) {
     navigation.navigate("Profile", {
       loadUser: true,
       key: route.params.profile.user_id,
+      user: { id: route.params.profile.user_id },
     });
   }
   return (
