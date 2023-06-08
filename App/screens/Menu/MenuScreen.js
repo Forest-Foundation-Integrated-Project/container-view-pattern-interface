@@ -29,6 +29,16 @@ export default function MenuScreen({ navigation, props }) {
   function logout() {
     dispatch(handleLogout());
   }
+
+  function goToProfile() {
+    console.log(user);
+    navigation.navigate("Profile", {
+      user: { id: user.user_id },
+      loadUser: true,
+      key: user.user_id,
+    });
+  }
+
   return (
     <SafeAreaView style={styles.menuContainer}>
       {user && (
@@ -36,15 +46,7 @@ export default function MenuScreen({ navigation, props }) {
           <DrawerContentScrollView {...props}>
             <View style={styles.body}>
               <View style={styles.profileContainer}>
-                <TouchableOpacity
-                  onPress={() =>
-                    navigation.navigate("Profile", {
-                      user: user,
-                      loadUser: false,
-                      key: user.user_id,
-                    })
-                  }
-                >
+                <TouchableOpacity onPress={goToProfile}>
                   <View style={styles.imageView}>
                     <Image
                       source={{

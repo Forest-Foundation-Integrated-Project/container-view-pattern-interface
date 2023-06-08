@@ -9,8 +9,8 @@ import getUser from "./../../services/users/getUser";
 import { Alert } from "react-native";
 
 export default function ProfileScreen({ navigation, route }) {
-  const [profile, setProfile, key] = useState(null);
-  const { user, loadUser } = route.params;
+  const [profile, setProfile] = useState(null);
+  const { user, loadUser, key } = route.params;
 
   async function fetchUser() {
     try {
@@ -22,11 +22,9 @@ export default function ProfileScreen({ navigation, route }) {
   }
 
   useEffect(() => {
-    if (loadUser == true) {
-      fetchUser();
-    } else {
-      setProfile(user);
-    }
+    console.log("USER?" + user);
+    fetchUser();
+    setProfile(user);
 
     navigation.setOptions({
       headerLeft: () => (
@@ -36,7 +34,7 @@ export default function ProfileScreen({ navigation, route }) {
       ),
       headerRight: headerRight,
     });
-  }, [navigation]);
+  }, [navigation, key]);
 
   function headerRight() {
     if (!loadUser) {
@@ -109,7 +107,7 @@ export default function ProfileScreen({ navigation, route }) {
             <Text style={styles.userRole}>{profile.role}</Text>
           </View>
           <View style={styles.bio}>
-            <Text style={styles.bioDescription}>{profile.description}</Text>
+            <Text style={styles.bioDescription}>{profile.user_bio}</Text>
           </View>
           <View style={styles.buttons}>
             <TouchableOpacity style={styles.button}>

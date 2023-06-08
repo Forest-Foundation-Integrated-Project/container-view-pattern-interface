@@ -40,7 +40,11 @@ export const styles = StyleSheet.create({
   },
   bio: {
     lineHeight: 17,
+    textAlign: "justify",
+    flex: 1,
     padding: 10,
+    justifyContent: "center",
+    alignContent: "center",
   },
   bioDescription: {
     fontSize: 16,
