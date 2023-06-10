@@ -132,18 +132,17 @@ export default function ProductListScreen({ navigation, route }) {
                     <View style={UserProductStyles.userSession}>
                       <Image
                         style={UserProductStyles.userImage}
-                        source={{ uri: route.params.item.seller.image }}
+                        source={{ uri: profile.image }}
                       />
                       <View style={UserProductStyles.userIfo}>
                         <Text style={UserProductStyles.userName}>
-                          {route.params.item.seller.name}
+                          {profile.name}
                         </Text>
                         <Text
                           numberOfLines={1}
                           style={UserProductStyles.userLocation}
                         >
-                          {route.params.item.seller.university} -{" "}
-                          {route.params.item.seller.city}{" "}
+                          {profile.university} - {profile.city}{" "}
                         </Text>
                       </View>
                     </View>
@@ -206,18 +205,17 @@ export default function ProductListScreen({ navigation, route }) {
                         <View style={UserProductStyles.muserSession}>
                           <Image
                             style={UserProductStyles.muserImage}
-                            source={{ uri: route.params.item.seller.image }}
+                            source={{ uri: profile.image }}
                           />
                           <View style={UserProductStyles.muserIfo}>
                             <Text style={UserProductStyles.muserName}>
-                              {route.params.item.seller.name}
+                              {profile.name}
                             </Text>
                             <Text
                               numberOfLines={1}
                               style={UserProductStyles.muserLocation}
                             >
-                              {route.params.item.seller.university} -{" "}
-                              {route.params.item.seller.city}{" "}
+                              {profile.university} - {profile.city}{" "}
                             </Text>
                           </View>
                         </View>

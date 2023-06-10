@@ -12,7 +12,6 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import { Formik } from "formik";
 import { validationSchema } from "./validation";
 import { login } from "../../services/users/login";
-import { AuthContext } from "./../../store/auth-context";
 import { Alert } from "react-native";
 import ErrorMessage from "./../../components/ErrorMessage";
 import { BackButtom } from "../../components/BackButton";
@@ -47,16 +46,18 @@ export default function ForgotPasswordScreen({ navigation }) {
   }
 
   async function codeHandler({ value1, value2, value3, value4 }) {
-    const code = value1 + value2 + value3 + value4
-    if(code != null) {
+    const code = value1 + value2 + value3 + value4;
+    if (code != null) {
       setModalVisible(false);
-      goToResetPasswordPage()
+      goToResetPasswordPage();
     }
   }
 
   const [modalVisible, setModalVisible] = useState(false);
 
-  const goToResetPasswordPage = () => {navigation.navigate('ResetPasswordScreen')}
+  const goToResetPasswordPage = () => {
+    navigation.navigate("ResetPasswordScreen");
+  };
 
   return (
     <>
@@ -116,7 +117,6 @@ export default function ForgotPasswordScreen({ navigation }) {
           )}
         </Formik>
       </View>
-
 
       <Modal
         animationType="slide"
@@ -192,7 +192,9 @@ export default function ForgotPasswordScreen({ navigation }) {
 
                   <TouchableOpacity
                     style={styles.button}
-                    onPress={() =>{codeHandler(values)}}
+                    onPress={() => {
+                      codeHandler(values);
+                    }}
                   >
                     <Text style={styles.buttonText}>Inserir código</Text>
                   </TouchableOpacity>

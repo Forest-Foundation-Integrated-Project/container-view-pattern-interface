@@ -26,6 +26,10 @@ export default function LoginScreen({ navigation }) {
   const onFooterLinkPress = () => {
     navigation.navigate("Registration");
   };
+  const forgotPassPressed = () => {
+    navigation.navigate("ForgotPasswordScreen");
+  };
+
   const [isAuthenticating, setIsAuthenticating] = useState(false);
 
   async function loginHandler({ email, password }) {

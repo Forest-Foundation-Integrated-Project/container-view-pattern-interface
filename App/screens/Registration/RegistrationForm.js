@@ -9,8 +9,11 @@ import { styles } from "./styles";
 import { Alert } from "react-native";
 import { brFormatDate, formatDate } from "./../../utils/date";
 import createUser from "./../../services/users/createUser";
+import { useDispatch } from "react-redux";
 
 export default function RegistrationForm({ navigation }) {
+  const dispatch = useDispatch();
+
   const ErrorMessage = ({ errorValue }) => {
     return errorValue ? (
       <View style={styles.errorContainer}>
@@ -29,7 +32,9 @@ export default function RegistrationForm({ navigation }) {
 
     try {
       const res = await createUser(userData);
-      authCtx.authenticate("auisdhuiasdh");
+      console.log(res);
+      const user = res.data;
+      dispatch(handleAuthenticate({ token, user }));
     } catch (error) {
       Alert.alert(`erro: ${error}`);
     }
