@@ -18,7 +18,7 @@ import ErrorMessage from "./../../components/ErrorMessage";
 import { BackButtom } from "../../components/BackButton";
 
 export default function ResetPasswordScreen({ navigation }) {
-
+  
   useEffect(() => {
     navigation.setOptions({
       headerLeft: () => (
@@ -35,7 +35,6 @@ export default function ResetPasswordScreen({ navigation }) {
   }, [navigation]);
 
 
-
   return (
     <>
       <SafeAreaView style={styles.topSafeArea} />
@@ -43,7 +42,6 @@ export default function ResetPasswordScreen({ navigation }) {
         <View style={styles.informationalText}>
           <Text style={styles.headline}>Digite sua nova senha de login.</Text>
           <Text style={[styles.headline, styles.subtext]}>Shh... Não contaremos a ninguém!</Text>
-        </View>
         <Formik
           style={styles.content}
           initialValues={{
@@ -68,7 +66,7 @@ export default function ResetPasswordScreen({ navigation }) {
               style={{ width: "100%"}}
               keyboardShouldPersistTaps="always"
             >
-              
+
               <View style={styles.formGroup}>
               <TextInput
                   style={styles.input}

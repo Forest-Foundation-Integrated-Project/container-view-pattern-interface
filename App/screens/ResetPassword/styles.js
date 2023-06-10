@@ -2,7 +2,6 @@ import { StyleSheet } from "react-native";
 import Constants from "expo-constants";
 import { CIANO, BRANCO } from "../../constants/colors";
 
-
 export default StyleSheet.create({
   StackScreen: {
     display: "hidden",

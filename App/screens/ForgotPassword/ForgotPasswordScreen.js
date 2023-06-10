@@ -46,6 +46,7 @@ export default function ForgotPasswordScreen({ navigation }) {
     }
   }
 
+
   async function codeHandler(code) {
     if(code != null) {
       setModalVisible(false);
@@ -55,7 +56,10 @@ export default function ForgotPasswordScreen({ navigation }) {
 
   const [modalVisible, setModalVisible] = useState(false);
 
-  const goToResetPasswordPage = () => {navigation.navigate('ResetPasswordScreen')}
+  const goToResetPasswordPage = () => {
+    navigation.navigate("ResetPasswordScreen");
+  };
+
 
   return (
     <>
@@ -116,7 +120,6 @@ export default function ForgotPasswordScreen({ navigation }) {
         </Formik>
       </View>
 
-
       <Modal
         animationType="slide"
         transparent={true}
@@ -128,12 +131,15 @@ export default function ForgotPasswordScreen({ navigation }) {
         <View style={styles.modalBackground}>
           <View style={styles.modal}>
             <Formik
+
               initialValues={{
                 code: ""
+
               }}
               onSubmit={(values) => {
                 codeHandler(values);
               }}
+
               validationSchema={CodeValidation}
             >
               {({
@@ -153,6 +159,7 @@ export default function ForgotPasswordScreen({ navigation }) {
                   <View style={styles.modalInput}>
                     <TextInput
                       style={styles.modalNumberInput}
+
                       value={values.code}
                       autoCapitalize="none"
                       onChangeText={handleChange("code")}

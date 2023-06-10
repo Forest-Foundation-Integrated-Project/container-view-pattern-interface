@@ -26,6 +26,10 @@ export default function LoginScreen({ navigation }) {
   const onFooterLinkPress = () => {
     navigation.navigate("Registration");
   };
+  const forgotPassPressed = () => {
+    navigation.navigate("ForgotPasswordScreen");
+  };
+
   const [isAuthenticating, setIsAuthenticating] = useState(false);
 
   const forgotPassPressed = () => {
@@ -115,7 +119,9 @@ export default function LoginScreen({ navigation }) {
                   errorValue={touched.password && errors.password}
                 />
               </View>
+
               <Text style={styles.forgotPass} onPress={forgotPassPressed}>Esqueceu sua senha?</Text>
+
               <TouchableOpacity style={styles.button} onPress={handleSubmit}>
                 <Text style={styles.buttonText}>Login</Text>
               </TouchableOpacity>
