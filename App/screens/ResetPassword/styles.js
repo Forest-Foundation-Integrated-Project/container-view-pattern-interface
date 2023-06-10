@@ -1,9 +1,7 @@
 import { StyleSheet } from "react-native";
 import Constants from "expo-constants";
+import { CIANO, BRANCO } from "../../constants/colors";
 
-import { CIANO } from "../../constants/colors";
-
-const CONTENT_BACKGROUND = "#FFFFFF";
 
 export default StyleSheet.create({
   StackScreen: {
@@ -13,14 +11,14 @@ export default StyleSheet.create({
   topSafeArea: {},
   container: {
     backgroundColor:
-      Platform.OS === "ios" ? CONTENT_BACKGROUND : CONTENT_BACKGROUND,
+      Platform.OS === "ios" ? BRANCO : BRANCO,
   },
 
   container: {
     flex: 1,
     backgroundColor: CIANO,
     paddingHorizontal: 30,
-    paddingTop: 150,
+    paddingTop: 26,
   },
 
   content: {
@@ -30,15 +28,30 @@ export default StyleSheet.create({
 
   },
 
+  informationalText: {
+    justifyContent: "space-between",
+    marginBottom: 40
+  },
+
+  headline:{
+    fontSize: 30,
+    fontWeight: "bold",
+    color: BRANCO
+  },
+
+  subtext: {
+    fontSize: 20,
+  },
+
   formGroup: {
+    paddingTop: 20,
+    paddingBottom: 10,
   },
 
   input: {
     overflow: "hidden",
-    marginTop: 15,
     backgroundColor: "white",
     height: 50,
-
     paddingHorizontal: 20,
     borderRadius: 20,
     borderWidth: 2,
@@ -53,7 +66,7 @@ export default StyleSheet.create({
     height: 75,
     borderWidth: 5,
     borderStyle: "solid",
-    borderColor: CONTENT_BACKGROUND,
+    borderColor: BRANCO,
     alignItems: "center",
     justifyContent: "center",
   },

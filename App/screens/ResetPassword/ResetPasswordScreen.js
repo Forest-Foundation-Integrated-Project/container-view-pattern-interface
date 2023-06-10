@@ -12,7 +12,6 @@ import { Formik } from "formik";
 import { validationSchema } from "./validation";
 import styles from "./styles";
 import { login } from "../../services/users/login";
-import { AuthContext } from "./../../store/auth-context";
 import { Loading } from "./../../components/Loading";
 import { Alert } from "react-native";
 import ErrorMessage from "./../../components/ErrorMessage";
@@ -35,36 +34,16 @@ export default function ResetPasswordScreen({ navigation }) {
     }
   }, [navigation]);
 
-  const authCtx = useContext(AuthContext);
 
-  const [isAuthenticating, setIsAuthenticating] = useState(false);
-
-  async function loginHandler({ password, confirmPassword }) {
-    setIsAuthenticating(true);
-    try {
-      token = await login(email, password, navigation);
-      authCtx.authenticate(token);
-    } catch (error) {
-      console.log(error);
-      Alert.alert(
-        "Falha na autenticação",
-        "Não foi possível realizar o login, confira seu email e senha"
-      );
-
-      setIsAuthenticating(false);
-    }
-
-    if (isAuthenticating) {
-      return <Loading message="Logging you in..." />;
-    }
-
-    return <AuthContext />;
-  }
 
   return (
     <>
       <SafeAreaView style={styles.topSafeArea} />
       <View style={styles.container}>
+        <View style={styles.informationalText}>
+          <Text style={styles.headline}>Digite sua nova senha de login.</Text>
+          <Text style={[styles.headline, styles.subtext]}>Shh... Não contaremos a ninguém!</Text>
+        </View>
         <Formik
           style={styles.content}
           initialValues={{
@@ -93,20 +72,20 @@ export default function ResetPasswordScreen({ navigation }) {
               <View style={styles.formGroup}>
               <TextInput
                   style={styles.input}
-                  value={values.password}
+                  value={values.newPassword}
                   onChangeText={handleChange("newPassword")}
                   onBlur={handleBlur("newPassword")}
                   autoCapitalize="none"
                   secureTextEntry={true}
                   placeholder="Nova senha"
                 />
-
-                <ErrorMessage errorValue={touched.email && errors.email} />
+                <ErrorMessage errorValue={touched.newPassword && errors.newPassword} />
               </View>
+
               <View style={styles.formGroup}>
                 <TextInput
                   style={styles.input}
-                  value={values.password}
+                  value={values.confirmPassword}
                   onChangeText={handleChange("confirmPassword")}
                   onBlur={handleBlur("confirmPassword")}
                   autoCapitalize="none"
@@ -115,7 +94,7 @@ export default function ResetPasswordScreen({ navigation }) {
                 />
 
                 <ErrorMessage
-                  errorValue={touched.password && errors.password}
+                  errorValue={touched.confirmPassword && errors.confirmPassword}
                 />
               </View>
               

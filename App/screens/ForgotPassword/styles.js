@@ -107,19 +107,18 @@ export default StyleSheet.create({
 
     modalInput: {
         marginVertical: 20,
-        flexDirection: 'row',
-        justifyContent: 'center',
+        alignItems: 'center',
+        minHeight: 80,
     },
 
     modalNumberInput: {
         borderWidth: 5,
         borderColor: BRANCO,
         borderRadius: 15,
-        height: 60,
-        width: 40,
+        width: '100%',
         marginHorizontal: 10,
         textAlign: 'center',
-        fontSize: 30,
+        fontSize: 40,
         color: BRANCO
     },
 
