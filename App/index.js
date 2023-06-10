@@ -14,8 +14,6 @@ import {
   ForgotPasswordScreen,
   ResetPasswordScreen,
   EditProfileScreen,
-  ForgotPasswordScreen,
-  ResetPasswordScreen,
 } from "./screens";
 import { decode, encode } from "base-64";
 import { styles } from "./generalStyles";

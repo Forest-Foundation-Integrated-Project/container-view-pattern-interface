@@ -32,10 +32,6 @@ export default function LoginScreen({ navigation }) {
 
   const [isAuthenticating, setIsAuthenticating] = useState(false);
 
-  const forgotPassPressed = () => {
-    navigation.navigate("ForgotPasswordScreen");
-  };
-
   async function loginHandler({ email, password }) {
     setIsAuthenticating(true);
     try {
