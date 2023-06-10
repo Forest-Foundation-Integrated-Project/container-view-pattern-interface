@@ -18,6 +18,7 @@ import ErrorMessage from "./../../components/ErrorMessage";
 import { BackButtom } from "../../components/BackButton";
 
 export default function ResetPasswordScreen({ navigation }) {
+  
   useEffect(() => {
     navigation.setOptions({
       headerLeft: () => (
@@ -33,36 +34,14 @@ export default function ResetPasswordScreen({ navigation }) {
     }
   }, [navigation]);
 
-  const [isAuthenticating, setIsAuthenticating] = useState(false);
-
-  async function loginHandler({ email, password }) {
-    setIsAuthenticating(true);
-    try {
-      const token = await login(email, password, navigation);
-      const res = await getUser("ded6f05a-ec8d-4ebb-ba6c-eb10fe8a2b0c", token);
-      const user = res.data;
-      dispatch(handleAuthenticate({ token, user }));
-    } catch (error) {
-      console.log("Error: " + error);
-      Alert.alert(
-        "Falha na autenticação",
-        "Não foi possível realizar o login, confira seu email e senha"
-      );
-
-      setIsAuthenticating(false);
-    }
-
-    if (isAuthenticating) {
-      return <Loading message="Logging you in..." />;
-    }
-
-    return <></>;
-  }
 
   return (
     <>
       <SafeAreaView style={styles.topSafeArea} />
       <View style={styles.container}>
+        <View style={styles.informationalText}>
+          <Text style={styles.headline}>Digite sua nova senha de login.</Text>
+          <Text style={[styles.headline, styles.subtext]}>Shh... Não contaremos a ninguém!</Text>
         <Formik
           style={styles.content}
           initialValues={{
@@ -84,26 +63,27 @@ export default function ResetPasswordScreen({ navigation }) {
             setFieldValue,
           }) => (
             <KeyboardAwareScrollView
-              style={{ width: "100%" }}
+              style={{ width: "100%"}}
               keyboardShouldPersistTaps="always"
             >
+
               <View style={styles.formGroup}>
-                <TextInput
+              <TextInput
                   style={styles.input}
-                  value={values.password}
+                  value={values.newPassword}
                   onChangeText={handleChange("newPassword")}
                   onBlur={handleBlur("newPassword")}
                   autoCapitalize="none"
                   secureTextEntry={true}
                   placeholder="Nova senha"
                 />
-
-                <ErrorMessage errorValue={touched.email && errors.email} />
+                <ErrorMessage errorValue={touched.newPassword && errors.newPassword} />
               </View>
+
               <View style={styles.formGroup}>
                 <TextInput
                   style={styles.input}
-                  value={values.password}
+                  value={values.confirmPassword}
                   onChangeText={handleChange("confirmPassword")}
                   onBlur={handleBlur("confirmPassword")}
                   autoCapitalize="none"
@@ -112,14 +92,12 @@ export default function ResetPasswordScreen({ navigation }) {
                 />
 
                 <ErrorMessage
-                  errorValue={touched.password && errors.password}
+                  errorValue={touched.confirmPassword && errors.confirmPassword}
                 />
               </View>
-
+              
               <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-                <Text style={styles.buttonText}>
-                  Alterar senha e fazer login
-                </Text>
+                <Text style={styles.buttonText}>Alterar senha e fazer login</Text>
               </TouchableOpacity>
             </KeyboardAwareScrollView>
           )}

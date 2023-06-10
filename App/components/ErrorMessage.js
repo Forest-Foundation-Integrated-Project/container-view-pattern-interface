@@ -11,7 +11,10 @@ export default ErrorMessage = ({ errorValue }) => {
 
 const styles = StyleSheet.create({
     errorContainer: {
-        marginVertical: 5,
+        position: "absolute",
+        //marginVertical: 5,
+        bottom: -15,
+        left: 0,
     },
     errorText: {
         color: "#F73216",

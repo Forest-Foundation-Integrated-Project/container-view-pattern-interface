@@ -11,6 +11,7 @@ import {
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Formik } from "formik";
 import { validationSchema } from "./validation";
+import { CodeValidation } from "./CodeValidation";
 import { login } from "../../services/users/login";
 import { Alert } from "react-native";
 import ErrorMessage from "./../../components/ErrorMessage";
@@ -45,11 +46,11 @@ export default function ForgotPasswordScreen({ navigation }) {
     }
   }
 
-  async function codeHandler({ value1, value2, value3, value4 }) {
-    const code = value1 + value2 + value3 + value4;
-    if (code != null) {
+
+  async function codeHandler(code) {
+    if(code != null) {
       setModalVisible(false);
-      goToResetPasswordPage();
+      goToResetPasswordPage()
     }
   }
 
@@ -58,6 +59,7 @@ export default function ForgotPasswordScreen({ navigation }) {
   const goToResetPasswordPage = () => {
     navigation.navigate("ResetPasswordScreen");
   };
+
 
   return (
     <>
@@ -129,17 +131,16 @@ export default function ForgotPasswordScreen({ navigation }) {
         <View style={styles.modalBackground}>
           <View style={styles.modal}>
             <Formik
-              //style={styles.content}
+
               initialValues={{
-                value1: "",
-                value2: "",
-                value3: "",
-                value4: "",
+                code: ""
+
               }}
               onSubmit={(values) => {
                 codeHandler(values);
               }}
-              validationSchema={validationSchema}
+
+              validationSchema={CodeValidation}
             >
               {({
                 handleChange,
@@ -158,43 +159,24 @@ export default function ForgotPasswordScreen({ navigation }) {
                   <View style={styles.modalInput}>
                     <TextInput
                       style={styles.modalNumberInput}
-                      value={values.value1}
-                      autoCapitalize="none"
-                      onChangeText={handleChange("value1")}
-                      onBlur={handleBlur("value1")}
-                      placeholder=""
-                    />
-                    <TextInput
-                      style={styles.modalNumberInput}
-                      value={values.value2}
-                      autoCapitalize="none"
-                      onChangeText={handleChange("value2")}
-                      onBlur={handleBlur("value2")}
-                      placeholder=""
-                    />
-                    <TextInput
-                      style={styles.modalNumberInput}
-                      value={values.value3}
-                      autoCapitalize="none"
-                      onChangeText={handleChange("value3")}
-                      onBlur={handleBlur("value3")}
-                      placeholder=""
-                    />
-                    <TextInput
-                      style={styles.modalNumberInput}
-                      value={values.value4}
-                      autoCapitalize="none"
-                      onChangeText={handleChange("value4")}
-                      onBlur={handleBlur("value4")}
-                      placeholder=""
-                    />
-                  </View>
 
+                      value={values.code}
+                      autoCapitalize="none"
+                      onChangeText={handleChange("code")}
+                      onBlur={handleBlur("code")}
+                      secureTextEntry={true}
+                      maxLength={6}
+                      placeholder=""
+                    />
+
+                    <ErrorMessage errorValue={touched.code && errors.code} />
+
+                  </View> 
+
+                  
                   <TouchableOpacity
                     style={styles.button}
-                    onPress={() => {
-                      codeHandler(values);
-                    }}
+                    onPress={handleSubmit}
                   >
                     <Text style={styles.buttonText}>Inserir código</Text>
                   </TouchableOpacity>

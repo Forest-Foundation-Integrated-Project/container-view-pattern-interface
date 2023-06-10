@@ -50,7 +50,7 @@ export default function HomeScreen({ navigation }) {
       seller_id: 1,
       price_cents: 599,
       tag_id: 1,
-      subtitle: `blablablablabla`,
+      subtitle: `${profiles[0].name}`,
       image:
         "https://i0.wp.com/cooknenjoy.com/wp-content/uploads/2019/05/P1180804.jpg?w=1200&ssl=1",
     },

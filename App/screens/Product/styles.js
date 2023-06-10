@@ -35,7 +35,7 @@ export const styles = StyleSheet.create({
     color: CINZA,
   },
   productSession: {
-    alignSelf: "center",
+    alignSelf: 'center',
     maxWidth: 300,
     backgroundColor: BRANCO,
     borderRadius: 15,
@@ -102,9 +102,10 @@ export const styles = StyleSheet.create({
     fontWeight: "bold",
     alignSelf: "center",
   },
+
   modalBackground: {
     flex: 1,
-    backgroundColor: "rgba(0, 0, 0, 0.2)",
+    backgroundColor: 'rgba(0, 0, 0, 0.2)',
   },
 
   modal: {
@@ -128,29 +129,29 @@ export const styles = StyleSheet.create({
   modalUserImage: {
     height: 152,
     width: 152,
-    borderRadius: 500,
+    borderRadius: 500
   },
 
   modalUserDesc: {
-    justifyContent: "space-around",
-    alignItems: "center",
-    marginVertical: 10,
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    marginVertical: 10
   },
 
   modalUserName: {
     fontSize: 20,
-    fontWeight: "bold",
+    fontWeight: 'bold'
   },
 
   modalUserSchool: {
     fontSize: 18,
-    fontWeight: "bold",
-    color: CINZA,
+    fontWeight: 'bold',
+    color: CINZA
   },
 
   modalUserStatus: {
     fontSize: 16,
-    color: CINZA,
+    color: CINZA
   },
 
   modalContactView: {
@@ -159,13 +160,13 @@ export const styles = StyleSheet.create({
     paddingVertical: 20,
     width: 250,
     borderRadius: 15,
-    alignItems: "center",
+    alignItems: 'center'
   },
 
   contactInfo: {
     fontSize: 20,
-    fontWeight: "bold",
-    color: BRANCO,
+    fontWeight: 'bold',
+    color: BRANCO
   },
 
   shadow: {

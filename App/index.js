@@ -11,6 +11,8 @@ import {
   SettingsScreen,
   CategoriesScreen,
   ProfileScreen,
+  ForgotPasswordScreen,
+  ResetPasswordScreen,
   EditProfileScreen,
   ForgotPasswordScreen,
   ResetPasswordScreen,
@@ -57,6 +59,7 @@ function AuthStack() {
         options={options}
         component={RegistrationScreen}
       />
+
 
       <Stack.Screen
         name="ForgotPasswordScreen"
