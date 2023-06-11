@@ -69,7 +69,7 @@ export const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 20,
     padding: 5,
-    height: 45,
+    height: 50,
     width: "60%",
     backgroundColor: CIANO,
     borderRadius: 15,
@@ -85,11 +85,19 @@ export const styles = StyleSheet.create({
   inputPicker: {
     minWidth: 165,
     height: 50,
-    paddingVertical: -10,
     borderRadius: 20,
     borderWidth: 2,
     borderColor: "#e3e3e3",
     backgroundColor: "#fff",
+    alignItems: "center",
+    flexDirection: "row", // Added flexDirection
+    // justifyContent: "space-between", // Added justifyContent
+    // alignItems: "center", // Added alignItems
+  },
+  picker: {
+    width: 30,
+    height: 30,
+    paddingRight: 10,
   },
   pickerText: {
     color: "cccccc",

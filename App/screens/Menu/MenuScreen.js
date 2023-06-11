@@ -36,6 +36,7 @@ export default function MenuScreen({ navigation, props }) {
       user: { id: user.user_id },
       loadUser: true,
       key: user.user_id,
+      canEdit: true,
     });
   }
 

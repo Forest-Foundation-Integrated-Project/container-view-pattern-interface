@@ -11,32 +11,21 @@ import { brFormatDate, formatDate } from "../../../utils/date";
 import updateUser from "../../../services/users/updateUser";
 import ErrorMessage from "../../../components/ErrorMessage";
 
-export default function EditProfileForm({ navigation }) {
+export default function EditProfileForm({ user, route }) {
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [birthDate, setBirthDate] = useState(new Date());
   const [gender, setGender] = useState("Gender");
 
   const onSubmitHandler = async (userData) => {
+    console.log("HIIIIIIII BUTTON");
     userData.birthDate = formatDate(birthDate);
     userData.gender = gender;
-
+    console.log(userData);
     try {
       const res = await updateUser(userData);
     } catch (error) {
       Alert.alert(`erro: ${error}`);
     }
-  };
-
-  const user = {
-    name: "Lais Gonçalves",
-    email: "lais@lais.com",
-    gender: "fem",
-    birthDate: "15-04-1994",
-    university: "Anhanguera - Caraguatatuba",
-    password: "123456",
-    confirmPassword: "123456",
-    description:
-      "Lorem impsu fdsad lorem impsum core. Corem ipsum dsad lorem impsum core. Corem ipsum fdsad lorem impsum core. Corem ipsum ",
   };
 
   return (
@@ -47,8 +36,6 @@ export default function EditProfileForm({ navigation }) {
         gender: user.gender,
         birthDate: user.birthDate,
         university: user.university,
-        password: "",
-        confirmPassword: "",
         enroll: Math.floor(Math.random() * 90000) + 10000,
       }}
       onSubmit={(values) => {
@@ -134,6 +121,11 @@ export default function EditProfileForm({ navigation }) {
                     value="other"
                   />
                 </Picker>
+                <TextInput
+                  style={styles.inputText}
+                  value={gender === "" ? "Gênero" : gender} // Display "Gênero" if no value is selected
+                  editable={false} // Disable editing of the input
+                />
               </View>
               <ErrorMessage errorValue={touched.gender && errors.gender} />
             </View>
@@ -184,42 +176,11 @@ export default function EditProfileForm({ navigation }) {
               errorValue={touched.university && errors.university}
             />
           </View>
-
-          <View style={styles.formGroup}>
-            <Text style={styles.label}>Senha</Text>
-            <TextInput
-              style={styles.input}
-              value={values.password}
-              onChangeText={handleChange("password")}
-              onBlur={handleBlur("password")}
-              autoCapitalize="none"
-              secureTextEntry={true}
-              placeholder="Senha"
-            />
-
-            <ErrorMessage errorValue={touched.password && errors.password} />
-          </View>
-
-          <View style={styles.formGroup}>
-            <Text style={styles.label}>Confirmar Senha</Text>
-            <TextInput
-              class="confirmPassword"
-              style={styles.input}
-              value={values.confirmPassword}
-              onChangeText={handleChange("confirmPassword")}
-              onBlur={handleBlur("confirmPassword")}
-              autoCapitalize="none"
-              secureTextEntry={true}
-              placeholder="Confirmar senha"
-            />
-
-            <ErrorMessage
-              errorValue={touched.confirmPassword && errors.confirmPassword}
-            />
-          </View>
-
-          <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-            <Text style={styles.buttonText}>SALVAR ALTERAÇÕES</Text>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => onSubmitHandler(values)}
+          >
+            <Text style={styles.buttonText}>Salvar Alterações</Text>
           </TouchableOpacity>
         </KeyboardAwareScrollView>
       )}

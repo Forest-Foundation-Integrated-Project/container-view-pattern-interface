@@ -9,8 +9,8 @@ import getUser from "./../../services/users/getUser";
 import { Alert } from "react-native";
 
 export default function ProfileScreen({ navigation, route }) {
-  const [profile, setProfile] = useState(null);
-  const { user, loadUser, key } = route.params;
+  const [profile, setProfile] = useState("");
+  const { user, canEdit, key } = route.params;
 
   async function fetchUser() {
     try {
@@ -21,10 +21,14 @@ export default function ProfileScreen({ navigation, route }) {
     }
   }
 
+  function editProfile() {
+    navigation.navigate("EditProfile", { user: profile });
+  }
+
   useEffect(() => {
-    console.log("USER?" + user);
-    fetchUser();
-    setProfile(user);
+    if (!profile) {
+      fetchUser();
+    }
 
     navigation.setOptions({
       headerLeft: () => (
@@ -34,10 +38,10 @@ export default function ProfileScreen({ navigation, route }) {
       ),
       headerRight: headerRight,
     });
-  }, [navigation, key]);
+  }, [navigation, key, profile]);
 
   function headerRight() {
-    if (!loadUser) {
+    if (canEdit) {
       return (
         <TouchableOpacity onPress={editProfile}>
           <EditButton />
@@ -85,9 +89,6 @@ export default function ProfileScreen({ navigation, route }) {
   function goHome() {
     navigation.navigate("Home");
   }
-  function editProfile() {
-    navigation.navigate("EditProfile");
-  }
 
   return (
     <View key={key} style={styles.container}>
@@ -120,7 +121,6 @@ export default function ProfileScreen({ navigation, route }) {
           <ProductList
             navigation={navigation}
             products={userProducts}
-            profile={profile}
             ListHeaderComponent={<></>}
           />
         </>

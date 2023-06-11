@@ -9,6 +9,13 @@ import { styles } from "./styles";
 import { Alert } from "react-native";
 import { brFormatDate, formatDate } from "./../../utils/date";
 import createUser from "./../../services/users/createUser";
+import getUser from "../../services/users/getUser";
+import { login } from "../../services/users/login";
+
+import {
+  handleAuthenticate,
+  handleLogout,
+} from "./../../store/redux/authentication";
 import { useDispatch } from "react-redux";
 
 export default function RegistrationForm({ navigation }) {
@@ -31,8 +38,9 @@ export default function RegistrationForm({ navigation }) {
     userData.gender = gender;
 
     try {
-      const res = await createUser(userData);
-      console.log(res);
+      var res = await createUser(userData);
+      const token = await login(res.data.email, res.data.password, navigation);
+      res = await getUser(res.data.user_id, token);
       const user = res.data;
       dispatch(handleAuthenticate({ token, user }));
     } catch (error) {
