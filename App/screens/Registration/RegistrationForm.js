@@ -39,7 +39,7 @@ export default function RegistrationForm({ navigation }) {
 
     try {
       var res = await createUser(userData);
-      const token = await login(res.data.email, res.data.password, navigation);
+      const token = await login(res.data.email, userData.password, navigation);
       res = await getUser(res.data.user_id, token);
       const user = res.data;
       dispatch(handleAuthenticate({ token, user }));
