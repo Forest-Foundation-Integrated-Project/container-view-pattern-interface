@@ -20,6 +20,7 @@ export function ProductList({ navigation, products, listHeaderComponent }) {
           image={item.image}
           title={item.title}
           subtitle={item.subtitle}
+          price={item.price_cents}
           onPress={() => productPressed(navigation, item)}
         />
       </View>

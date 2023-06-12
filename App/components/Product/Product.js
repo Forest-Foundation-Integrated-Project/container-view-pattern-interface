@@ -2,7 +2,7 @@ import React from "react";
 import { View, Image, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { styles } from "./styles";
 
-export function Product({ image, title, subtitle, onPress }) {
+export function Product({ image, title, subtitle, price, onPress }) {
   return (
     <View style={[styles.container, styles.shadow]}>
       <TouchableOpacity onPress={onPress}>
@@ -16,6 +16,9 @@ export function Product({ image, title, subtitle, onPress }) {
             </Text>
             <Text numberOfLines={1} style={styles.subtitle}>
               {subtitle}
+            </Text>
+            <Text numberOfLines={1} style={styles.price}>
+              R${price/100}
             </Text>
           </View>
         </View>

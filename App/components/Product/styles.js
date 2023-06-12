@@ -29,21 +29,27 @@ export const styles = StyleSheet.create({
     width: "100%",
     alignItems: "flex-start",
     marginTop: 8,
-    paddingVertical: 4,
     paddingHorizontal: 10,
     flex: 1,
   },
   title: {
     flex: 1,
-    fontSize: 14,
+    fontSize: 12,
     fontWeight: "bold",
     marginBottom: 2,
-    paddingBottom: 2,
   },
   subtitle: {
     fontSize: 12,
     color: "#666",
     paddingBottom: 10,
+  },
+
+  price: {
+    position: "absolute",
+    right: 10,
+    bottom: 10,
+    fontSize: 14,
+    fontWeight: "bold",
   },
   item: {
     flex: 0.5,

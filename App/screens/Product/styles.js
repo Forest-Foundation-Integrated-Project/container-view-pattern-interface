@@ -3,24 +3,37 @@ import { CIANO, PRETO, CINZA, CNZACL, BRANCO } from "./../../constants/colors";
 
 const screenWidth = Dimensions.get("window").width;
 
-export const styles = StyleSheet.create({
+export const UserProductStyles = StyleSheet.create({
+
   topSafeArea: {},
   container: {
-    flex: 1,
-    //alignItems: "center",
-    //justifyContent: 'center',
+    flex: 2,
+    alignItems: "center",
+    justifyContent: "center",
   },
+
+  tags: {
+    flexDirection: 'row',
+    marginVertical: 20,
+    paddingTop: 10
+  },
+
+  tagLabel: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: CINZA
+  },
+
   userSession: {
     maxWidth: "100%",
     marginVertical: 10,
-    marginHorizontal: 20,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "flex-start",
   },
   userImage: {
-    height: 60,
-    width: 60,
+    height: 84,
+    width: 84,
     borderRadius: 50,
   },
   userIfo: {
@@ -35,10 +48,11 @@ export const styles = StyleSheet.create({
     color: CINZA,
   },
   productSession: {
-    alignSelf: 'center',
-    maxWidth: 300,
+    maxWidth: 375,
+    height: 422,
     backgroundColor: BRANCO,
     borderRadius: 15,
+    marginVertical: 20
   },
   contactUserSection: {
     alignItems: "center",
@@ -48,24 +62,22 @@ export const styles = StyleSheet.create({
     width: "100%",
   },
   prodImage: {
-    width: 400,
-    height: 300,
-    // height: 250,
-    // width: 300,
+    width: 375,
+    height: 265,
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,
   },
   prodInfo: {
     marginHorizontal: 10,
-    //alignItems: 'flex-start',
     flexWrap: "wrap",
-    paddingBottom: 10,
   },
+
   topDesc: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
   },
+
   prodTitle: {
     fontWeight: "bold",
     fontSize: 20,
@@ -77,98 +89,33 @@ export const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   prodDesc: {
+    paddingTop: 10,
     fontSize: 16,
     color: CINZA,
     flexWrap: "wrap",
-    maxWidth: 280,
-    textAlign: "justify",
+    maxWidth: 363,
   },
   buttoncontactUser: {
-    alignSelf: "center",
     margin: 20,
+    width: 292,
+    height: 55,
     backgroundColor: CIANO,
     borderRadius: 15,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   buttonLabel: {
     fontSize: 16,
     fontWeight: "bold",
     color: BRANCO,
-    marginHorizontal: 50,
-    marginVertical: 15,
+    //marginHorizontal: 50,
+    //marginVertical: 15,
   },
   label: {
-    marginHorizontal: 20,
     fontSize: 20,
     fontWeight: "bold",
     alignSelf: "center",
   },
-
-  modalBackground: {
-    flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.2)',
-  },
-
-  modal: {
-    position: "absolute",
-    flex: 1,
-    bottom: 0,
-    left: 0,
-    right: 0,
-    minHeight: 490,
-    alignSelf: "center",
-    backgroundColor: BRANCO,
-    borderRadius: 20,
-    alignItems: "center",
-  },
-
-  modalUserInfo: {
-    marginVertical: 40,
-    alignItems: "center",
-  },
-
-  modalUserImage: {
-    height: 152,
-    width: 152,
-    borderRadius: 500
-  },
-
-  modalUserDesc: {
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    marginVertical: 10
-  },
-
-  modalUserName: {
-    fontSize: 20,
-    fontWeight: 'bold'
-  },
-
-  modalUserSchool: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: CINZA
-  },
-
-  modalUserStatus: {
-    fontSize: 16,
-    color: CINZA
-  },
-
-  modalContactView: {
-    marginVertical: 20,
-    backgroundColor: CIANO,
-    paddingVertical: 20,
-    width: 250,
-    borderRadius: 15,
-    alignItems: 'center'
-  },
-
-  contactInfo: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: BRANCO
-  },
-
   shadow: {
     ...Platform.select({
       ios: {
@@ -182,12 +129,12 @@ export const styles = StyleSheet.create({
       },
     }),
   },
-
   //prefix m is related to seller modal
   mcenteredView: {
     flex: 1,
-    alignItems: "center",
+    flexDirection: "column",
     justifyContent: "flex-end",
+    backgroundColor: "rgba(0, 0, 0, 0.1)",
   },
   mmodalView: {
     height: "65%",
@@ -195,7 +142,6 @@ export const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 20,
     padding: 35,
-    alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -204,14 +150,24 @@ export const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
+    height: 400,
   },
   mbutton: {
     borderRadius: 20,
     padding: 10,
     elevation: 2,
+    height: 100,
     backgroundColor: CIANO,
+    justifyContent: "center",
+    alignItems: "center",
   },
-  mbuttonText: {},
+  mbuttonText: {
+    color: "white",
+    fontSize: 20,
+    paddingHorizontal: 20,
+    textAlign: "center",
+    fontWeight: 700,
+  },
   mbuttonOpen: {
     backgroundColor: "#F194FF",
   },
