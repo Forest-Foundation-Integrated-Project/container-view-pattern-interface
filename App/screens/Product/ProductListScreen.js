@@ -11,7 +11,7 @@ import {
   Pressable,
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
-import { styles } from "./styles";
+import { UserProductStyles } from "./styles";
 import { ProductList } from "../../components/Product/ProductList";
 import { BackButtom } from "../../components/BackButton";
 import { StyleSheet } from "react-native";
@@ -116,11 +116,11 @@ export default function ProductListScreen({ navigation, route }) {
 
   return (
     <>
-      <SafeAreaView style={styles.topSafeArea} />
+      <SafeAreaView style={UserProductStyles.topSafeArea} />
 
       <StatusBar style="light" />
 
-      <View style={styles.container}>
+      <View style={UserProductStyles.container}>
         <ProductList
           navigation={navigation}
           products={products}
@@ -128,21 +128,30 @@ export default function ProductListScreen({ navigation, route }) {
             <>
               <View>
                 <Pressable onPress={closeModal}>
+
+                  <View style={UserProductStyles.tags}>
+                    <Text style={UserProductStyles.tagLabel}>Alumnus /</Text>
+                    <Text style={UserProductStyles.tagLabel}>Categoria /</Text>
+                    <Text style={UserProductStyles.tagLabel}>Usuario /</Text>
+                    <Text style={UserProductStyles.tagLabel}>Produto </Text>
+                  </View>
+
                   <TouchableWithoutFeedback onPress={goToProfile}>
                     <View style={UserProductStyles.userSession}>
                       <Image
                         style={UserProductStyles.userImage}
-                        source={{ uri: profile.image }}
+                        source={{ uri: route.params.item.seller.image }}
                       />
                       <View style={UserProductStyles.userIfo}>
                         <Text style={UserProductStyles.userName}>
-                          {profile.name}
+                          {route.params.item.seller.name}
                         </Text>
                         <Text
                           numberOfLines={1}
                           style={UserProductStyles.userLocation}
                         >
-                          {profile.university} - {profile.city}{" "}
+                          {route.params.item.seller.university} -{" "}
+                          {route.params.item.seller.city}{" "}
                         </Text>
                       </View>
                     </View>
@@ -173,7 +182,7 @@ export default function ProductListScreen({ navigation, route }) {
                   </View>
                   <View style={UserProductStyles.contactUserSection}>
                     <TouchableOpacity
-                      style={UserProductStyles.buttoncontactUser}
+                      style={[UserProductStyles.buttoncontactUser, UserProductStyles.shadow]}
                       onPress={() => setModalVisible(true)}
                     >
                       <Text
@@ -205,17 +214,18 @@ export default function ProductListScreen({ navigation, route }) {
                         <View style={UserProductStyles.muserSession}>
                           <Image
                             style={UserProductStyles.muserImage}
-                            source={{ uri: profile.image }}
+                            source={{ uri: route.params.item.seller.image }}
                           />
                           <View style={UserProductStyles.muserIfo}>
                             <Text style={UserProductStyles.muserName}>
-                              {profile.name}
+                              {route.params.item.seller.name}
                             </Text>
                             <Text
                               numberOfLines={1}
                               style={UserProductStyles.muserLocation}
                             >
-                              {profile.university} - {profile.city}{" "}
+                              {route.params.item.seller.university} -{" "}
+                              {route.params.item.seller.city}{" "}
                             </Text>
                           </View>
                         </View>
@@ -237,189 +247,3 @@ export default function ProductListScreen({ navigation, route }) {
   );
 }
 
-export const UserProductStyles = StyleSheet.create({
-  topSafeArea: {},
-
-  topSafeArea: {},
-  container: {
-    flex: 2,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  userSession: {
-    maxWidth: "100%",
-    marginVertical: 10,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "flex-start",
-  },
-  userImage: {
-    height: 60,
-    width: 60,
-    borderRadius: 50,
-  },
-  userIfo: {
-    marginHorizontal: 10,
-  },
-  userName: {
-    fontSize: 16,
-    fontWeight: "bold",
-  },
-  userLocation: {
-    fontSize: 14,
-    color: CINZA,
-  },
-  productSession: {
-    maxWidth: 350,
-    maxHeight: 500,
-    backgroundColor: BRANCO,
-    borderRadius: 15,
-  },
-  contactUserSection: {
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  productList: {
-    width: "100%",
-  },
-  prodImage: {
-    width: 400,
-    height: 300,
-    // height: 250,
-    // width: 300,
-    borderTopLeftRadius: 15,
-    borderTopRightRadius: 15,
-  },
-  prodInfo: {
-    marginHorizontal: 10,
-    //alignItems: 'flex-start',
-    flexWrap: "wrap",
-  },
-  topDesc: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  prodTitle: {
-    fontWeight: "bold",
-    fontSize: 20,
-    maxWidth: 170,
-  },
-  prodPrice: {
-    marginLeft: 10,
-    fontSize: 24,
-    fontWeight: "bold",
-  },
-  prodDesc: {
-    fontSize: 16,
-    color: CINZA,
-    flexWrap: "wrap",
-    maxWidth: 290,
-  },
-  buttoncontactUser: {
-    margin: 20,
-    backgroundColor: CIANO,
-    borderRadius: 15,
-  },
-  buttonLabel: {
-    fontSize: 16,
-    fontWeight: "bold",
-    color: BRANCO,
-    marginHorizontal: 50,
-    marginVertical: 15,
-  },
-  label: {
-    fontSize: 20,
-    fontWeight: "bold",
-    alignSelf: "center",
-  },
-  shadow: {
-    ...Platform.select({
-      ios: {
-        shadowColor: "black",
-        shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 0.1,
-        shadowRadius: 15,
-      },
-      android: {
-        elevation: 4,
-      },
-    }),
-  },
-  //prefix m is related to seller modal
-  mcenteredView: {
-    flex: 1,
-    flexDirection: "column",
-    justifyContent: "flex-end",
-  },
-  mmodalView: {
-    height: "65%",
-    width: "100%",
-    backgroundColor: "white",
-    borderRadius: 20,
-    padding: 35,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-    height: 400,
-  },
-  mbutton: {
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2,
-    height: 100,
-    backgroundColor: CIANO,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  mbuttonText: {
-    color: "white",
-    fontSize: 20,
-    paddingHorizontal: 20,
-    textAlign: "center",
-    fontWeight: 700,
-  },
-  mbuttonOpen: {
-    backgroundColor: "#F194FF",
-  },
-  mbuttonClose: {
-    backgroundColor: "#2196F3",
-  },
-  mtextStyle: {
-    color: "white",
-    fontWeight: "bold",
-    textAlign: "center",
-  },
-  mmodalText: {
-    marginBottom: 15,
-    textAlign: "center",
-  },
-  muserSession: {
-    flexDirection: "column",
-    padding: 10,
-    marginBottom: 10,
-    alignItems: "center",
-    alignContent: "center",
-  },
-  muserImage: {
-    height: 150,
-    width: 150,
-    borderRadius: 150,
-    alignSelf: "center",
-  },
-  muserName: {
-    fontSize: 20,
-    fontWeight: "bold",
-  },
-  muserLocation: {
-    fontSize: 18,
-    color: "grey",
-    alignSelf: "center",
-  },
-  muserIfo: {},
-});
