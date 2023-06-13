@@ -43,8 +43,8 @@ export default function ProfileScreen({ navigation, route }) {
     const message = route.params?.successMessage;
     if (message) {
       setSuccessMessage(message);
+      console.log("success message:" + successMessage);
     }
-    console.log(successMessage);
   }, [navigation, key, profile, route.params]);
 
   function headerRight() {

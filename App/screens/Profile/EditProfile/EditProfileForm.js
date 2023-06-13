@@ -47,6 +47,7 @@ export default function EditProfileForm({ user, route }) {
         birthDate: user.birthDate,
         university: user.university,
         enroll: Math.floor(Math.random() * 90000) + 10000,
+        bio: user.bio,
       }}
       onSubmit={(values) => {
         onSubmitHandler(values);
@@ -185,6 +186,20 @@ export default function EditProfileForm({ user, route }) {
             <ErrorMessage
               errorValue={touched.university && errors.university}
             />
+          </View>
+          <View style={styles.formGroup}>
+            <Text style={styles.label}>Bio</Text>
+            <TextInput
+              style={{ ...styles.input, height: 100, alignItems: "flex-start" }}
+              value={values.bio}
+              multiline={true}
+              numberOfLines={5}
+              onChangeText={handleChange("bio")}
+              onBlur={handleBlur("bio")}
+              placeholder="Escreva sobre você..."
+            />
+
+            <ErrorMessage errorValue={touched.bio && errors.bio} />
           </View>
           <TouchableOpacity
             style={styles.button}
