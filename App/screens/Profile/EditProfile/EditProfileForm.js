@@ -10,19 +10,29 @@ import { Alert } from "react-native";
 import { brFormatDate, formatDate } from "../../../utils/date";
 import updateUser from "../../../services/users/updateUser";
 import ErrorMessage from "../../../components/ErrorMessage";
+import { useNavigation } from "@react-navigation/native";
 
 export default function EditProfileForm({ user, route }) {
+  const navigation = useNavigation();
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [birthDate, setBirthDate] = useState(new Date());
   const [gender, setGender] = useState("Gender");
 
   const onSubmitHandler = async (userData) => {
-    console.log("HIIIIIIII BUTTON");
-    userData.birthDate = formatDate(birthDate);
-    userData.gender = gender;
-    console.log(userData);
     try {
-      const res = await updateUser(userData);
+      userData.birthDate = formatDate(birthDate);
+      userData.gender = gender;
+      const res = await updateUser(user.user_id, userData);
+      navigation.navigate("Profile", {
+        loadUser: true,
+        user: { id: user.user_id },
+        key: user.id + Date.now(),
+        canEdit: true,
+      });
+
+      navigation.setParams({
+        successMessage: "Dados atualizados com sucesso!",
+      });
     } catch (error) {
       Alert.alert(`erro: ${error}`);
     }

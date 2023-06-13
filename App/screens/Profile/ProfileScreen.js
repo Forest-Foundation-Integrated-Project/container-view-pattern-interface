@@ -10,7 +10,8 @@ import { Alert } from "react-native";
 
 export default function ProfileScreen({ navigation, route }) {
   const [profile, setProfile] = useState("");
-  const { user, canEdit, key } = route.params;
+  const [successMessage, setSuccessMessage] = useState("");
+  const { user, canEdit, key, loadUser } = route.params;
 
   async function fetchUser() {
     try {
@@ -26,7 +27,7 @@ export default function ProfileScreen({ navigation, route }) {
   }
 
   useEffect(() => {
-    if (!profile) {
+    if (loadUser) {
       fetchUser();
     }
 
@@ -38,7 +39,13 @@ export default function ProfileScreen({ navigation, route }) {
       ),
       headerRight: headerRight,
     });
-  }, [navigation, key, profile]);
+
+    const message = route.params?.successMessage;
+    if (message) {
+      setSuccessMessage(message);
+    }
+    console.log(successMessage);
+  }, [navigation, key, profile, route.params]);
 
   function headerRight() {
     if (canEdit) {
@@ -110,6 +117,11 @@ export default function ProfileScreen({ navigation, route }) {
           <View style={styles.bio}>
             <Text style={styles.bioDescription}>{profile.user_bio}</Text>
           </View>
+          {successMessage && (
+            <View style={styles.successMessage}>
+              <Text style={styles.successText}>{successMessage}</Text>
+            </View>
+          )}
           <View style={styles.buttons}>
             <TouchableOpacity style={styles.button}>
               <Text style={styles.buttonText}>Adcionar produto</Text>

@@ -41,6 +41,7 @@ export const styles = StyleSheet.create({
   content: {
     paddingHorizontal: 30,
     backgroundColor: CONTENT_BACKGROUND,
+    paddingTop: 30,
   },
   input: {
     minWidth: 165,

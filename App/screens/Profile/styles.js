@@ -75,4 +75,14 @@ export const styles = StyleSheet.create({
     alignSelf: "center",
   },
   products: {},
+  successMessage: {
+    backgroundColor: "green",
+    padding: 10,
+    marginBottom: 10,
+  },
+  successText: {
+    color: "white",
+    fontSize: 16,
+    fontWeight: "bold",
+  },
 });

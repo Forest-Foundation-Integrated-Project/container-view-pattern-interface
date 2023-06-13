@@ -34,6 +34,7 @@ export function UserProduct({ route, navigation }) {
       loadUser: true,
       key: route.params.profile.user_id,
       user: { id: route.params.profile.user_id },
+      canEdit: false,
     });
   }
   return (

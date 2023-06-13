@@ -16,9 +16,7 @@ import EditProfileForm from "./EditProfileForm";
 import { StatusBar } from "expo-status-bar";
 
 export default function EditProfileScreen({ navigation, route }) {
-  console.log("ROUTE PARAMS\n: " + JSON.stringify(route.params));
   const { user } = route.params;
-  console.log("USER: " + user);
   useEffect(() => {
     navigation.setOptions({
       headerLeft: () => (
