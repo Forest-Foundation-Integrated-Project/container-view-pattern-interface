@@ -16,12 +16,12 @@ export default function EditProfileForm({ user, route }) {
   const navigation = useNavigation();
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [birthDate, setBirthDate] = useState(new Date());
-  const [gender, setGender] = useState("Gender");
+  const [gender, setGender] = useState("");
 
   const onSubmitHandler = async (userData) => {
     try {
       userData.birthDate = formatDate(birthDate);
-      userData.gender = gender;
+      userData.gender = getOriginalGender(gender);
       const res = await updateUser(user.user_id, userData);
       navigation.navigate("Profile", {
         loadUser: true,
@@ -37,13 +37,32 @@ export default function EditProfileForm({ user, route }) {
       Alert.alert(`erro: ${error}`);
     }
   };
+  const genderMappings = {
+    male: "Masculino",
+    female: "Feminino",
+    other: "Other",
+  };
+
+  function transformGender(gender) {
+    console.log("GENDER: " + gender);
+    return genderMappings[gender] || "Other";
+  }
+
+  function getOriginalGender(gender) {
+    for (const key in genderMappings) {
+      if (genderMappings[key] === gender) {
+        return String(key);
+      }
+    }
+    return "other";
+  }
 
   return (
     <Formik
       initialValues={{
         name: user.name,
         email: user.email,
-        gender: user.gender,
+        gender: transformGender(user.gender),
         birthDate: user.birthDate,
         university: user.university,
         enroll: Math.floor(Math.random() * 90000) + 10000,
@@ -103,7 +122,7 @@ export default function EditProfileForm({ user, route }) {
                   value={gender}
                   onBlur={handleBlur("gender")}
                   onValueChange={(item, indexItem) => {
-                    setGender(item);
+                    setGender(transformGender(item));
                     setFieldValue("gender", item);
                   }}
                 >
