@@ -11,14 +11,16 @@ import { Alert } from "react-native";
 export default function ProfileScreen({ navigation, route }) {
   const [profile, setProfile] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
-  const { user, canEdit, key, loadUser } = route.params;
+  const { user, isLoggedUser, key, loadUser } = route.params;
 
   async function fetchUser() {
-    try {
-      const res = await getUser(user.id);
-      setProfile(res.data);
-    } catch (error) {
-      Alert.alert(`erro: ${error}`);
+    if (loadUser && profile.user_id !== user.id) {
+      try {
+        const res = await getUser(user.id);
+        setProfile(res.data);
+      } catch (error) {
+        Alert.alert(`erro: ${error}`);
+      }
     }
   }
 
@@ -27,10 +29,9 @@ export default function ProfileScreen({ navigation, route }) {
   }
 
   useEffect(() => {
-    if (loadUser) {
-      fetchUser();
-    }
+    fetchUser();
 
+    console.log("IS LOGGED USER?" + isLoggedUser);
     navigation.setOptions({
       headerLeft: () => (
         <TouchableOpacity onPress={goHome}>
@@ -48,7 +49,7 @@ export default function ProfileScreen({ navigation, route }) {
   }, [navigation, key, profile, route.params]);
 
   function headerRight() {
-    if (canEdit) {
+    if (isLoggedUser) {
       return (
         <TouchableOpacity onPress={editProfile}>
           <EditButton />
@@ -122,14 +123,18 @@ export default function ProfileScreen({ navigation, route }) {
               <Text style={styles.successText}>{successMessage}</Text>
             </View>
           )}
-          <View style={styles.buttons}>
-            <TouchableOpacity style={styles.button}>
-              <Text style={styles.buttonText}>Adcionar produto</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.button}>
-              <Text style={styles.buttonText}>Editar produtos</Text>
-            </TouchableOpacity>
-          </View>
+          {isLoggedUser && (
+            <>
+              <View style={styles.buttons}>
+                <TouchableOpacity style={styles.button}>
+                  <Text style={styles.buttonText}>Adcionar produto</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.button}>
+                  <Text style={styles.buttonText}>Editar produtos</Text>
+                </TouchableOpacity>
+              </View>
+            </>
+          )}
           <ProductList
             navigation={navigation}
             products={userProducts}

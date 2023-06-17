@@ -9,6 +9,7 @@ export async function httpGet(url, data, token) {
 
   if (typeof token == "undefined") {
     token = await AsyncStorage.getItem("token");
+    console.log("TOKEN: " + token);
   }
 
   var params;

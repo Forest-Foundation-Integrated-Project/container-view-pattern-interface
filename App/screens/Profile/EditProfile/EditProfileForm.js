@@ -22,12 +22,16 @@ export default function EditProfileForm({ user, route }) {
     try {
       userData.birthDate = formatDate(birthDate);
       userData.gender = getOriginalGender(gender);
+
+      console.log("BEFORE SEND: " + JSON.stringify(userData));
+
       const res = await updateUser(user.user_id, userData);
+      console.log("RESPONSE OF UPDTATE: " + JSON.stringify(res.data));
       navigation.navigate("Profile", {
         loadUser: true,
         user: { id: user.user_id },
         key: user.id + Date.now(),
-        canEdit: true,
+        isLoggedUser: true,
       });
 
       navigation.setParams({
@@ -44,13 +48,12 @@ export default function EditProfileForm({ user, route }) {
   };
 
   function transformGender(gender) {
-    console.log("GENDER: " + gender);
     return genderMappings[gender] || "Other";
   }
 
   function getOriginalGender(gender) {
     for (const key in genderMappings) {
-      if (genderMappings[key] === gender) {
+      if (genderMappings[key] == gender) {
         return String(key);
       }
     }
@@ -66,7 +69,7 @@ export default function EditProfileForm({ user, route }) {
         birthDate: user.birthDate,
         university: user.university,
         enroll: Math.floor(Math.random() * 90000) + 10000,
-        bio: user.bio,
+        user_bio: user.user_bio,
       }}
       onSubmit={(values) => {
         onSubmitHandler(values);
@@ -210,15 +213,15 @@ export default function EditProfileForm({ user, route }) {
             <Text style={styles.label}>Bio</Text>
             <TextInput
               style={{ ...styles.input, height: 100, alignItems: "flex-start" }}
-              value={values.bio}
+              value={values.user_bio}
               multiline={true}
               numberOfLines={5}
-              onChangeText={handleChange("bio")}
-              onBlur={handleBlur("bio")}
+              onChangeText={handleChange("user_bio")}
+              onBlur={handleBlur("user_bio")}
               placeholder="Escreva sobre você..."
             />
 
-            <ErrorMessage errorValue={touched.bio && errors.bio} />
+            <ErrorMessage errorValue={touched.user_bio && errors.user_bio} />
           </View>
           <TouchableOpacity
             style={styles.button}

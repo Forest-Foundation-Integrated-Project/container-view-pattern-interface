@@ -45,8 +45,8 @@ export default function ProductListScreen({ navigation, route }) {
     navigation.navigate("Profile", {
       loadUser: true,
       user: { id: route.params.item.seller_id },
-      key: route.params.item.seller_id,
-      canEdit: false,
+      key: route.params.item.seller_id + Date.now(),
+      isLoggedUser: false,
     });
   }
 

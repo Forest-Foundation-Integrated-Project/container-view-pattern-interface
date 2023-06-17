@@ -35,8 +35,10 @@ export default function LoginScreen({ navigation }) {
   async function loginHandler({ email, password }) {
     setIsAuthenticating(true);
     try {
-      const token = await login(email, password, navigation);
-      const res = await getUser("4b2ccf36-3742-45c3-80b6-2036a92d940f", token);
+      const { token, user_id } = await login(email, password, navigation);
+      console.log("TOKEN??? + " + token);
+      const res = await getUser(user_id, token);
+      console.log("RESPONSE: GET USER: " + JSON.stringify(res.data));
       const user = res.data;
       dispatch(handleAuthenticate({ token, user }));
     } catch (error) {

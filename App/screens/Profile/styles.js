@@ -45,6 +45,7 @@ export const styles = StyleSheet.create({
     padding: 10,
     justifyContent: "center",
     alignContent: "center",
+    alignItems: "center",
   },
   bioDescription: {
     fontSize: 16,
