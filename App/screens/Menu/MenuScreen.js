@@ -18,6 +18,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { useDispatch } from "react-redux";
 import { handleLogout } from "../../store/redux/authentication";
 import { useSelector } from "react-redux";
+import { date } from "yup";
 
 export default function MenuScreen({ navigation, props }) {
   const user = useSelector((state) => state.authentication.user);
@@ -35,7 +36,8 @@ export default function MenuScreen({ navigation, props }) {
     navigation.navigate("Profile", {
       user: { id: user.user_id },
       loadUser: true,
-      key: user.user_id,
+      key: user.user_id + Date.now(),
+      isLoggedUser: true,
     });
   }
 

@@ -13,10 +13,12 @@ export async function login(email, password, navigation) {
 
   if (response.status == 200) {
     token = response.data.token;
+    user_id = response.data.userId;
   } else {
     alert("Erro: " + response.message);
     token = null;
+    user_id = null;
   }
 
-  return token;
+  return { token, user_id };
 }

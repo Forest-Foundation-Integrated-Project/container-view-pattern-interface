@@ -35,8 +35,10 @@ export default function LoginScreen({ navigation }) {
   async function loginHandler({ email, password }) {
     setIsAuthenticating(true);
     try {
-      const token = await login(email, password, navigation);
-      const res = await getUser("ded6f05a-ec8d-4ebb-ba6c-eb10fe8a2b0c", token);
+      const { token, user_id } = await login(email, password, navigation);
+      console.log("TOKEN??? + " + token);
+      const res = await getUser(user_id, token);
+      console.log("RESPONSE: GET USER: " + JSON.stringify(res.data));
       const user = res.data;
       dispatch(handleAuthenticate({ token, user }));
     } catch (error) {
@@ -116,7 +118,9 @@ export default function LoginScreen({ navigation }) {
                 />
               </View>
 
-              <Text style={styles.forgotPass} onPress={forgotPassPressed}>Esqueceu sua senha?</Text>
+              <Text style={styles.forgotPass} onPress={forgotPassPressed}>
+                Esqueceu sua senha?
+              </Text>
 
               <TouchableOpacity style={styles.button} onPress={handleSubmit}>
                 <Text style={styles.buttonText}>Login</Text>

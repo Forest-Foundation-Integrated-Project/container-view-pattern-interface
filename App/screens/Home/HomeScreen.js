@@ -14,11 +14,16 @@ import { StatusBar } from "expo-status-bar";
 import { styles } from "./styles";
 import { ProductList } from "./../../components/Product/ProductList";
 import { useSelector } from "react-redux";
+import {
+  handleAuthenticate,
+  handleLogout,
+} from "../../store/redux/authentication";
 
 export default function HomeScreen({ navigation }) {
   const profile = useSelector((state) => state.authentication.user);
   // const products = useSelector((state) => state.product.products);
 
+  // handleAuthenticate(handleLogout());
   const [products, setProducts] = useState([
     {
       id: 1,
@@ -42,7 +47,7 @@ export default function HomeScreen({ navigation }) {
           "https://natashaskitchen.com/wp-content/uploads/2020/05/Vanilla-Cupcakes-3.jpg",
       },
     },
-    
+
     {
       id: 2,
       title: "Aula de matemática",

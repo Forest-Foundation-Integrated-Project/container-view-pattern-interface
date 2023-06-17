@@ -10,46 +10,66 @@ import { Alert } from "react-native";
 import { brFormatDate, formatDate } from "../../../utils/date";
 import updateUser from "../../../services/users/updateUser";
 import ErrorMessage from "../../../components/ErrorMessage";
+import { useNavigation } from "@react-navigation/native";
 
-export default function EditProfileForm({ navigation }) {
+export default function EditProfileForm({ user, route }) {
+  const navigation = useNavigation();
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [birthDate, setBirthDate] = useState(new Date());
-  const [gender, setGender] = useState("Gender");
+  const [gender, setGender] = useState("");
 
   const onSubmitHandler = async (userData) => {
-    userData.birthDate = formatDate(birthDate);
-    userData.gender = gender;
-
     try {
-      const res = await updateUser(userData);
+      userData.birthDate = formatDate(birthDate);
+      userData.gender = getOriginalGender(gender);
+
+      console.log("BEFORE SEND: " + JSON.stringify(userData));
+
+      const res = await updateUser(user.user_id, userData);
+      console.log("RESPONSE OF UPDTATE: " + JSON.stringify(res.data));
+      navigation.navigate("Profile", {
+        loadUser: true,
+        user: { id: user.user_id },
+        key: user.id + Date.now(),
+        isLoggedUser: true,
+      });
+
+      navigation.setParams({
+        successMessage: "Dados atualizados com sucesso!",
+      });
     } catch (error) {
       Alert.alert(`erro: ${error}`);
     }
   };
-
-  const user = {
-    name: "Lais Gonçalves",
-    email: "lais@lais.com",
-    gender: "fem",
-    birthDate: "15-04-1994",
-    university: "Anhanguera - Caraguatatuba",
-    password: "123456",
-    confirmPassword: "123456",
-    description:
-      "Lorem impsu fdsad lorem impsum core. Corem ipsum dsad lorem impsum core. Corem ipsum fdsad lorem impsum core. Corem ipsum ",
+  const genderMappings = {
+    male: "Masculino",
+    female: "Feminino",
+    other: "Other",
   };
+
+  function transformGender(gender) {
+    return genderMappings[gender] || "Other";
+  }
+
+  function getOriginalGender(gender) {
+    for (const key in genderMappings) {
+      if (genderMappings[key] == gender) {
+        return String(key);
+      }
+    }
+    return "other";
+  }
 
   return (
     <Formik
       initialValues={{
         name: user.name,
         email: user.email,
-        gender: user.gender,
+        gender: transformGender(user.gender),
         birthDate: user.birthDate,
         university: user.university,
-        password: "",
-        confirmPassword: "",
         enroll: Math.floor(Math.random() * 90000) + 10000,
+        user_bio: user.user_bio,
       }}
       onSubmit={(values) => {
         onSubmitHandler(values);
@@ -105,7 +125,7 @@ export default function EditProfileForm({ navigation }) {
                   value={gender}
                   onBlur={handleBlur("gender")}
                   onValueChange={(item, indexItem) => {
-                    setGender(item);
+                    setGender(transformGender(item));
                     setFieldValue("gender", item);
                   }}
                 >
@@ -134,6 +154,11 @@ export default function EditProfileForm({ navigation }) {
                     value="other"
                   />
                 </Picker>
+                <TextInput
+                  style={styles.inputText}
+                  value={gender === "" ? "Gênero" : gender} // Display "Gênero" if no value is selected
+                  editable={false} // Disable editing of the input
+                />
               </View>
               <ErrorMessage errorValue={touched.gender && errors.gender} />
             </View>
@@ -184,42 +209,25 @@ export default function EditProfileForm({ navigation }) {
               errorValue={touched.university && errors.university}
             />
           </View>
-
           <View style={styles.formGroup}>
-            <Text style={styles.label}>Senha</Text>
+            <Text style={styles.label}>Bio</Text>
             <TextInput
-              style={styles.input}
-              value={values.password}
-              onChangeText={handleChange("password")}
-              onBlur={handleBlur("password")}
-              autoCapitalize="none"
-              secureTextEntry={true}
-              placeholder="Senha"
+              style={{ ...styles.input, height: 100, alignItems: "flex-start" }}
+              value={values.user_bio}
+              multiline={true}
+              numberOfLines={5}
+              onChangeText={handleChange("user_bio")}
+              onBlur={handleBlur("user_bio")}
+              placeholder="Escreva sobre você..."
             />
 
-            <ErrorMessage errorValue={touched.password && errors.password} />
+            <ErrorMessage errorValue={touched.user_bio && errors.user_bio} />
           </View>
-
-          <View style={styles.formGroup}>
-            <Text style={styles.label}>Confirmar Senha</Text>
-            <TextInput
-              class="confirmPassword"
-              style={styles.input}
-              value={values.confirmPassword}
-              onChangeText={handleChange("confirmPassword")}
-              onBlur={handleBlur("confirmPassword")}
-              autoCapitalize="none"
-              secureTextEntry={true}
-              placeholder="Confirmar senha"
-            />
-
-            <ErrorMessage
-              errorValue={touched.confirmPassword && errors.confirmPassword}
-            />
-          </View>
-
-          <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-            <Text style={styles.buttonText}>SALVAR ALTERAÇÕES</Text>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => onSubmitHandler(values)}
+          >
+            <Text style={styles.buttonText}>Salvar Alterações</Text>
           </TouchableOpacity>
         </KeyboardAwareScrollView>
       )}

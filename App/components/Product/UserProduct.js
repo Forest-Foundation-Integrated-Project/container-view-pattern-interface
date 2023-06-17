@@ -32,8 +32,9 @@ export function UserProduct({ route, navigation }) {
   function goToProfile() {
     navigation.navigate("Profile", {
       loadUser: true,
-      key: route.params.profile.user_id,
+      key: route.params.profile.user_id + Date.now(),
       user: { id: route.params.profile.user_id },
+      isLoggedUser: false,
     });
   }
   return (

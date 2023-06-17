@@ -9,23 +9,29 @@ import getUser from "./../../services/users/getUser";
 import { Alert } from "react-native";
 
 export default function ProfileScreen({ navigation, route }) {
-  const [profile, setProfile] = useState(null);
-  const { user, loadUser, key } = route.params;
+  const [profile, setProfile] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+  const { user, isLoggedUser, key, loadUser } = route.params;
 
   async function fetchUser() {
-    try {
-      const res = await getUser(user.id);
-      setProfile(res.data);
-    } catch (error) {
-      Alert.alert(`erro: ${error}`);
+    if (loadUser && profile.user_id !== user.id) {
+      try {
+        const res = await getUser(user.id);
+        setProfile(res.data);
+      } catch (error) {
+        Alert.alert(`erro: ${error}`);
+      }
     }
   }
 
-  useEffect(() => {
-    console.log("USER?" + user);
-    fetchUser();
-    setProfile(user);
+  function editProfile() {
+    navigation.navigate("EditProfile", { user: profile });
+  }
 
+  useEffect(() => {
+    fetchUser();
+
+    console.log("IS LOGGED USER?" + isLoggedUser);
     navigation.setOptions({
       headerLeft: () => (
         <TouchableOpacity onPress={goHome}>
@@ -34,10 +40,16 @@ export default function ProfileScreen({ navigation, route }) {
       ),
       headerRight: headerRight,
     });
-  }, [navigation, key]);
+
+    const message = route.params?.successMessage;
+    if (message) {
+      setSuccessMessage(message);
+      console.log("success message:" + successMessage);
+    }
+  }, [navigation, key, profile, route.params]);
 
   function headerRight() {
-    if (!loadUser) {
+    if (isLoggedUser) {
       return (
         <TouchableOpacity onPress={editProfile}>
           <EditButton />
@@ -85,9 +97,6 @@ export default function ProfileScreen({ navigation, route }) {
   function goHome() {
     navigation.navigate("Home");
   }
-  function editProfile() {
-    navigation.navigate("EditProfile");
-  }
 
   return (
     <View key={key} style={styles.container}>
@@ -109,18 +118,26 @@ export default function ProfileScreen({ navigation, route }) {
           <View style={styles.bio}>
             <Text style={styles.bioDescription}>{profile.user_bio}</Text>
           </View>
-          <View style={styles.buttons}>
-            <TouchableOpacity style={styles.button}>
-              <Text style={styles.buttonText}>Adcionar produto</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.button}>
-              <Text style={styles.buttonText}>Editar produtos</Text>
-            </TouchableOpacity>
-          </View>
+          {successMessage && (
+            <View style={styles.successMessage}>
+              <Text style={styles.successText}>{successMessage}</Text>
+            </View>
+          )}
+          {isLoggedUser && (
+            <>
+              <View style={styles.buttons}>
+                <TouchableOpacity style={styles.button}>
+                  <Text style={styles.buttonText}>Adcionar produto</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.button}>
+                  <Text style={styles.buttonText}>Editar produtos</Text>
+                </TouchableOpacity>
+              </View>
+            </>
+          )}
           <ProductList
             navigation={navigation}
             products={userProducts}
-            profile={profile}
             ListHeaderComponent={<></>}
           />
         </>

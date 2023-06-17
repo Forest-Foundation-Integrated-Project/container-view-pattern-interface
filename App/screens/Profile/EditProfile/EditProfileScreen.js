@@ -16,6 +16,7 @@ import EditProfileForm from "./EditProfileForm";
 import { StatusBar } from "expo-status-bar";
 
 export default function EditProfileScreen({ navigation, route }) {
+  const { user } = route.params;
   useEffect(() => {
     navigation.setOptions({
       headerLeft: () => (
@@ -25,14 +26,6 @@ export default function EditProfileScreen({ navigation, route }) {
       ),
     });
   }, [navigation]);
-
-  const user = {
-    name: "Lais Gonçalves",
-    university: "Anhanguera - Caraguatatuba",
-    role: "Vendedor",
-    description:
-      "Lorem impsu fdsad lorem impsum core. Corem ipsum dsad lorem impsum core. Corem ipsum fdsad lorem impsum core. Corem ipsum ",
-  };
 
   function goToProfileScreen() {
     navigation.goBack();
@@ -61,7 +54,7 @@ export default function EditProfileScreen({ navigation, route }) {
         </View>
         <StatusBar style="light" />
         <SafeAreaView style={styles.container}>
-          <EditProfileForm navigation={navigation} />
+          <EditProfileForm navigation={navigation} user={user} />
         </SafeAreaView>
       </View>
     </>

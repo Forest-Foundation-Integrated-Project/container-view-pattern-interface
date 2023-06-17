@@ -45,7 +45,8 @@ export default function ProductListScreen({ navigation, route }) {
     navigation.navigate("Profile", {
       loadUser: true,
       user: { id: route.params.item.seller_id },
-      key: route.params.item.seller_id,
+      key: route.params.item.seller_id + Date.now(),
+      isLoggedUser: false,
     });
   }
 
@@ -128,7 +129,6 @@ export default function ProductListScreen({ navigation, route }) {
             <>
               <View>
                 <Pressable onPress={closeModal}>
-
                   <View style={UserProductStyles.tags}>
                     <Text style={UserProductStyles.tagLabel}>Alumnus /</Text>
                     <Text style={UserProductStyles.tagLabel}>Categoria /</Text>
@@ -182,7 +182,10 @@ export default function ProductListScreen({ navigation, route }) {
                   </View>
                   <View style={UserProductStyles.contactUserSection}>
                     <TouchableOpacity
-                      style={[UserProductStyles.buttoncontactUser, UserProductStyles.shadow]}
+                      style={[
+                        UserProductStyles.buttoncontactUser,
+                        UserProductStyles.shadow,
+                      ]}
                       onPress={() => setModalVisible(true)}
                     >
                       <Text
@@ -246,4 +249,3 @@ export default function ProductListScreen({ navigation, route }) {
     </>
   );
 }
-
