@@ -36,10 +36,11 @@ export default function ProductListScreen({ navigation, route }) {
   }
 
   useEffect(() => {
+    console.log("user_id: ")
     if (typeof profile == "undefined") {
       fetchUser();
     }
-  });
+  }, []);
 
   function goToProfile() {
     navigation.navigate("Profile", {

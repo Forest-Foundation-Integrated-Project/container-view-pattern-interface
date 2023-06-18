@@ -112,6 +112,10 @@ export default function HomeScreen({ navigation }) {
     },
   ]);
 
+  useEffect(() => {
+    
+  }, [])
+
   return (
     <>
       <SafeAreaView style={styles.topSafeArea} />
