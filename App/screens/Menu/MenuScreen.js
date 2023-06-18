@@ -21,7 +21,7 @@ import { useSelector } from "react-redux";
 
 export default function MenuScreen({ navigation, props }) {
   const user = useSelector((state) => state.authentication.user);
-
+  console.log('user ', user)
   const BASE_PATH =
     "https://raw.githubusercontent.com/AboutReact/sampleresource/master/";
 

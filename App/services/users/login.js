@@ -4,7 +4,7 @@ import { httpPost } from "../httpPost";
 
 export async function login(email, password, navigation) {
   let url = `${BASE_URL}/auth/sign-in`;
-  let token;
+  let data;
 
   const response = await httpPost(url, {
     email: email,
@@ -12,11 +12,11 @@ export async function login(email, password, navigation) {
   });
 
   if (response.status == 200) {
-    token = response.data.token;
+    data = response.data;
   } else {
     alert("Erro: " + response.message);
-    token = null;
+    data = null;
   }
 
-  return token;
+  return data;
 }
