@@ -9,13 +9,15 @@ export async function httpGet(url, data, token) {
 
   if (typeof token == "undefined") {
     token = await AsyncStorage.getItem("token");
-    console.log("TOKEN: " + token);
+    //console.log("TOKEN: " + token);
   }
 
   var params;
   const headers = {
     Authorization: `Bearer ${token}`,
   };
+
+  console.log({url, data})
 
   try {
     if (typeof data === "string") {

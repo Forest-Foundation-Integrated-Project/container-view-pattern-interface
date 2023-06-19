@@ -13,14 +13,13 @@ export function ProductList({ navigation, products, listHeaderComponent }) {
     const columnWrapperStyle = isSingleItem
       ? styles.singleItemColumn
       : styles.row;
-
     return (
       <View style={itemStyle}>
         <Product
           image={item.image}
           title={item.title}
-          subtitle={item.subtitle}
-          price={item.price_cents}
+          subtitle={item.sellerId}
+          price={(item.priceCents/100).toFixed()}
           onPress={() => productPressed(navigation, item)}
         />
       </View>

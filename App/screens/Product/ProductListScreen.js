@@ -27,8 +27,8 @@ export default function ProductListScreen({ navigation, route }) {
 
   async function fetchUser() {
     try {
-      console.log("user_id: " + route.params.item.seller_id);
-      const res = await getUser(route.params.item.seller_id);
+      console.log("user_id: " + route.params.item.sellerId);
+      const res = await getUser(route.params.item.sellerId);
       setProfile(res.data);
     } catch (error) {
       console.log(`erro: ${error}`);
@@ -45,8 +45,8 @@ export default function ProductListScreen({ navigation, route }) {
   function goToProfile() {
     navigation.navigate("Profile", {
       loadUser: true,
-      user: { id: route.params.item.seller_id },
-      key: route.params.item.seller_id + Date.now(),
+      user: { id: route.params.item.sellerId },
+      key: route.params.item.sellerId + Date.now(),
       isLoggedUser: false,
     });
   }
@@ -173,7 +173,7 @@ export default function ProductListScreen({ navigation, route }) {
                           {route.params.item.title}
                         </Text>
                         <Text style={UserProductStyles.prodPrice}>
-                          R${route.params.item.price_cents / 100}
+                          R${(route.params.item.priceCents/10000).toFixed(2)}
                         </Text>
                       </View>
                       <Text style={UserProductStyles.prodDesc}>
