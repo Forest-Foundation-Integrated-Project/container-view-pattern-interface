@@ -27,7 +27,6 @@ export default function ProductListScreen({ navigation, route }) {
 
   async function fetchUser() {
     try {
-      console.log("user_id: " + route.params.item.sellerId);
       const res = await getUser(route.params.item.sellerId);
       setProfile(res.data);
     } catch (error) {
@@ -36,11 +35,13 @@ export default function ProductListScreen({ navigation, route }) {
   }
 
   useEffect(() => {
-    console.log("user_id: ")
+    fetchUser();
     if (typeof profile == "undefined") {
       fetchUser();
     }
   }, []);
+
+  console.log("LUIZ GUSTAVO", profile)
 
   function goToProfile() {
     navigation.navigate("Profile", {
@@ -132,27 +133,27 @@ export default function ProductListScreen({ navigation, route }) {
                 <Pressable onPress={closeModal}>
                   <View style={UserProductStyles.tags}>
                     <Text style={UserProductStyles.tagLabel}>Alumnus /</Text>
-                    <Text style={UserProductStyles.tagLabel}>Categoria /</Text>
-                    <Text style={UserProductStyles.tagLabel}>Usuario /</Text>
-                    <Text style={UserProductStyles.tagLabel}>Produto </Text>
+                    <Text style={UserProductStyles.tagLabel}>Produtos /</Text>
+                    <Text style={UserProductStyles.tagLabel}>{route.params.item.seller.name} /</Text>
+                    <Text style={UserProductStyles.tagLabel}>{route.params.item.title}</Text>
                   </View>
 
                   <TouchableWithoutFeedback onPress={goToProfile}>
                     <View style={UserProductStyles.userSession}>
                       <Image
                         style={UserProductStyles.userImage}
-                        source={{ uri: route.params.item.seller.image }}
+                        source={{ uri: profile.image }}
                       />
                       <View style={UserProductStyles.userIfo}>
                         <Text style={UserProductStyles.userName}>
-                          {route.params.item.seller.name}
+                          {profile.name}
                         </Text>
                         <Text
                           numberOfLines={1}
                           style={UserProductStyles.userLocation}
                         >
-                          {route.params.item.seller.university} -{" "}
-                          {route.params.item.seller.city}{" "}
+                          {profile.university} -{" "}
+                          {profile.city}{" "}
                         </Text>
                       </View>
                     </View>

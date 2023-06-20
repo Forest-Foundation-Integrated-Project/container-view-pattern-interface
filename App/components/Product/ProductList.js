@@ -18,7 +18,7 @@ export function ProductList({ navigation, products, listHeaderComponent }) {
         <Product
           image={item.image}
           title={item.title}
-          subtitle={item.sellerId}
+          subtitle={item.seller.name}
           price={(item.priceCents/100).toFixed()}
           onPress={() => productPressed(navigation, item)}
         />
