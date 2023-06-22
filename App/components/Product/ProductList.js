@@ -32,7 +32,7 @@ export function ProductList({ navigation, products, listHeaderComponent }) {
       ListHeaderComponent={listHeaderComponent}
       data={products}
       renderItem={renderItem}
-      keyExtractor={(item) => item.id}
+      keyExtractor={(item) => item.productId}
       numColumns={2}
       columWrapperStyle={styles.row}
       contentContainerStyle={styles.list}
