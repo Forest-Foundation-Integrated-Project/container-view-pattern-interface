@@ -5,5 +5,6 @@ import { httpGet } from "./../httpGet";
 export default async function getProducts({params, token}) {
   const response = await httpGet(BASE_URL + "/products", params, token);
 
+  //console.log(JSON.stringify(response));
   return response;
 }

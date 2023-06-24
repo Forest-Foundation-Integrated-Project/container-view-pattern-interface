@@ -17,24 +17,34 @@ import { BackButtom } from "../../components/BackButton";
 import { StyleSheet } from "react-native";
 import getUser from "../../services/users/getUser";
 import { CIANO, PRETO, CINZA, CNZACL, BRANCO } from "../../constants/colors";
+import { userProductsApi } from "../Home/hooks/userProductsApi"
 
 export default function ProductListScreen({ navigation, route }) {
-  const [profile, setProfile] = useState(null);
-  const [products, setProducts] = useState([])
+  const [profile, setProfile] = useState('');
+  const [loadProducts, setLoadProducts] = useState('')
+  const [products, setProducts] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
   const closeModal = () => {
     setModalVisible(false);
   };
 
   async function fetchUser() {
-    console.log("AQUI")
     try {
       console.log(route.params.item.sellerId)
       const res = await getUser(route.params.item.sellerId);
-      console.log('user' + JSON.stringfy(res))
       setProfile(res.data);
     } catch (error) {
       console.log(`erro: ${error}`);
+    }
+  }
+
+  async function fetchProducts() {
+    try {
+      const {requestProducts} = userProductsApi({setLoad: setLoadProducts, onSuccess: setProducts, sellerId: route.params.item.sellerId })
+      requestProducts()
+      console.log(products)
+    } catch (error) {
+      console.log(error)
     }
   }
 
@@ -48,7 +58,8 @@ export default function ProductListScreen({ navigation, route }) {
   }
 
   useEffect(() => {
-    fetchUser();
+    fetchUser()
+    fetchProducts()
     navigation.setOptions({
       headerLeft: () => (
         <TouchableOpacity onPress={goBack}>
@@ -57,6 +68,7 @@ export default function ProductListScreen({ navigation, route }) {
       ),
     });
   }, [navigation]);
+
 
   function goBack() {
     navigation.goBack();
@@ -73,7 +85,7 @@ export default function ProductListScreen({ navigation, route }) {
         <ProductList
           navigation={navigation}
           products={products}
-          listHeaderComponent={(profile) => (
+          listHeaderComponent={() => (
             <>
               <View>
                 <Pressable onPress={closeModal}>

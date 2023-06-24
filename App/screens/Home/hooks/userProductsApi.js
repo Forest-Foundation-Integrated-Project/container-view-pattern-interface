@@ -15,7 +15,6 @@ export const userProductsApi = ({onSuccess, onFail, setLoad, sellerId}) => {
             }
             const {data} = await getProducts({params: params})
             onSuccess(data.value.data)
-            
         } catch (error) {
             console.log('data erro', error)
         }finally {
