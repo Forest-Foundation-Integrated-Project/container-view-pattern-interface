@@ -25,7 +25,7 @@ export default function HomeScreen({ navigation }) {
   // const products = useSelector((state) => state.product.products);
 
   // handleAuthenticate(handleLogout());
-  const [loadProducts, setLoadProducts] = useState(false)
+  const [loadProducts, setLoadProducts] = useState('')
 
   const [products, setProducts] = useState([]);
 
@@ -35,10 +35,6 @@ export default function HomeScreen({ navigation }) {
   useEffect(() => {
     requestProducts()
   }, [])
-
-  useEffect(() => {
-    console.log(products)
-  }, [products])
 
   return (
     <>

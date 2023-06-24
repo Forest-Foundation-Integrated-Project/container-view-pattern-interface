@@ -9,7 +9,7 @@ export async function httpGet(url, data, token) {
 
   if (typeof token == "undefined") {
     token = await AsyncStorage.getItem("token");
-    console.log("TOKEN: " + token);
+    //console.log("TOKEN: " + token);
   }
 
   var params;
@@ -23,7 +23,7 @@ export async function httpGet(url, data, token) {
     } else {
       params = data
     }
-    console.log("adasd ", headers)
+    //console.log("adasd ", headers)
     return await instance.get(url, { params: params, headers: headers });
 
   } catch (error) {

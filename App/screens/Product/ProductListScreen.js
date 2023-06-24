@@ -20,28 +20,23 @@ import { CIANO, PRETO, CINZA, CNZACL, BRANCO } from "../../constants/colors";
 
 export default function ProductListScreen({ navigation, route }) {
   const [profile, setProfile] = useState(null);
+  const [products, setProducts] = useState([])
   const [modalVisible, setModalVisible] = useState(false);
   const closeModal = () => {
     setModalVisible(false);
   };
 
   async function fetchUser() {
+    console.log("AQUI")
     try {
+      console.log(route.params.item.sellerId)
       const res = await getUser(route.params.item.sellerId);
+      console.log('user' + JSON.stringfy(res))
       setProfile(res.data);
     } catch (error) {
       console.log(`erro: ${error}`);
     }
   }
-
-  useEffect(() => {
-    fetchUser();
-    if (typeof profile == "undefined") {
-      fetchUser();
-    }
-  }, []);
-
-  console.log("LUIZ GUSTAVO", profile)
 
   function goToProfile() {
     navigation.navigate("Profile", {
@@ -53,6 +48,7 @@ export default function ProductListScreen({ navigation, route }) {
   }
 
   useEffect(() => {
+    fetchUser();
     navigation.setOptions({
       headerLeft: () => (
         <TouchableOpacity onPress={goBack}>
@@ -62,60 +58,10 @@ export default function ProductListScreen({ navigation, route }) {
     });
   }, [navigation]);
 
-  const seller_name = "mocked but will be over soon";
-
-  const [products, setProducts] = useState([
-    {
-      id: 1,
-      title: "Cupcake",
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-      seller_id: "4b2ccf36-3742-45c3-80b6-2036a92d940f",
-      price_cents: 1999,
-      tag_id: 1,
-      subtitle: `${seller_name}`,
-      image:
-        "https://natashaskitchen.com/wp-content/uploads/2020/05/Vanilla-Cupcakes-3.jpg",
-      seller: {
-        id: "4b2ccf36-3742-45c3-80b6-2036a92d940f",
-        userId: "d32b8356-f81f-4823-bf77-9a967bbb630a",
-        name: "Outra Pessoaaa",
-        university: "IFSP",
-        phone: "(12) 99999-9999",
-        city: "Caraguatatuba",
-        image:
-          "https://natashaskitchen.com/wp-content/uploads/2020/05/Vanilla-Cupcakes-3.jpg",
-      },
-    },
-    {
-      id: 1,
-      title: "Cupcake",
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-      seller_id: "4b2ccf36-3742-45c3-80b6-2036a92d940f",
-      price_cents: 1999,
-      tag_id: 1,
-      subtitle: `${seller_name}`,
-      image:
-        "https://natashaskitchen.com/wp-content/uploads/2020/05/Vanilla-Cupcakes-3.jpg",
-      seller: {
-        id: "4b2ccf36-3742-45c3-80b6-2036a92d940f",
-        userId: "d32b8356-f81f-4823-bf77-9a967bbb630a",
-        name: "Outra Pessoaaa",
-        university: "IFSP",
-        phone: "(12) 99999-9999",
-        city: "Caraguatatuba",
-        image:
-          "https://natashaskitchen.com/wp-content/uploads/2020/05/Vanilla-Cupcakes-3.jpg",
-      },
-    },
-  ]);
-
   function goBack() {
     navigation.goBack();
   }
 
-  console.log(route.params.item);
 
   return (
     <>
@@ -127,7 +73,7 @@ export default function ProductListScreen({ navigation, route }) {
         <ProductList
           navigation={navigation}
           products={products}
-          listHeaderComponent={() => (
+          listHeaderComponent={(profile) => (
             <>
               <View>
                 <Pressable onPress={closeModal}>
@@ -142,7 +88,7 @@ export default function ProductListScreen({ navigation, route }) {
                     <View style={UserProductStyles.userSession}>
                       <Image
                         style={UserProductStyles.userImage}
-                        source={{ uri: profile.image }}
+                        source={{ uri: "https://placehold.co/600x400" }}
                       />
                       <View style={UserProductStyles.userIfo}>
                         <Text style={UserProductStyles.userName}>
