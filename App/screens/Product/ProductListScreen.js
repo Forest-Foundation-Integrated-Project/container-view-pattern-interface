@@ -91,16 +91,16 @@ export default function ProductListScreen({ navigation, route }) {
                 <Pressable onPress={closeModal}>
                   <View style={UserProductStyles.tags}>
                     <Text style={UserProductStyles.tagLabel}>Alumnus /</Text>
-                    <Text style={UserProductStyles.tagLabel}>Produtos /</Text>
-                    <Text style={UserProductStyles.tagLabel}>{route.params.item.seller.name} /</Text>
-                    <Text style={UserProductStyles.tagLabel}>{route.params.item.title}</Text>
+                    <Text style={UserProductStyles.tagLabel} numberOfLines={1}>Produtos /</Text>
+                    <Text style={UserProductStyles.tagLabel} numberOfLines={1}>{route.params.item.seller.name} /</Text>
+                    <Text style={UserProductStyles.tagLabel} numberOfLines={1}>{route.params.item.title}</Text>
                   </View>
 
                   <TouchableWithoutFeedback onPress={goToProfile}>
                     <View style={UserProductStyles.userSession}>
                       <Image
                         style={UserProductStyles.userImage}
-                        source={{ uri: "https://placehold.co/600x400" }}
+                        source={{uri:'https://placehold.co/600x400.png'}}
                       />
                       <View style={UserProductStyles.userIfo}>
                         <Text style={UserProductStyles.userName}>
@@ -123,7 +123,7 @@ export default function ProductListScreen({ navigation, route }) {
                     ]}
                   >
                     <Image
-                      source={{ uri: route.params.item.image }}
+                      source={{uri:'https://placehold.co/400x400.png'}}
                       style={UserProductStyles.prodImage}
                     />
                     <View style={UserProductStyles.prodInfo}>
@@ -177,24 +177,30 @@ export default function ProductListScreen({ navigation, route }) {
                         <View style={UserProductStyles.muserSession}>
                           <Image
                             style={UserProductStyles.muserImage}
-                            source={{ uri: route.params.item.seller.image }}
+                            source={{uri:'https://placehold.co/400x400.png'}}
                           />
-                          <View style={UserProductStyles.muserIfo}>
+                          <View style={UserProductStyles.muserInfo}>
                             <Text style={UserProductStyles.muserName}>
-                              {route.params.item.seller.name}
+                              {profile.name}
                             </Text>
                             <Text
                               numberOfLines={1}
                               style={UserProductStyles.muserLocation}
                             >
-                              {route.params.item.seller.university} -{" "}
-                              {route.params.item.seller.city}{" "}
+                              {profile.university} -
+                              {profile.city}
+                            </Text>
+                            <Text
+                              numberOfLines={1}
+                              style={UserProductStyles.muserRole}
+                            >
+                              {profile.role}
                             </Text>
                           </View>
                         </View>
                         <TouchableOpacity style={UserProductStyles.mbutton}>
                           <Text style={UserProductStyles.mbuttonText}>
-                            Meu Whatsapp: 12 99999-9999
+                            {profile.contact_info}
                           </Text>
                         </TouchableOpacity>
                       </View>

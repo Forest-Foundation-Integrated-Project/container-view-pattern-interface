@@ -8,7 +8,7 @@ export function Product({ image, title, subtitle, price, onPress }) {
       <TouchableOpacity onPress={onPress}>
         <View>
           <View style={styles.imageContainer}>
-            <Image source={{ uri: image }} style={styles.image} />
+            <Image source={{uri:image}} style={styles.image} />
           </View>
           <View style={styles.textContainer}>
             <Text numberOfLines={1} style={styles.title}>

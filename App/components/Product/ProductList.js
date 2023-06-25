@@ -16,7 +16,7 @@ export function ProductList({ navigation, products, listHeaderComponent }) {
     return (
       <View style={itemStyle}>
         <Product
-          image={"https://placehold.co/600x400"}
+          image={"https://placehold.co/600x400.png"}
           title={item.title}
           subtitle={item.seller.name}
           price={(item.priceCents/100).toFixed()}

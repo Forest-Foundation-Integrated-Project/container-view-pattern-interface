@@ -21,7 +21,8 @@ export const UserProductStyles = StyleSheet.create({
   tagLabel: {
     fontSize: 14,
     fontWeight: 'bold',
-    color: CINZA
+    color: CINZA,
+    maxWidth: 150
   },
 
   userSession: {
@@ -32,6 +33,7 @@ export const UserProductStyles = StyleSheet.create({
     justifyContent: "flex-start",
   },
   userImage: {
+    resizeMode: 'contain',
     height: 84,
     width: 84,
     borderRadius: 50,
@@ -52,16 +54,12 @@ export const UserProductStyles = StyleSheet.create({
     height: 422,
     backgroundColor: BRANCO,
     borderRadius: 15,
-    marginVertical: 20
+    marginVertical: 20,
+    alignSelf: "center"
   },
-  contactUserSection: {
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  productList: {
-    width: "100%",
-  },
+
   prodImage: {
+    resizeMode: 'contain',
     width: 375,
     height: 265,
     borderTopLeftRadius: 15,
@@ -95,6 +93,11 @@ export const UserProductStyles = StyleSheet.create({
     flexWrap: "wrap",
     maxWidth: 363,
   },
+  contactUserSection: {
+    alignItems: "center",
+    justifyContent: "center",
+  },
+ 
   buttoncontactUser: {
     margin: 20,
     width: 292,
@@ -116,6 +119,11 @@ export const UserProductStyles = StyleSheet.create({
     fontWeight: "bold",
     alignSelf: "center",
   },
+
+  productList: {
+    width: "100%",
+  },
+
   shadow: {
     ...Platform.select({
       ios: {
@@ -190,20 +198,37 @@ export const UserProductStyles = StyleSheet.create({
     alignItems: "center",
     alignContent: "center",
   },
+
   muserImage: {
+    resizeMode: 'contain',
     height: 150,
     width: 150,
     borderRadius: 150,
     alignSelf: "center",
   },
+
+  muserInfo: {
+    flexDirection: "column",
+    justifyContent: "space-around",
+    alignItems: "center",
+  },
+
   muserName: {
     fontSize: 20,
     fontWeight: "bold",
   },
+
   muserLocation: {
     fontSize: 18,
-    color: "grey",
-    alignSelf: "center",
+    fontWeight: "500",
+    textTransform: "uppercase",
+    color: CINZA,
+
   },
-  muserIfo: {},
-});
+
+  muserRole: {
+    fontSize: 18,
+    color: "grey",
+  }
+  
+})
