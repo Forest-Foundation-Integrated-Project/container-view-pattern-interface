@@ -7,14 +7,14 @@ export const styles = StyleSheet.create({
     flexGrow: 1,
     justifyContent: 'space-between',
     backgroundColor: CIANO,
-    paddingBottom: 30,
+    paddingBottom: 20,
     borderTopLeftRadius: 30,
     borderBottomLeftRadius: 30,
-    marginBottom: '5%'
   },
   body: {
-    height: 500
+    height: 610
   },
+
   profileContainer: {
     justifyContent: 'center',
     alignItems: 'center',
@@ -24,16 +24,17 @@ export const styles = StyleSheet.create({
   imageView: {
     borderColor: 'white',
     borderStyle: 'solid',
-    borderWidth: 3,
-    borderRadius: 110,
+    borderWidth: 2,
+    borderRadius: 100,
+    marginBottom: 10
   },
+
   sideMenuProfileIcon: {
-    resizeMode: 'center',
-    width: 110,
-    height: 110,
-    borderRadius: 110,
-    alignSelf: 'center',
+    width: 157,
+    height: 157,
+    borderRadius: 100,
   },
+
   iconStyle: {
     width: 15,
     height: 15,
@@ -81,12 +82,14 @@ export const styles = StyleSheet.create({
     fontSize: 16
   },
   userName: {
-    paddingTop: 10,
+    paddingVertical: 10,
+    textAlign: 'center',
     color: 'white',
     fontWeight: 'bold',
     fontSize: 16
   },
   userRole: {
     color: 'white',
+    textAlign: 'center'
   }
 });

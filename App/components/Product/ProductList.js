@@ -13,14 +13,13 @@ export function ProductList({ navigation, products, listHeaderComponent }) {
     const columnWrapperStyle = isSingleItem
       ? styles.singleItemColumn
       : styles.row;
-
     return (
       <View style={itemStyle}>
         <Product
-          image={item.image}
+          image={"https://placehold.co/600x400.png"}
           title={item.title}
-          subtitle={item.subtitle}
-          price={item.price_cents}
+          subtitle={item.seller.name}
+          price={(item.priceCents/100).toFixed()}
           onPress={() => productPressed(navigation, item)}
         />
       </View>
@@ -33,7 +32,7 @@ export function ProductList({ navigation, products, listHeaderComponent }) {
       ListHeaderComponent={listHeaderComponent}
       data={products}
       renderItem={renderItem}
-      keyExtractor={(item) => item.id}
+      keyExtractor={(item) => item.productId}
       numColumns={2}
       columWrapperStyle={styles.row}
       contentContainerStyle={styles.list}

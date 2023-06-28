@@ -62,6 +62,20 @@ export default function MenuScreen({ navigation, props }) {
                 </TouchableOpacity>
               </View>
               <View style={styles.menuItemsView}>
+              <DrawerItem
+                  style={styles.menuItem}
+                  label={() => (
+                    <Text style={styles.menuItemText}>Página inicial</Text>
+                  )}
+                  icon={() => (
+                    <Ionicons
+                      color="white"
+                      size={28}
+                      name="home"
+                    ></Ionicons>
+                  )}
+                  onPress={() => navigation.navigate("HomeScreen")}
+                />
                 <DrawerItem
                   style={styles.menuItem}
                   label={() => (

@@ -16,7 +16,8 @@ export const headerNavigationOptions = ({ navigation }) => ({
   drawerPosition: "right",
   drawerStyle: {
     width: '70%',
-    marginTop: '20%',
+    marginTop: 94,
+    backgroundColor: 'rgba(0, 0, 0, 0)'
   },
   overlayColor: 'rgba(0, 0, 0, 0)',
   headerStyle: {

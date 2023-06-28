@@ -6,10 +6,13 @@ import { EditButton } from "../../components/EditButton";
 import { BackButtom } from "../../components/BackButton";
 import { ProductList } from "../../components/Product/ProductList";
 import getUser from "./../../services/users/getUser";
+import { userProductsApi } from "../Home/hooks/userProductsApi"
 import { Alert } from "react-native";
 
 export default function ProfileScreen({ navigation, route }) {
   const [profile, setProfile] = useState("");
+  const [loadProducts, setLoadProducts] = useState('')
+  const [products, setProducts] = useState([]);
   const [successMessage, setSuccessMessage] = useState("");
   const { user, isLoggedUser, key, loadUser } = route.params;
 
@@ -24,12 +27,23 @@ export default function ProfileScreen({ navigation, route }) {
     }
   }
 
+  async function fetchProducts() {
+    try {
+      const {requestProducts} = userProductsApi({setLoad: setLoadProducts, onSuccess: setProducts, sellerId: user.id })
+      requestProducts()
+      console.log(products)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   function editProfile() {
     navigation.navigate("EditProfile", { user: profile });
   }
 
   useEffect(() => {
-    fetchUser();
+    fetchUser()
+    fetchProducts()
 
     console.log("IS LOGGED USER?" + isLoggedUser);
     navigation.setOptions({
@@ -58,45 +72,10 @@ export default function ProfileScreen({ navigation, route }) {
     }
   }
 
-  const [userProducts, setProducts] = useState([
-    {
-      id: 1,
-      title: "Cupcake",
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-      seller_id: "4b2ccf36-3742-45c3-80b6-2036a92d940f",
-      price_cents: 1999,
-      tag_id: 1,
-      subtitle: `mocked profile name`,
-      image:
-        "https://natashaskitchen.com/wp-content/uploads/2020/05/Vanilla-Cupcakes-3.jpg",
-      seller: {
-        id: "4b2ccf36-3742-45c3-80b6-2036a92d940f",
-        userId: "d32b8356-f81f-4823-bf77-9a967bbb630a",
-        name: "Outra Pessoaaa",
-        university: "IFSP",
-        phone: "(12) 99999-9999",
-        city: "Caraguatatuba",
-        image:
-          "https://natashaskitchen.com/wp-content/uploads/2020/05/Vanilla-Cupcakes-3.jpg",
-      },
-    },
-    // {
-    //   id: 2,
-    //   title: "Aula de matemática",
-    //   description: "Description for Product 2",
-    //   seller_id: 2,
-    //   price_cents: 2999,
-    //   tag_id: 2,
-    //   subtitle: `${profiles[0].name}`,
-    //   image:
-    //     "https://api.time.com/wp-content/uploads/2017/10/how-to-improve-math-class.jpg?quality=85&w=1200&h=628&crop=1",
-    // },
-  ]);
-
   function goHome() {
     navigation.navigate("Home");
   }
+
 
   return (
     <View key={key} style={styles.container}>
@@ -137,7 +116,7 @@ export default function ProfileScreen({ navigation, route }) {
           )}
           <ProductList
             navigation={navigation}
-            products={userProducts}
+            products={products}
             ListHeaderComponent={<></>}
           />
         </>

@@ -20,6 +20,7 @@ export const styles = StyleSheet.create({
     overflow: "hidden",
   },
   image: {
+    resizeMode: 'contain',
     flex: 1,
     width: "100%",
     borderTopLeftRadius: 15,
@@ -42,6 +43,7 @@ export const styles = StyleSheet.create({
     fontSize: 12,
     color: "#666",
     paddingBottom: 10,
+    maxWidth: 95
   },
 
   price: {

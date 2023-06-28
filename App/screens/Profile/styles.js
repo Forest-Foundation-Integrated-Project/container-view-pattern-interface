@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
     padding: 15,
   },
   image: {
-    resizeMode: "center",
+    resizeMode: "contain",
     width: 150,
     height: 150,
     borderRadius: 150,
