@@ -36,13 +36,10 @@ export default function LoginScreen({ navigation }) {
     setIsAuthenticating(true);
     try {
       const { token, user_id } = await login(email, password, navigation);
-      console.log("TOKEN??? + " + token);
       const res = await getUser(user_id, token);
-      console.log("RESPONSE: GET USER: " + JSON.stringify(res.data));
       const user = res.data;
       dispatch(handleAuthenticate({ token, user }));
     } catch (error) {
-      console.log("Error: " + error);
       Alert.alert(
         "Falha na autenticação",
         "Não foi possível realizar o login, confira seu email e senha"
