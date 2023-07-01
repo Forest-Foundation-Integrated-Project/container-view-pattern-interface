@@ -25,3 +25,5 @@ export { default as CreateProductScreen } from "./Product/CreateProductScreen";
 export { default as EditProductsScreen } from "./Product/EditProductsScreen";
 
 export { default as EditProductScreen } from "./Product/EditProductScreen";
+
+export { default as UploadImagesScreen } from "./Product/Upload/UploadImagesScreen";

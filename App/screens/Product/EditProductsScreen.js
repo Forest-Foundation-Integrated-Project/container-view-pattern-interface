@@ -48,13 +48,18 @@ export default function EditProductsScreen({ navigation, route }) {
           <FlatList
             showsVerticalScrollIndicator={false}
             data={products}
-            keyExtractor={(item) => item.productId} // Replace "id" with the actual unique identifier of your product object
+            keyExtractor={(item) => item.productId}
             renderItem={({ item }) => (
               <TouchableOpacity onPress={() => handleEditProduct(item)}>
                 <View style={styles.productContainer}>
                   <Image
                     style={styles.productImage}
-                    source={{ uri: item.images[0] }}
+                    source={{
+                      uri:
+                        item.images.length > 0
+                          ? item.images[0]
+                          : "https://natashaskitchen.com/wp-content/uploads/2020/05/Vanilla-Cupcakes-3.jpg",
+                    }}
                   />
                   <View style={styles.productSession}>
                     <Text style={styles.productTitle}>{item.title}</Text>

@@ -17,6 +17,7 @@ import {
   CreateProductScreen,
   EditProductsScreen,
   EditProductScreen,
+  UploadImagesScreen,
 } from "./screens";
 import { decode, encode } from "base-64";
 import { styles } from "./generalStyles";
@@ -121,6 +122,11 @@ function AuthenticatedStack() {
         name="EditProduct"
         options={options}
         component={EditProductScreen}
+      />
+      <Drawer.Screen
+        name="UploadImages"
+        options={options}
+        component={UploadImagesScreen}
       />
     </Drawer.Navigator>
   );

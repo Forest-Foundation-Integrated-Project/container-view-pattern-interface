@@ -26,7 +26,7 @@ export default function EditProductScreen({ navigation, route }) {
   }, []);
 
   function handleUploadImages() {
-    navigation.navigate("UploadImage", { product: product });
+    navigation.navigate("UploadImages", { product: product });
   }
 
   function transformPriceCents(priceCents) {
@@ -54,29 +54,32 @@ export default function EditProductScreen({ navigation, route }) {
 
   return (
     <>
-      <SafeAreaView style={styles.topSafeArea} />
-
       <StatusBar style="light" />
 
       <SafeAreaView style={styles.container}>
         {product && (
           <View style={styles.productContainer}>
-            <View style={styles.uploadContainer}>
-              <TouchableOpacity onPress={handleUploadImages}>
+            <TouchableOpacity onPress={handleUploadImages}>
+              <View style={styles.uploadContainer}>
                 <Image
                   style={styles.productImage}
-                  source={{ uri: product.images[0] }}
+                  source={{
+                    uri:
+                      product.images.length > 0
+                        ? product.images[0]
+                        : "https://natashaskitchen.com/wp-content/uploads/2020/05/Vanilla-Cupcakes-3.jpg",
+                  }}
                 />
                 <Text style={styles.uploadTitle}>
                   Adicione até três imagens para seu produto.
                 </Text>
-              </TouchableOpacity>
-            </View>
+              </View>
+            </TouchableOpacity>
 
             <Formik
               initialValues={{
                 title: product.title,
-                priceCents: (product.priceCents / 100).toFixed(2),
+                priceCents: `R$ ${(product.priceCents / 100).toFixed(2)}`,
                 description: product.description,
                 category: "Alimentos",
               }}
@@ -113,16 +116,14 @@ export default function EditProductScreen({ navigation, route }) {
                     <Text style={styles.label}>Preço</Text>
                     <TextInput
                       style={styles.input}
-                      value={values.priceCents}
-                      onChangeText={handleChange("priceCents")}
-                      onBlur={handleBlur("priceCents")}
+                      value={values.price}
+                      onChangeText={handleChange("price")}
+                      onBlur={handleBlur("price")}
                       autoCapitalize="none"
                       placeholder="R$ 5,00"
                     />
 
-                    <ErrorMessage
-                      errorValue={touched.priceCents && errors.priceCents}
-                    />
+                    <ErrorMessage errorValue={touched.price && errors.price} />
                   </View>
                   <View>
                     <Text style={styles.label}>Categoria</Text>
@@ -187,9 +188,33 @@ export default function EditProductScreen({ navigation, route }) {
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f5f5f5",
+    backgroundColor: "#fff",
+    paddingTop: 10,
   },
-  topSafeArea: {},
+  productContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  uploadContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  productImage: {
+    width: 150,
+    height: 150,
+    resizeMode: "cover",
+    paddingVertical: 30,
+  },
+  uploadTitle: {
+    fontSize: 20,
+    paddingLeft: 40,
+    marginTop: 10,
+    textAlign: "left",
+    width: "50%",
+    fontWeight: 700,
+  },
   content: {
     paddingHorizontal: 30,
     backgroundColor: CONTENT_BACKGROUND,
@@ -246,20 +271,5 @@ export const styles = StyleSheet.create({
   pickerText: {
     color: "cccccc",
     fontSize: 14,
-  },
-  uploadContainer: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  productImage: {
-    width: 100,
-    height: 100,
-    resizeMode: "cover",
-  },
-  uploadTitle: {
-    fontSize: 16,
-    textAlign: "center", // Added textAlign
-    marginTop: 10, // Added marginTop
   },
 });
