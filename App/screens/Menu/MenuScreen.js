@@ -32,7 +32,6 @@ export default function MenuScreen({ navigation, props }) {
   }
 
   function goToProfile() {
-    console.log(user);
     navigation.navigate("Profile", {
       user: { id: user.user_id },
       loadUser: true,
@@ -62,17 +61,13 @@ export default function MenuScreen({ navigation, props }) {
                 </TouchableOpacity>
               </View>
               <View style={styles.menuItemsView}>
-              <DrawerItem
+                <DrawerItem
                   style={styles.menuItem}
                   label={() => (
                     <Text style={styles.menuItemText}>Página inicial</Text>
                   )}
                   icon={() => (
-                    <Ionicons
-                      color="white"
-                      size={28}
-                      name="home"
-                    ></Ionicons>
+                    <Ionicons color="white" size={28} name="home"></Ionicons>
                   )}
                   onPress={() => navigation.navigate("HomeScreen")}
                 />

@@ -17,11 +17,12 @@ import { BackButtom } from "../../components/BackButton";
 import { StyleSheet } from "react-native";
 import getUser from "../../services/users/getUser";
 import { CIANO, PRETO, CINZA, CNZACL, BRANCO } from "../../constants/colors";
-import { userProductsApi } from "../Home/hooks/userProductsApi"
+import { userProductsApi } from "../Home/hooks/userProductsApi";
+import { Ionicons } from "@expo/vector-icons";
 
 export default function ProductListScreen({ navigation, route }) {
-  const [profile, setProfile] = useState('');
-  const [loadProducts, setLoadProducts] = useState('')
+  const [profile, setProfile] = useState("");
+  const [loadProducts, setLoadProducts] = useState("");
   const [products, setProducts] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
   const closeModal = () => {
@@ -30,21 +31,23 @@ export default function ProductListScreen({ navigation, route }) {
 
   async function fetchUser() {
     try {
-      console.log(route.params.item.sellerId)
       const res = await getUser(route.params.item.sellerId);
       setProfile(res.data);
     } catch (error) {
-      console.log(`erro: ${error}`);
+      console.log(`ProductListScreen::Erro: ${error}`);
     }
   }
 
   async function fetchProducts() {
     try {
-      const {requestProducts} = userProductsApi({setLoad: setLoadProducts, onSuccess: setProducts, sellerId: route.params.item.sellerId })
-      requestProducts()
-      console.log(products)
+      const { requestProducts } = userProductsApi({
+        setLoad: setLoadProducts,
+        onSuccess: setProducts,
+        sellerId: route.params.item.sellerId,
+      });
+      requestProducts();
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
 
@@ -58,8 +61,8 @@ export default function ProductListScreen({ navigation, route }) {
   }
 
   useEffect(() => {
-    fetchUser()
-    fetchProducts()
+    fetchUser();
+    fetchProducts();
     navigation.setOptions({
       headerLeft: () => (
         <TouchableOpacity onPress={goBack}>
@@ -69,11 +72,9 @@ export default function ProductListScreen({ navigation, route }) {
     });
   }, [navigation]);
 
-
   function goBack() {
     navigation.goBack();
   }
-
 
   return (
     <>
@@ -91,16 +92,22 @@ export default function ProductListScreen({ navigation, route }) {
                 <Pressable onPress={closeModal}>
                   <View style={UserProductStyles.tags}>
                     <Text style={UserProductStyles.tagLabel}>Alumnus /</Text>
-                    <Text style={UserProductStyles.tagLabel} numberOfLines={1}>Produtos /</Text>
-                    <Text style={UserProductStyles.tagLabel} numberOfLines={1}>{route.params.item.seller.name} /</Text>
-                    <Text style={UserProductStyles.tagLabel} numberOfLines={1}>{route.params.item.title}</Text>
+                    <Text style={UserProductStyles.tagLabel} numberOfLines={1}>
+                      Produtos /
+                    </Text>
+                    <Text style={UserProductStyles.tagLabel} numberOfLines={1}>
+                      {route.params.item.seller.name} /
+                    </Text>
+                    <Text style={UserProductStyles.tagLabel} numberOfLines={1}>
+                      {route.params.item.title}
+                    </Text>
                   </View>
 
                   <TouchableWithoutFeedback onPress={goToProfile}>
                     <View style={UserProductStyles.userSession}>
                       <Image
                         style={UserProductStyles.userImage}
-                        source={{uri:'https://placehold.co/600x400.png'}}
+                        source={{ uri: "https://placehold.co/600x400.png" }}
                       />
                       <View style={UserProductStyles.userIfo}>
                         <Text style={UserProductStyles.userName}>
@@ -110,8 +117,7 @@ export default function ProductListScreen({ navigation, route }) {
                           numberOfLines={1}
                           style={UserProductStyles.userLocation}
                         >
-                          {profile.university} -{" "}
-                          {profile.city}{" "}
+                          {profile.university} - {profile.city}{" "}
                         </Text>
                       </View>
                     </View>
@@ -123,7 +129,7 @@ export default function ProductListScreen({ navigation, route }) {
                     ]}
                   >
                     <Image
-                      source={{uri:'https://placehold.co/400x400.png'}}
+                      source={{ uri: "https://placehold.co/400x400.png" }}
                       style={UserProductStyles.prodImage}
                     />
                     <View style={UserProductStyles.prodInfo}>
@@ -132,7 +138,7 @@ export default function ProductListScreen({ navigation, route }) {
                           {route.params.item.title}
                         </Text>
                         <Text style={UserProductStyles.prodPrice}>
-                          R${(route.params.item.priceCents/10000).toFixed(2)}
+                          R${(route.params.item.priceCents / 10000).toFixed(2)}
                         </Text>
                       </View>
                       <Text style={UserProductStyles.prodDesc}>
@@ -177,7 +183,7 @@ export default function ProductListScreen({ navigation, route }) {
                         <View style={UserProductStyles.muserSession}>
                           <Image
                             style={UserProductStyles.muserImage}
-                            source={{uri:'https://placehold.co/400x400.png'}}
+                            source={{ uri: "https://placehold.co/400x400.png" }}
                           />
                           <View style={UserProductStyles.muserInfo}>
                             <Text style={UserProductStyles.muserName}>
@@ -187,8 +193,7 @@ export default function ProductListScreen({ navigation, route }) {
                               numberOfLines={1}
                               style={UserProductStyles.muserLocation}
                             >
-                              {profile.university} -
-                              {profile.city}
+                              {profile.university} -{profile.city}
                             </Text>
                             <Text
                               numberOfLines={1}

@@ -6,12 +6,12 @@ import { EditButton } from "../../components/EditButton";
 import { BackButtom } from "../../components/BackButton";
 import { ProductList } from "../../components/Product/ProductList";
 import getUser from "./../../services/users/getUser";
-import { userProductsApi } from "../Home/hooks/userProductsApi"
+import { userProductsApi } from "../Home/hooks/userProductsApi";
 import { Alert } from "react-native";
 
 export default function ProfileScreen({ navigation, route }) {
   const [profile, setProfile] = useState("");
-  const [loadProducts, setLoadProducts] = useState('')
+  const [loadProducts, setLoadProducts] = useState("");
   const [products, setProducts] = useState([]);
   const [successMessage, setSuccessMessage] = useState("");
   const { user, isLoggedUser, key, loadUser } = route.params;
@@ -29,11 +29,15 @@ export default function ProfileScreen({ navigation, route }) {
 
   async function fetchProducts() {
     try {
-      const {requestProducts} = userProductsApi({setLoad: setLoadProducts, onSuccess: setProducts, sellerId: user.id })
-      requestProducts()
-      console.log(products)
+      const { requestProducts } = userProductsApi({
+        setLoad: setLoadProducts,
+        onSuccess: setProducts,
+        sellerId: user.id,
+      });
+      requestProducts();
     } catch (error) {
-      console.log(error)
+      console.log("PASSOU AQUI?");
+      console.log(error);
     }
   }
 
@@ -41,11 +45,14 @@ export default function ProfileScreen({ navigation, route }) {
     navigation.navigate("EditProfile", { user: profile });
   }
 
-  useEffect(() => {
-    fetchUser()
-    fetchProducts()
+  function handleCreateProduct() {
+    navigation.navigate("CreateProductScreen", { user: profile });
+  }
 
-    console.log("IS LOGGED USER?" + isLoggedUser);
+  useEffect(() => {
+    fetchUser();
+    fetchProducts();
+
     navigation.setOptions({
       headerLeft: () => (
         <TouchableOpacity onPress={goHome}>
@@ -58,7 +65,6 @@ export default function ProfileScreen({ navigation, route }) {
     const message = route.params?.successMessage;
     if (message) {
       setSuccessMessage(message);
-      console.log("success message:" + successMessage);
     }
   }, [navigation, key, profile, route.params]);
 
@@ -76,6 +82,9 @@ export default function ProfileScreen({ navigation, route }) {
     navigation.navigate("Home");
   }
 
+  function handleEditProduct() {
+    navigation.navigate("EditProducts", { userId: profile.user_id });
+  }
 
   return (
     <View key={key} style={styles.container}>
@@ -105,10 +114,16 @@ export default function ProfileScreen({ navigation, route }) {
           {isLoggedUser && (
             <>
               <View style={styles.buttons}>
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity
+                  style={styles.button}
+                  onPress={handleCreateProduct}
+                >
                   <Text style={styles.buttonText}>Adcionar produto</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity
+                  style={styles.button}
+                  onPress={handleEditProduct}
+                >
                   <Text style={styles.buttonText}>Editar produtos</Text>
                 </TouchableOpacity>
               </View>

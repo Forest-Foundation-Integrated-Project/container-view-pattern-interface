@@ -14,6 +14,9 @@ import {
   ForgotPasswordScreen,
   ResetPasswordScreen,
   EditProfileScreen,
+  CreateProductScreen,
+  EditProductsScreen,
+  EditProductScreen,
 } from "./screens";
 import { decode, encode } from "base-64";
 import { styles } from "./generalStyles";
@@ -57,7 +60,6 @@ function AuthStack() {
         options={options}
         component={RegistrationScreen}
       />
-
 
       <Stack.Screen
         name="ForgotPasswordScreen"
@@ -104,6 +106,21 @@ function AuthenticatedStack() {
         name="ProductScreen"
         options={options}
         component={ProductScreen}
+      />
+      <Drawer.Screen
+        name="CreateProduct"
+        options={options}
+        component={CreateProductScreen}
+      />
+      <Drawer.Screen
+        name="EditProducts"
+        options={options}
+        component={EditProductsScreen}
+      />
+      <Drawer.Screen
+        name="EditProduct"
+        options={options}
+        component={EditProductScreen}
       />
     </Drawer.Navigator>
   );

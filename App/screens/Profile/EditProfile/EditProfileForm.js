@@ -23,10 +23,7 @@ export default function EditProfileForm({ user, route }) {
       userData.birthDate = formatDate(birthDate);
       userData.gender = getOriginalGender(gender);
 
-      console.log("BEFORE SEND: " + JSON.stringify(userData));
-
       const res = await updateUser(user.user_id, userData);
-      console.log("RESPONSE OF UPDTATE: " + JSON.stringify(res.data));
       navigation.navigate("Profile", {
         loadUser: true,
         user: { id: user.user_id },

@@ -12,29 +12,29 @@ import {
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { styles } from "./styles";
-import { ProductList } from "./../../components/Product/ProductList"
+import { ProductList } from "./../../components/Product/ProductList";
 import { useSelector } from "react-redux";
 import {
   handleAuthenticate,
   handleLogout,
 } from "../../store/redux/authentication";
-import { userProductsApi } from "./hooks/userProductsApi"
+import { userProductsApi } from "./hooks/userProductsApi";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function HomeScreen({ navigation }) {
   const profile = useSelector((state) => state.authentication.user);
-  // const products = useSelector((state) => state.product.products);
-
-  // handleAuthenticate(handleLogout());
-  const [loadProducts, setLoadProducts] = useState('')
-
   const [products, setProducts] = useState([]);
 
+  const [loadProducts, setLoadProducts] = useState("");
 
-  const {requestProducts} = userProductsApi({setLoad: setLoadProducts, onSuccess: setProducts})
+  const { requestProducts } = userProductsApi({
+    setLoad: setLoadProducts,
+    onSuccess: setProducts,
+  });
 
   useEffect(() => {
-    requestProducts()
-  }, [])
+    requestProducts();
+  }, []);
 
   return (
     <>

@@ -16,6 +16,12 @@ export { default as ProductScreen } from "./Product/ProductListScreen";
 
 export { default as EditProfileScreen } from "./Profile/EditProfile/EditProfileScreen";
 
-export { default as ForgotPasswordScreen } from './ForgotPassword/ForgotPasswordScreen'
+export { default as ForgotPasswordScreen } from "./ForgotPassword/ForgotPasswordScreen";
 
-export { default as ResetPasswordScreen } from './ResetPassword/ResetPasswordScreen';
+export { default as ResetPasswordScreen } from "./ResetPassword/ResetPasswordScreen";
+
+export { default as CreateProductScreen } from "./Product/CreateProductScreen";
+
+export { default as EditProductsScreen } from "./Product/EditProductsScreen";
+
+export { default as EditProductScreen } from "./Product/EditProductScreen";
