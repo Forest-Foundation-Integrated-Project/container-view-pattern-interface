@@ -4,8 +4,9 @@ export const productApi = api.injectEndpoints({
   endpoints: (builder) => ({
     listProducts: builder.mutation({
       query: (params) => ({
-        url: `/products/?limit=${params.limit}`,
+        url: '/products',
         method: 'GET',
+        params: params
       })
     }),
     protected: builder.mutation({
