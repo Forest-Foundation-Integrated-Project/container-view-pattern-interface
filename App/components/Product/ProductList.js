@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, FlatList, StyleSheet } from "react-native";
+import { ActivityIndicator, FlatList, StyleSheet, View } from "react-native";
 
 import { Product } from "./Product";
 import { useListProductsMutation } from "../../services/products";
@@ -55,6 +55,8 @@ export function ProductList({ navigation, listHeaderComponent }) {
     );
   };
 
+  const FooterActivityIndicator = () => isLoading ? <ActivityIndicator style={styles.activityIndicator} size="large" /> : null
+
   return (
     <FlatList
       showsVerticalScrollIndicator={false}
@@ -67,7 +69,7 @@ export function ProductList({ navigation, listHeaderComponent }) {
       contentContainerStyle={styles.list}
       onEndReached={handleLoadNextProducts}
       onEndReachedThreshold={0.1}
-    // ListFooterComponent={}
+      ListFooterComponent={FooterActivityIndicator}
     />
   );
 }
@@ -93,5 +95,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginHorizontal: 8,
+  },
+  activityIndicator: {
+    marginTop: 20,
+    marginBottom: 10,
   },
 });
