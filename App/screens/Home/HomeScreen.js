@@ -1,40 +1,36 @@
-import React, { useState, useContext, useEffect, useLayoutEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   SafeAreaView,
-  FlatList,
-  Modal,
   View,
   Text,
   Image,
   TouchableOpacity,
-  TouchableWithoutFeedback,
-  TouchableHighlight,
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
-import { styles } from "./styles";
+
 import { ProductList } from "./../../components/Product/ProductList"
 import { useSelector } from "react-redux";
-import {
-  handleAuthenticate,
-  handleLogout,
-} from "../../store/redux/authentication";
-import { userProductsApi } from "./hooks/userProductsApi"
+import { useListProductsMutation } from "../../services/products";
+import { styles } from "./styles";
 
 export default function HomeScreen({ navigation }) {
   const profile = useSelector((state) => state.authentication.user);
-  // const products = useSelector((state) => state.product.products);
-
-  // handleAuthenticate(handleLogout());
-  const [loadProducts, setLoadProducts] = useState('')
-
+  const [listProducts, { isLoading, data }] = useListProductsMutation()
   const [products, setProducts] = useState([]);
 
 
-  const {requestProducts} = userProductsApi({setLoad: setLoadProducts, onSuccess: setProducts})
+  const load = async () => await listProducts({ limit: 5 }).unwrap()
+    .catch(err => console.log('deu ruim ', JSON.stringify(err)))
 
   useEffect(() => {
-    requestProducts()
+    load()
   }, [])
+
+  useEffect(() => {
+    if (data?.data.length) {
+      setProducts(data.data)
+    }
+  }, [isLoading])
 
   return (
     <>
