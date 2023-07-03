@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react"
 import {
   SafeAreaView,
   FlatList,
@@ -9,23 +9,22 @@ import {
   TouchableWithoutFeedback,
   Image,
   Pressable,
-} from "react-native";
-import { StatusBar } from "expo-status-bar";
-import { UserProductStyles } from "./styles";
-import { ProductList } from "../../components/Product/ProductList";
-import { BackButtom } from "../../components/BackButton";
-import { StyleSheet } from "react-native";
-import getUser from "../../services/users/getUser";
-import { CIANO, PRETO, CINZA, CNZACL, BRANCO } from "../../constants/colors";
+} from "react-native"
+import { StatusBar } from "expo-status-bar"
+import { UserProductStyles } from "./styles"
+import { ProductImageRoller } from "./ProductImageRoller"
+import { ProductList } from "../../components/Product/ProductList"
+import { BackButtom } from "../../components/BackButton"
+import getUser from "../../services/users/getUser"
 import { userProductsApi } from "../Home/hooks/userProductsApi"
 
 export default function ProductListScreen({ navigation, route }) {
-  const [profile, setProfile] = useState('');
+  const [profile, setProfile] = useState('')
   const [loadProducts, setLoadProducts] = useState('')
   const [products, setProducts] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
   const closeModal = () => {
-    setModalVisible(false);
+    setModalVisible(false)
   };
 
   async function fetchUser() {
@@ -122,10 +121,8 @@ export default function ProductListScreen({ navigation, route }) {
                       UserProductStyles.shadow,
                     ]}
                   >
-                    <Image
-                      source={{uri:'https://placehold.co/400x400.png'}}
-                      style={UserProductStyles.prodImage}
-                    />
+                    <ProductImageRoller images={route.params.item}/>
+
                     <View style={UserProductStyles.prodInfo}>
                       <View style={UserProductStyles.topDesc}>
                         <Text style={UserProductStyles.prodTitle}>
