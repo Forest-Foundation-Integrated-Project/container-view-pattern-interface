@@ -2,15 +2,12 @@ import React from "react";
 import {
   SafeAreaView,
   View,
-  StyleSheet,
   Image,
   Text,
-  Linking,
   TouchableOpacity,
 } from "react-native";
 import {
   DrawerContentScrollView,
-  DrawerItemList,
   DrawerItem,
 } from "@react-navigation/drawer";
 import { styles } from "./styles";
@@ -18,7 +15,6 @@ import { Ionicons } from "@expo/vector-icons";
 import { useDispatch } from "react-redux";
 import { handleLogout } from "../../store/redux/authentication";
 import { useSelector } from "react-redux";
-import { date } from "yup";
 
 export default function MenuScreen({ navigation, props }) {
   const user = useSelector((state) => state.authentication.user);
