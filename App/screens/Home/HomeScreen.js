@@ -1,41 +1,17 @@
-import React, { useState, useContext, useEffect, useLayoutEffect } from "react";
+import React from "react";
 import {
   SafeAreaView,
-  FlatList,
-  Modal,
   View,
   Text,
   Image,
   TouchableOpacity,
-  TouchableWithoutFeedback,
-  TouchableHighlight,
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
-import { styles } from "./styles";
+
 import { ProductList } from "./../../components/Product/ProductList"
-import { useSelector } from "react-redux";
-import {
-  handleAuthenticate,
-  handleLogout,
-} from "../../store/redux/authentication";
-import { userProductsApi } from "./hooks/userProductsApi"
+import { styles } from "./styles";
 
 export default function HomeScreen({ navigation }) {
-  const profile = useSelector((state) => state.authentication.user);
-  // const products = useSelector((state) => state.product.products);
-
-  // handleAuthenticate(handleLogout());
-  const [loadProducts, setLoadProducts] = useState('')
-
-  const [products, setProducts] = useState([]);
-
-
-  const {requestProducts} = userProductsApi({setLoad: setLoadProducts, onSuccess: setProducts})
-
-  useEffect(() => {
-    requestProducts()
-  }, [])
-
   return (
     <>
       <SafeAreaView style={styles.topSafeArea} />
@@ -70,11 +46,9 @@ export default function HomeScreen({ navigation }) {
         </View>
 
         <ProductList
-          products={products}
-          profile={profile}
           navigation={navigation}
           ListHeaderComponent={<></>}
-        ></ProductList>
+        />
       </SafeAreaView>
     </>
   );
