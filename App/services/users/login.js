@@ -2,7 +2,7 @@ import { BASE_URL } from "@env";
 import { TEST_USERS_BASE_URL } from "@env";
 import { httpPost } from "../httpPost";
 
-export async function login(email, password, navigation) {
+export async function login(email, password) {
   try {
     let url = `${BASE_URL}/auth/sign-in`;
     let token;

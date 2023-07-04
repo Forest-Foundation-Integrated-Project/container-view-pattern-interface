@@ -12,7 +12,6 @@ import { brFormatDate, formatDate } from "./../../utils/date";
 import createUser from "./../../services/users/createUser";
 import getUser from "../../services/users/getUser";
 import { login } from "../../services/users/login";
-
 import {
   handleAuthenticate,
   handleLogout,
@@ -21,7 +20,6 @@ import { useDispatch } from "react-redux";
 
 export default function RegistrationForm({ navigation }) {
   const dispatch = useDispatch();
-
   const ErrorMessage = ({ errorValue }) => {
     return errorValue ? (
       <View style={styles.errorContainer}>
@@ -40,15 +38,23 @@ export default function RegistrationForm({ navigation }) {
 
     try {
       var res = await createUser(userData);
-      const token = await login(res.data.email, userData.password, navigation);
-      res = await getUser(res.data.user_id, token);
-      const user = res.data;
-      dispatch(handleAuthenticate({ token, user }));
+      if (res.status == 201) {
+        const { token, user_id } = await login(
+          res.data.email,
+          userData.password,
+          navigation
+        );
 
-      navigation.navigate('EmailConfirmScreen')
-      
+        res = await getUser(user_id, token);
+
+        console.log("res get user", JSON.stringify(res.data));
+
+        const user = res.data;
+        dispatch(handleAuthenticate({ token, user }));
+      }
     } catch (error) {
       Alert.alert(`erro: ${error}`);
+      dispatch(handleLogout());
     }
   };
 
@@ -62,7 +68,7 @@ export default function RegistrationForm({ navigation }) {
         university: "",
         password: "",
         confirmPassword: "",
-        enroll: Math.floor(Math.random() * 90000) + 10000,
+        phone: "",
       }}
       onSubmit={(values) => {
         onSubmitHandler(values);
@@ -106,11 +112,21 @@ export default function RegistrationForm({ navigation }) {
 
             <ErrorMessage errorValue={touched.email && errors.email} />
           </View>
+          <View style={styles.formGroup}>
+            <TextInput
+              style={styles.input} // Use the same style as other inputs
+              value={values.phone}
+              onChangeText={handleChange("phone")}
+              onBlur={handleBlur("phone")}
+              autoCapitalize="none"
+              placeholder="12 992929999"
+            />
+            <ErrorMessage errorValue={touched.phone && errors.phone} />
+          </View>
           <View style={styles.dualFormGroup}>
             <View>
               <View style={styles.inputPicker}>
                 <Picker
-                  style={styles.picker}
                   selectedValue={gender}
                   value={gender}
                   onBlur={handleBlur("gender")}

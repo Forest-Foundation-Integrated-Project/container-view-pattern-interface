@@ -7,7 +7,5 @@ export default async function createUser(userData) {
   userData.city = "Caraguatatuba";
   response = httpPost(MS_USERS_BASE_URL, userData);
 
-  console.log(JSON.stringify(response));
-
   return response;
 }
