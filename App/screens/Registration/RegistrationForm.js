@@ -46,9 +46,7 @@ export default function RegistrationForm({ navigation }) {
         );
 
         res = await getUser(user_id, token);
-
-        console.log("res get user", JSON.stringify(res.data));
-
+        
         const user = res.data;
         dispatch(handleAuthenticate({ token, user }));
       }
