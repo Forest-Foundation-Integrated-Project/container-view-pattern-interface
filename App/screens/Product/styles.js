@@ -59,7 +59,7 @@ export const UserProductStyles = StyleSheet.create({
   },
 
   prodImage: {
-    resizeMode: 'contain',
+    resizeMode: "cover",
     width: 375,
     height: 265,
     borderTopLeftRadius: 15,
