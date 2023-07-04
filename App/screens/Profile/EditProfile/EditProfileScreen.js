@@ -43,7 +43,7 @@ export default function EditProfileScreen({ navigation, route }) {
           <View style={styles.imageContainer}>
             <Image
               source={{
-                uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz8La2nwie8i1L3Asva1zyiKRaiWkVzujCP9ixCPH7OzYsLOPwBGfJ8VNzV67jehFLz2s&usqp=CAU",
+                uri: user.profileImage,
               }}
               style={styles.image}
             />

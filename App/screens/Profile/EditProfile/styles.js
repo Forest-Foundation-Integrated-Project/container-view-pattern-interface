@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
     paddingLeft: 5,
   },
   image: {
-    resizeMode: "center",
+    resizeMode: "cover",
     width: 120,
     height: 120,
     borderRadius: 120,
