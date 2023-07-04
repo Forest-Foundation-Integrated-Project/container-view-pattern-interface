@@ -91,9 +91,8 @@ export const styles = StyleSheet.create({
     borderColor: "#e3e3e3",
     backgroundColor: "#fff",
     alignItems: "center",
-    flexDirection: "row", // Added flexDirection
-    // justifyContent: "space-between", // Added justifyContent
-    // alignItems: "center", // Added alignItems
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   picker: {
     width: 30,

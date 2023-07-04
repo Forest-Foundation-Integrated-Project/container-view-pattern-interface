@@ -14,7 +14,10 @@ import {
   ForgotPasswordScreen,
   ResetPasswordScreen,
   EditProfileScreen,
+  EmailConfirmScreen,
 } from "./screens";
+// import  EmailConfirmScreen from "./screens/EmailConfirm/EmailConfirmScreen"
+
 import { decode, encode } from "base-64";
 import { styles } from "./generalStyles";
 import { BackButtom } from "./components/BackButton";
@@ -70,6 +73,12 @@ function AuthStack() {
         options={options}
         component={ResetPasswordScreen}
       />
+
+      <Stack.Screen
+        name="EmailConfirmScreen"
+        options={{ headerShown: false }}
+        component={EmailConfirmScreen}
+      /> 
     </Stack.Navigator>
   );
 }
@@ -105,6 +114,9 @@ function AuthenticatedStack() {
         options={options}
         component={ProductScreen}
       />
+
+
+
     </Drawer.Navigator>
   );
 }

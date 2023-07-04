@@ -15,7 +15,7 @@ const authentication = createSlice({
       state.user = action.payload.user;
       state.isAuthenticated = true;
 
-      typeof state.token !== "undefined"
+      typeof state.token !== "undefined" && AsyncStorage.getItem("token")
         ? AsyncStorage.setItem("token", action.payload.token)
         : null;
       typeof state.user !== "undefined"

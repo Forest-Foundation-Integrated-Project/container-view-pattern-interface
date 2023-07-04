@@ -16,6 +16,8 @@ export { default as ProductScreen } from "./Product/ProductListScreen";
 
 export { default as EditProfileScreen } from "./Profile/EditProfile/EditProfileScreen";
 
+export { default as EmailConfirmScreen } from "./EmailConfirm/EmailConfirmScreen";
+
 export { default as ForgotPasswordScreen } from './ForgotPassword/ForgotPasswordScreen'
 
 export { default as ResetPasswordScreen } from './ResetPassword/ResetPasswordScreen';
