@@ -57,6 +57,7 @@ export default StyleSheet.create({
     // height: 110,
     alignItems: "center",
     flexDirection: "column",
+    paddingHorizontal: 20,
   },
 
   message: {
@@ -69,12 +70,12 @@ export default StyleSheet.create({
 
   emailBox: {
     backgroundColor: "#FFF",
-    paddingVertical: 22,
+    paddingVertical: 10,
     paddingHorizontal: 15,
     flexDirection: "column",
     justifyContent: "center",
-    
-    marginTop: 50,
+
+    marginTop: 20,
     marginHorizontal: 16,
     borderRadius: 15,
   },
@@ -93,7 +94,7 @@ export default StyleSheet.create({
   authenticationMessageBox: {
     width: 396,
     height: 73,
-    marginTop: 65,
+    marginTop: 20,
     paddingHorizontal: 22,
   },
 
@@ -102,7 +103,6 @@ export default StyleSheet.create({
     textAlign: "justify",
     fontWeight: 600,
     fontSize: 20,
-
   },
 
   button: {
@@ -119,26 +119,50 @@ export default StyleSheet.create({
     borderStyle: "solid",
     borderColor: "#FFF",
     borderRadius: 20,
-},
+  },
 
-buttonText: {
-  color: "#fff",
-  fontSize: 16,
-  fontWeight: "bold",
-},
+  buttonText: {
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "bold",
+  },
 
-shadow: {
-  ...Platform.select({
-    ios: {
-      shadowColor: "black",
-      shadowOffset: { width: 0, height: 4 },
-      shadowOpacity: 0.1,
-      shadowRadius: 15,
-    },
-    android: {
-      elevation: 4,
-    },
-  }),
-},
-  
+  tokenBox: {
+    marginTop: 10,
+  },
+  tokenInput: {
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    width: "80%",
+    color: "#fff",
+    alignSelf: "center",
+    fontSize: 45,
+    borderBottomColor: "#fff",
+    borderBottomWidth: 10,
+    borderRadius: 3,
+    letterSpacing: 18,
+  },
+  buttonWhite: {
+    backgroundColor: "#fff",
+    padding: 4,
+  },
+  sendTokenText: {
+    fontSize: 18,
+    color: "#444444",
+    fontWeight: 700,
+  },
+
+  shadow: {
+    ...Platform.select({
+      ios: {
+        shadowColor: "black",
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.1,
+        shadowRadius: 15,
+      },
+      android: {
+        elevation: 4,
+      },
+    }),
+  },
 });

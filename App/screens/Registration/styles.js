@@ -73,9 +73,9 @@ export const styles = StyleSheet.create({
     alignSelf: "flex-end",
   },
   picker: {
-    width: 30,
+    width: 165,
     height: 30,
-    paddingLeft: 10,
+    alignItems: "flex-end",
   },
   pickerText: {
     color: "darkgrey",
@@ -84,5 +84,9 @@ export const styles = StyleSheet.create({
   pickerSelect: {
     color: "black",
     fontSize: 14,
+  },
+  containerPicker: {
+    // flex: 1,
+    alignItems: "center",
   },
 });

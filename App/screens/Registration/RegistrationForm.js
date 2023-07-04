@@ -46,9 +46,17 @@ export default function RegistrationForm({ navigation }) {
         );
 
         res = await getUser(user_id, token);
-        
+
         const user = res.data;
-        dispatch(handleAuthenticate({ token, user }));
+
+        if (user.emailCheck == false) {
+          navigation.navigate("EmailConfirmScreen", {
+            user: user,
+            authToken: token,
+          });
+        } else {
+          dispatch(handleAuthenticate({ token, user }));
+        }
       }
     } catch (error) {
       Alert.alert(`erro: ${error}`);
@@ -122,12 +130,13 @@ export default function RegistrationForm({ navigation }) {
             <ErrorMessage errorValue={touched.phone && errors.phone} />
           </View>
           <View style={styles.dualFormGroup}>
-            <View>
+            <View style={styles.containerPicker}>
               <View style={styles.inputPicker}>
                 <Picker
                   selectedValue={gender}
                   value={gender}
                   onBlur={handleBlur("gender")}
+                  style={styles.picker}
                   onValueChange={(item, indexItem) => {
                     setGender(item);
                     setFieldValue("gender", item);
