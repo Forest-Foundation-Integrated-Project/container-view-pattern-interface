@@ -52,7 +52,7 @@ export default function MenuScreen({ navigation, props }) {
                   <View style={styles.imageView}>
                     <Image
                       source={{
-                        uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz8La2nwie8i1L3Asva1zyiKRaiWkVzujCP9ixCPH7OzYsLOPwBGfJ8VNzV67jehFLz2s&usqp=CAU",
+                        uri: user.profileImage,
                       }}
                       style={styles.sideMenuProfileIcon}
                     />

@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, TextInput } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import DatePicker from "@react-native-community/datetimepicker";
+import EmailConfirmScreen from "../EmailConfirm/EmailConfirmScreen";
 import { Formik } from "formik";
 import { validationSchema } from "./validation";
 import { styles } from "./styles";
@@ -43,6 +44,9 @@ export default function RegistrationForm({ navigation }) {
       res = await getUser(res.data.user_id, token);
       const user = res.data;
       dispatch(handleAuthenticate({ token, user }));
+
+      navigation.navigate('EmailConfirmScreen')
+      
     } catch (error) {
       Alert.alert(`erro: ${error}`);
     }

@@ -174,7 +174,7 @@ export default function ProductListScreen({ navigation, route }) {
                         <View style={UserProductStyles.muserSession}>
                           <Image
                             style={UserProductStyles.muserImage}
-                            source={{uri:'https://placehold.co/400x400.png'}}
+                            source={{uri: profile.profileImage}}
                           />
                           <View style={UserProductStyles.muserInfo}>
                             <Text style={UserProductStyles.muserName}>

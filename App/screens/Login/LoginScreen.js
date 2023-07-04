@@ -12,7 +12,6 @@ import { Formik } from "formik";
 import Lottie from 'lottie-react-native';
 import { useDispatch } from "react-redux";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-
 import { validationSchema } from "./validation";
 import { login } from "../../services/users/login";
 import getUser from "../../services/users/getUser";
